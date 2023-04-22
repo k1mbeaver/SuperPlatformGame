@@ -2,6 +2,13 @@
 
 
 #include "MyPlayerCharacter.h"
+#include "Camera/CameraComponent.h"
+#include "GameFrameWork/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "GameFrameWork/CharacterMovementComponent.h"
+#include "Animation/AnimInstance.h"
 
 // Sets default values
 AMyPlayerCharacter::AMyPlayerCharacter()

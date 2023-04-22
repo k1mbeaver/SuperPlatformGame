@@ -27,20 +27,6 @@ public:
 
 protected:
 
-	/** Called for forwards/backward input */
-	void MoveForward(float Value);
-
-	/** Called for side to side input */
-	void MoveRight(float Value);
-
-	void BulletTime();
-
-	void StopBulletTime();
-
-	void TransCamera();
-
-	void StopTransCamera();
-
 	/** 
 	 * Called via input to turn at a given rate. 
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
@@ -81,5 +67,19 @@ public:
 
 	void TransCameraPos(float t, float targetRatio);
 	void ReturnTransCameraPos(float t, float targetRatio);
+
+	/** Called for forwards/backward input */
+	void MoveForward(float Value);
+
+	/** Called for side to side input */
+	void MoveRight(float Value);
+
+	void BulletTime();
+
+	void StopBulletTime();
+
+	void TransCamera();
+
+	void StopTransCamera();
 };
 
