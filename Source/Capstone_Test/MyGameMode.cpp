@@ -11,8 +11,8 @@ AMyGameMode::AMyGameMode()
 	//DefaultPawnClass = AMyCharacter::StaticClass();
 	//DefaultPawnClass = APlayerCharacter::StaticClass();
 
-	//static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("Blueprint'/Game/Blueprints/PlayerCharacter.PlayerCharacter_C'"));
-	//DefaultPawnClass = PlayerPawnClassFinder.Class;
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("Blueprint'/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.BP_ThirdPersonCharacter_C'"));
+	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
 	// PlayerController
 	PlayerControllerClass = AMyPlayerController::StaticClass();
