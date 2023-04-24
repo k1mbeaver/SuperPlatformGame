@@ -58,6 +58,30 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (CurrentState == ECharacterState::STAND)
+	{
+		ReturnTransCameraPos(0.05, 1);
+	}
+
+	else if (CurrentState == ECharacterState::CROUCH)
+	{
+		TransCameraPos(0.05, 0.5);
+		// 나중에 편집하기
+	}
+
+	else if (CurrentState == ECharacterState::DOWN)
+	{
+		TransCameraPos(0.05, 0.5);
+		// 나중에 편집하기
+	}
+
+	else if (CurrentState == ECharacterState::RUN)
+	{
+		TransCameraPos(0.05, 0.5);
+		// 나중에 편집하기
+	}
+
+	/*
 	if (bCameraMove)
 	{
 		TransCameraPos(0.05, 0.5);
@@ -67,6 +91,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 	{
 		ReturnTransCameraPos(0.05, 1);
 	}
+	*/
 }
 
 

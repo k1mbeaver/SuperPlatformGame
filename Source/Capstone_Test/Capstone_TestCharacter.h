@@ -6,6 +6,16 @@
 #include "GameFramework/Character.h"
 #include "Capstone_TestCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class ECharacterState : uint8
+{
+	CROUCH, // 웅크린상태
+	DOWN, // 엎드린 상태
+	STAND, // 서있는 상태
+	RUN, // 달리는 상태
+	// 이후에 추가하자
+};
+
 UCLASS(config=Game)
 class ACapstone_TestCharacter : public ACharacter
 {
@@ -24,6 +34,9 @@ public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Input)
 	float TurnRateGamepad;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
+		ECharacterState CurrentState = ECharacterState::STAND;
 
 protected:
 
