@@ -94,5 +94,17 @@ public:
 	void TransCamera();
 
 	void StopTransCamera();
+
+	void Run();
+
+	void StopRun();
+
+	void Crouch();
+
+	void StopCrouch();
+
+	void CharacterDown();
+
+	void StopDown();
 };
 

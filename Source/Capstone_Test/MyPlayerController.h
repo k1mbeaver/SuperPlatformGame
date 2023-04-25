@@ -27,4 +27,10 @@ public:
 private:
 	void MoveForward(float NewAxisValue);
 	void MoveRight(float NewAxisValue);
+	void Run();
+	void StopRun();
+	void Crouch();
+	void StopCrouch();
+	void CharacterDown();
+	void StopDown();
 };

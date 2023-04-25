@@ -58,9 +58,11 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*
 	if (CurrentState == ECharacterState::STAND)
 	{
-		ReturnTransCameraPos(0.05, 1);
+		TransCameraPos(0.05, 1.0);
+		//ReturnTransCameraPos(0.05, 1);
 	}
 
 	else if (CurrentState == ECharacterState::CROUCH)
@@ -71,27 +73,71 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 
 	else if (CurrentState == ECharacterState::DOWN)
 	{
-		TransCameraPos(0.05, 0.5);
+		TransCameraPos(0.05, 0.3);
 		// 나중에 편집하기
 	}
 
 	else if (CurrentState == ECharacterState::RUN)
 	{
-		TransCameraPos(0.05, 0.5);
+		TransCameraPos(0.05, 1.2);
 		// 나중에 편집하기
 	}
-
-	/*
+	*/
+	
 	if (bCameraMove)
 	{
-		TransCameraPos(0.05, 0.5);
+		if (CurrentState == ECharacterState::STAND)
+		{
+			TransCameraPos(0.05, 1.0);
+			//ReturnTransCameraPos(0.05, 1);
+		}
+
+		else if (CurrentState == ECharacterState::CROUCH)
+		{
+			TransCameraPos(0.05, 0.5);
+			// 나중에 편집하기
+		}
+
+		else if (CurrentState == ECharacterState::DOWN)
+		{
+			TransCameraPos(0.05, 0.3);
+			// 나중에 편집하기
+		}
+
+		else if (CurrentState == ECharacterState::RUN)
+		{
+			TransCameraPos(0.05, 1.2);
+			// 나중에 편집하기
+		}
 	}
 
 	else
 	{
-		ReturnTransCameraPos(0.05, 1);
+		if (CurrentState == ECharacterState::STAND)
+		{
+			ReturnTransCameraPos(0.05, 1.0);
+			//ReturnTransCameraPos(0.05, 1);
+		}
+
+		else if (CurrentState == ECharacterState::CROUCH)
+		{
+			ReturnTransCameraPos(0.05, 0.5);
+			// 나중에 편집하기
+		}
+
+		else if (CurrentState == ECharacterState::DOWN)
+		{
+			ReturnTransCameraPos(0.05, 0.3);
+			// 나중에 편집하기
+		}
+
+		else if (CurrentState == ECharacterState::RUN)
+		{
+			ReturnTransCameraPos(0.05, 1.2);
+			// 나중에 편집하기
+		}
 	}
-	*/
+	
 }
 
 
@@ -216,3 +262,41 @@ void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
 	CameraBoom->TargetArmLength = LerpFun(CameraBoom->TargetArmLength, EndArmValue, t);
 	CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
 }
+
+void ACapstone_TestCharacter::Run()
+{
+	CurrentState = ECharacterState::RUN;
+	bCameraMove = true;
+}
+
+void ACapstone_TestCharacter::StopRun()
+{
+	CurrentState = ECharacterState::STAND;
+	bCameraMove = false;
+}
+
+void ACapstone_TestCharacter::Crouch()
+{
+	CurrentState = ECharacterState::CROUCH;
+	bCameraMove = true;
+}
+
+void ACapstone_TestCharacter::StopCrouch()
+{
+	CurrentState = ECharacterState::STAND;
+	bCameraMove = false;
+}
+
+void ACapstone_TestCharacter::CharacterDown()
+{
+	CurrentState = ECharacterState::DOWN;
+	bCameraMove = true;
+}
+
+void ACapstone_TestCharacter::StopDown()
+{
+	CurrentState = ECharacterState::STAND;
+	bCameraMove = false;
+}
+
+
