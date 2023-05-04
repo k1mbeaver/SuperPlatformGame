@@ -299,4 +299,13 @@ void ACapstone_TestCharacter::StopDown()
 	bCameraMove = false;
 }
 
+void ACapstone_TestCharacter::Bash()
+{
+
+}
+
+void ACapstone_TestCharacter::StopBash()
+{
+
+}
 

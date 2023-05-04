@@ -106,5 +106,9 @@ public:
 	void CharacterDown();
 
 	void StopDown();
+
+	void Bash();
+
+	void StopBash();
 };
 

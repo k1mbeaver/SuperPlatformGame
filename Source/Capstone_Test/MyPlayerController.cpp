@@ -50,6 +50,9 @@ void AMyPlayerController::SetupInputComponent()
 	// 캐릭터 엎드리기
 	InputComponent->BindAction(TEXT("CharacterDown"), IE_Pressed, this, &AMyPlayerController::CharacterDown);
 	InputComponent->BindAction(TEXT("CharacterDown"), IE_Released, this, &AMyPlayerController::StopDown);
+
+	InputComponent->BindAction(TEXT("Bash"), IE_Pressed, this, &AMyPlayerController::Bash);
+	InputComponent->BindAction(TEXT("Bash"), IE_Released, this, &AMyPlayerController::StopBash);
 }
 
 void AMyPlayerController::MoveForward(float NewAxisValue)
@@ -113,5 +116,21 @@ void AMyPlayerController::StopDown()
 	if (myCharacter)
 	{
 		myCharacter->StopDown();
+	}
+}
+
+void AMyPlayerController::Bash()
+{
+	if (myCharacter)
+	{
+		myCharacter->Bash();
+	}
+}
+
+void AMyPlayerController::StopBash()
+{
+	if (myCharacter)
+	{
+		myCharacter->StopBash();
 	}
 }
