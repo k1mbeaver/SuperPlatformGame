@@ -109,6 +109,11 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 			TransCameraPos(0.05, 1.2);
 			// 나중에 편집하기
 		}
+
+		else if (CurrentState == ECharacterState::BASH)
+		{
+			// 나중에 편집하기
+		}
 	}
 
 	else
@@ -136,6 +141,11 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 			ReturnTransCameraPos(0.05, 1.2);
 			// 나중에 편집하기
 		}
+
+		else if (CurrentState == ECharacterState::BASH)
+		{
+			// 나중에 편집하기
+		}
 	}
 	
 }
@@ -147,18 +157,18 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Set up gameplay key bindings
-	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	//check(PlayerInputComponent);
+//	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	//PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
-	PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
+	//PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
+	//PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
 
-	PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
-	PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
+	//PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
+	//PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
 
-	PlayerInputComponent->BindAxis("Move Forward / Backward", this, &ACapstone_TestCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
+	//PlayerInputComponent->BindAxis("Move Forward / Backward", this, &ACapstone_TestCharacter::MoveForward);
+	///PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
@@ -169,8 +179,8 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	//PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &ACapstone_TestCharacter::LookUpAtRate);
 
 	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &ACapstone_TestCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &ACapstone_TestCharacter::TouchStopped);
+	//PlayerInputComponent->BindTouch(IE_Pressed, this, &ACapstone_TestCharacter::TouchStarted);
+	//PlayerInputComponent->BindTouch(IE_Released, this, &ACapstone_TestCharacter::TouchStopped);
 }
 
 void ACapstone_TestCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)

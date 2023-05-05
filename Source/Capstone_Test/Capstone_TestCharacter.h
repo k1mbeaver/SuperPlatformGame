@@ -13,7 +13,8 @@ enum class ECharacterState : uint8
 	DOWN, // 엎드린 상태
 	STAND, // 서있는 상태
 	RUN, // 달리는 상태
-	// 이후에 추가하자
+	BASH, // 가속 상태
+		// 이후에 추가하자
 };
 
 UCLASS(config=Game)
