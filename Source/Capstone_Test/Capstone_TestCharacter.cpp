@@ -311,11 +311,11 @@ void ACapstone_TestCharacter::StopDown()
 
 void ACapstone_TestCharacter::Bash()
 {
-
+	bCameraMove = true;
 }
 
 void ACapstone_TestCharacter::StopBash()
 {
-
+	bCameraMove = false;
 }
 
