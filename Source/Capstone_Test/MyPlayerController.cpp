@@ -37,23 +37,23 @@ void AMyPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	// 캐릭터 이동 함수
-	InputComponent->BindAxis(TEXT("Move Forward / Backward"), this, &AMyPlayerController::MoveForward);
-	InputComponent->BindAxis(TEXT("Move Right / Left"), this, &AMyPlayerController::MoveRight);
+	//InputComponent->BindAxis(TEXT("Move Forward / Backward"), this, &AMyPlayerController::MoveForward);
+	//InputComponent->BindAxis(TEXT("Move Right / Left"), this, &AMyPlayerController::MoveRight);
 
 	// 캐릭터 달리기
-	InputComponent->BindAction(TEXT("Run"), IE_Pressed, this, &AMyPlayerController::Run);
-	InputComponent->BindAction(TEXT("Run"), IE_Released, this, &AMyPlayerController::StopRun);
+	//InputComponent->BindAction(TEXT("Run"), IE_Pressed, this, &AMyPlayerController::Run);
+	//InputComponent->BindAction(TEXT("Run"), IE_Released, this, &AMyPlayerController::StopRun);
 
 	// 캐릭터 웅크리기
-	InputComponent->BindAction(TEXT("Crouch"), IE_Pressed, this, &AMyPlayerController::Crouch);
-	InputComponent->BindAction(TEXT("Crouch"), IE_Released, this, &AMyPlayerController::StopCrouch);
+	//InputComponent->BindAction(TEXT("Crouch"), IE_Pressed, this, &AMyPlayerController::Crouch);
+	//InputComponent->BindAction(TEXT("Crouch"), IE_Released, this, &AMyPlayerController::StopCrouch);
 
 	// 캐릭터 엎드리기
-	InputComponent->BindAction(TEXT("CharacterDown"), IE_Pressed, this, &AMyPlayerController::CharacterDown);
-	InputComponent->BindAction(TEXT("CharacterDown"), IE_Released, this, &AMyPlayerController::StopDown);
+	//InputComponent->BindAction(TEXT("CharacterDown"), IE_Pressed, this, &AMyPlayerController::CharacterDown);
+	//InputComponent->BindAction(TEXT("CharacterDown"), IE_Released, this, &AMyPlayerController::StopDown);
 
-	InputComponent->BindAction(TEXT("Bash"), IE_Pressed, this, &AMyPlayerController::Bash);
-	InputComponent->BindAction(TEXT("Bash"), IE_Released, this, &AMyPlayerController::StopBash);
+	//InputComponent->BindAction(TEXT("Bash"), IE_Pressed, this, &AMyPlayerController::Bash);
+	//InputComponent->BindAction(TEXT("Bash"), IE_Released, this, &AMyPlayerController::StopBash);
 }
 
 void AMyPlayerController::MoveForward(float NewAxisValue)
