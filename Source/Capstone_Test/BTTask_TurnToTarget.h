@@ -14,4 +14,7 @@ class CAPSTONE_TEST_API UBTTask_TurnToTarget : public UBTTaskNode
 {
 	GENERATED_BODY()
 	
+public:
+	UBTTask_TurnToTarget();
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };
