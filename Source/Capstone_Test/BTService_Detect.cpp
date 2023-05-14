@@ -14,7 +14,6 @@ UBTService_Detect::UBTService_Detect()
 {
     NodeName = TEXT("Detect");
     Interval = 0.3f;
-    bUIPrint = false;
 }
 
 void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -50,24 +49,6 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
              //  && MyCharacter->GetController()->IsPlayerController()
             if (MyCharacter)
             {
-                int SkillTime = OwnerComp.GetBlackboardComponent()->GetValueAsInt(AMyAIController::SkillTime);
-                SkillTime++;
-
-                if (SkillTime > 20) // 스킬 쿨이 50이 넘어가면 사용후
-                {
-                    SkillTime = 0; // 초기화
-                }
-
-                if (!(myMonster->bUIPrint))
-                {
-                   // HUD->SetMonsterName(myMonster->strMonsterType);
-                   // HUD->SetMonsterHP(myMonster->fAIHp / myMonster->fMaxHp);
-                   // HUD->SetMonsterVisible();
-
-                    myMonster->bUIPrint = true;
-                }
-
-                OwnerComp.GetBlackboardComponent()->SetValueAsInt(AMyAIController::SkillTime, SkillTime);
                 OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyAIController::TargetKey, MyCharacter);
                 // DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Green, false, 0.2f);
 

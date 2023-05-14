@@ -29,8 +29,8 @@ public:
 
 	void RunAI();
 	void StopAI();
-	UFUNCTION()
-		void EndIntro();
+	//UFUNCTION()
+		//void EndIntro();
 
 private:
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))

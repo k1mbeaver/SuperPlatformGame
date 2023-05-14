@@ -18,7 +18,7 @@ const FName AMyAIController::bUIPrint(TEXT("bUIPrint"));
 
 AMyAIController::AMyAIController(FObjectInitializer const& object_initializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBehaviorTree> BTObject(TEXT("BehaviorTree'/Game/AI/BT_MonsterAI.BT_MonsterAI'"));
+	static ConstructorHelpers::FObjectFinder<UBehaviorTree> BTObject(TEXT("BehaviorTree'/Game/AI/BT_AIMonster.BT_AIMonster'"));
 	if (BTObject.Succeeded())
 	{
 		BTAsset = BTObject.Object;
@@ -32,8 +32,8 @@ void AMyAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//RunBehaviorTree(BTAsset);
-	//BTAsset_Component->StartTree(*BTAsset);
+	RunBehaviorTree(BTAsset);
+	BTAsset_Component->StartTree(*BTAsset);
 }
 
 void AMyAIController::OnPossess(APawn* InPawn)
@@ -66,9 +66,11 @@ void AMyAIController::StopAI()
 	BTAsset_Component->StopTree(EBTStopMode::Safe);
 }
 
+/*
 void AMyAIController::EndIntro() // 여기서 BT를 실행시킨다.
 {
 	RunBehaviorTree(BTAsset);
 	BTAsset_Component->StartTree(*BTAsset);
 }
+*/
 
