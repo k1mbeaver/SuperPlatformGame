@@ -35,8 +35,6 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
     FCollisionQueryParams CollisionQueryParam(NAME_None, false, ControllingPawn);
     bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel1, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
 
-    //APlayerUI_HUD* HUD = Cast<APlayerUI_HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
-
     AMyAICharacter* myMonster = Cast<AMyAICharacter>(ControllingPawn);
 
     if (bResult)
@@ -44,9 +42,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
         for (auto const& OverlapResult : OverlapResults)
         {
             ACapstone_TestCharacter* MyCharacter = Cast<ACapstone_TestCharacter>(OverlapResult.GetActor());
-            //AMyAICharacter* MyAICharacter = Cast<AMyAICharacter>(OverlapResult.GetActor());
 
-             //  && MyCharacter->GetController()->IsPlayerController()
             if (MyCharacter)
             {
                 OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyAIController::TargetKey, MyCharacter);

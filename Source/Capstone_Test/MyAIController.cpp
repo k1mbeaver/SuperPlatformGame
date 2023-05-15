@@ -12,8 +12,6 @@
 const FName AMyAIController::HomePosKey(TEXT("HomePos"));
 const FName AMyAIController::PatrolPosKey(TEXT("PatrolPos"));
 const FName AMyAIController::TargetKey(TEXT("Target"));
-const FName AMyAIController::SkillTime(TEXT("SkillTime"));
-const FName AMyAIController::bUIPrint(TEXT("bUIPrint"));
 
 
 AMyAIController::AMyAIController(FObjectInitializer const& object_initializer)
@@ -65,12 +63,3 @@ void AMyAIController::StopAI()
 
 	BTAsset_Component->StopTree(EBTStopMode::Safe);
 }
-
-/*
-void AMyAIController::EndIntro() // 여기서 BT를 실행시킨다.
-{
-	RunBehaviorTree(BTAsset);
-	BTAsset_Component->StartTree(*BTAsset);
-}
-*/
-

@@ -24,13 +24,9 @@ public:
 	static const FName HomePosKey;
 	static const FName PatrolPosKey;
 	static const FName TargetKey;
-	static const FName SkillTime;
-	static const FName bUIPrint;
 
 	void RunAI();
 	void StopAI();
-	//UFUNCTION()
-		//void EndIntro();
 
 private:
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
