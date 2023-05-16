@@ -106,7 +106,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 
 		else if (CurrentState == ECharacterState::RUN)
 		{
-			TransCameraPos(0.05, 1.2);
+			TransCameraPos(0.05, 0.8);
 			// 나중에 편집하기
 		}
 
@@ -138,7 +138,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 
 		else if (CurrentState == ECharacterState::RUN)
 		{
-			ReturnTransCameraPos(0.05, 1.2);
+			ReturnTransCameraPos(0.05, 0.8);
 			// 나중에 편집하기
 		}
 
@@ -311,11 +311,15 @@ void ACapstone_TestCharacter::StopDown()
 
 void ACapstone_TestCharacter::Bash()
 {
+	CurrentState = ECharacterState::BASH;
+	GetWorldSettings()->SetTimeDilation(0.1f);
 	bCameraMove = true;
 }
 
 void ACapstone_TestCharacter::StopBash()
 {
+	CurrentState = ECharacterState::STAND;
+	GetWorldSettings()->SetTimeDilation(1.0f);
 	bCameraMove = false;
 }
 
