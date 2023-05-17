@@ -32,7 +32,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	// instead of recompiling to adjust them
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
-	GetCharacterMovement()->MaxWalkSpeed = 500.f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
@@ -106,7 +106,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 
 		else if (CurrentState == ECharacterState::RUN)
 		{
-			TransCameraPos(0.05, 0.8);
+			TransCameraPos(0.05, 0.6);
 			// 나중에 편집하기
 		}
 
@@ -138,7 +138,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 
 		else if (CurrentState == ECharacterState::RUN)
 		{
-			ReturnTransCameraPos(0.05, 0.8);
+			ReturnTransCameraPos(0.05, 0.6);
 			// 나중에 편집하기
 		}
 
@@ -276,24 +276,28 @@ void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
 void ACapstone_TestCharacter::Run()
 {
 	CurrentState = ECharacterState::RUN;
+	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 	bCameraMove = true;
 }
 
 void ACapstone_TestCharacter::StopRun()
 {
 	CurrentState = ECharacterState::STAND;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	bCameraMove = false;
 }
 
 void ACapstone_TestCharacter::Crouch()
 {
 	CurrentState = ECharacterState::CROUCH;
+	GetCharacterMovement()->MaxWalkSpeed = 150.0f;
 	bCameraMove = true;
 }
 
 void ACapstone_TestCharacter::StopCrouch()
 {
 	CurrentState = ECharacterState::STAND;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	bCameraMove = false;
 }
 
