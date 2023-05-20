@@ -29,6 +29,8 @@ class ACapstone_TestCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	class UMyGameInstance* myGameInstance;
 public:
 	ACapstone_TestCharacter();
 
