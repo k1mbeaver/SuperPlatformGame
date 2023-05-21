@@ -4,7 +4,31 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Engine/DataTable.h"
 #include "CharacterDataTableClass.generated.h"
+
+USTRUCT(BlueprintType)
+struct FCharacterDataTable : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// 캐릭터 체력?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CharacterHP;
+
+	// 캐릭터 공격력
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CharacterDamage;
+
+	// 캐릭터 속도
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CharacterSpeed;
+
+	// 캐릭터 메쉬
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USkeletalMesh* CharacterMesh;
+};
 
 UCLASS()
 class CAPSTONE_TEST_API ACharacterDataTableClass : public AActor
