@@ -8,6 +8,7 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "MyGameInstance.h"
+#include "MyAnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -151,6 +152,13 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 	
 }
 
+void ACapstone_TestCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//GetMesh()->SetSkeletalMesh();
+	//myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Input

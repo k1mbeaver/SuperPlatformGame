@@ -67,10 +67,15 @@ protected:
 
 	virtual void Tick(float DeltaTime) override;
 	// End of APawn interface
+	
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 private:
 	bool bCameraMove = false;
 
+private:
+	class UMyAnimInstance* myAnimInstance;
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
