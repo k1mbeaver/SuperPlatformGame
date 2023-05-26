@@ -34,7 +34,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	// instead of recompiling to adjust them
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
-	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 250.0f;
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
@@ -292,7 +292,7 @@ void ACapstone_TestCharacter::Run()
 void ACapstone_TestCharacter::StopRun()
 {
 	CurrentState = ECharacterState::STAND;
-	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 250.0f;
 	bCameraMove = false;
 }
 
