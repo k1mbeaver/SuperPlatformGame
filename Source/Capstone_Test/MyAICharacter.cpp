@@ -2,7 +2,7 @@
 
 
 #include "MyAICharacter.h"
-
+#include "Kismet/GameplayStatics.h"
 // Sets default values
 AMyAICharacter::AMyAICharacter()
 {

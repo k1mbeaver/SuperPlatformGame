@@ -51,26 +51,8 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 		int nMonsterType;
 
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
-		bool bAlive;
-
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly)
-		bool bUIPrint;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-		FString strMonsterType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-		FString strMonsterItem;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-		USoundBase* DeathSound;
-
 	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		//UAnimMontage* AttackMontage;
-
-	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
-		//UAnimMontage* IntroMontage;
 
 	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		//UAnimMontage* SkillMontage;
@@ -86,15 +68,6 @@ public:
 
 	//UPROPERTY()
 		//class UParticleSystem* SkillParticle;
-
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-		USceneComponent* ParticleMuzzleLocation;
-
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-		USceneComponent* IntroParticleMuzzleLocation;
-
-	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
-		USceneComponent* ProjectileMuzzle;
 
 	// damage particle
 	UPROPERTY()
