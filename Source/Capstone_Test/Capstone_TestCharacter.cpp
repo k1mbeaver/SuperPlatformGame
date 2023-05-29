@@ -59,32 +59,6 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 void ACapstone_TestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	/*
-	if (CurrentState == ECharacterState::STAND)
-	{
-		TransCameraPos(0.05, 1.0);
-		//ReturnTransCameraPos(0.05, 1);
-	}
-
-	else if (CurrentState == ECharacterState::CROUCH)
-	{
-		TransCameraPos(0.05, 0.5);
-		// 나중에 편집하기
-	}
-
-	else if (CurrentState == ECharacterState::DOWN)
-	{
-		TransCameraPos(0.05, 0.3);
-		// 나중에 편집하기
-	}
-
-	else if (CurrentState == ECharacterState::RUN)
-	{
-		TransCameraPos(0.05, 1.2);
-		// 나중에 편집하기
-	}
-	*/
 	
 	if (bCameraMove)
 	{
@@ -156,7 +130,7 @@ void ACapstone_TestCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//GetMesh()->SetSkeletalMesh();
+	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
 	//myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
