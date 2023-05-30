@@ -10,6 +10,8 @@ UMyAnimInstance::UMyAnimInstance()
 	CurrentPawnSpeed = 0.0f;
 	IsInAir = false;
 	IsDead = false;
+	IsCrouch = false;
+	IsBash = false;
 
 	// 몽타주는 게임 인스턴스에서 직접 가져오는걸로?
 }

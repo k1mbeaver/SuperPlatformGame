@@ -131,7 +131,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
-	//myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -275,6 +275,7 @@ void ACapstone_TestCharacter::Crouch()
 	CurrentState = ECharacterState::CROUCH;
 	GetCharacterMovement()->MaxWalkSpeed = 150.0f;
 	bCameraMove = true;
+	myAnimInstance->IsCrouch = true;
 }
 
 void ACapstone_TestCharacter::StopCrouch()
@@ -282,6 +283,7 @@ void ACapstone_TestCharacter::StopCrouch()
 	CurrentState = ECharacterState::STAND;
 	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	bCameraMove = false;
+	myAnimInstance->IsCrouch = false;
 }
 
 void ACapstone_TestCharacter::CharacterDown()
@@ -301,6 +303,7 @@ void ACapstone_TestCharacter::Bash()
 	CurrentState = ECharacterState::BASH;
 	GetWorldSettings()->SetTimeDilation(0.1f);
 	bCameraMove = true;
+	myAnimInstance->IsBash = true;
 }
 
 void ACapstone_TestCharacter::StopBash()
@@ -308,5 +311,6 @@ void ACapstone_TestCharacter::StopBash()
 	CurrentState = ECharacterState::STAND;
 	GetWorldSettings()->SetTimeDilation(1.0f);
 	bCameraMove = false;
+	myAnimInstance->IsBash = false;
 }
 
