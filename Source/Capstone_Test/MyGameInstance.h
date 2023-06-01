@@ -20,7 +20,7 @@ class CAPSTONE_TEST_API UMyGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
-	//UMyGameInstance();
+	UMyGameInstance();
 
 	// 플레이어 데이터 값 얻어오기
 	//USkeletalMesh* GetPlayerSkeletalMesh(FString PlayerType);
@@ -29,6 +29,8 @@ public:
 	//int GetPlayerStage();
 	//float GetPlayerMP();
 
+	// AI 몬스터 데이터 얻어오기
+	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
 
 private:
 	UPROPERTY()

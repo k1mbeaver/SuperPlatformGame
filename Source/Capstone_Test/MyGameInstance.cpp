@@ -6,19 +6,20 @@
 #include "CharacterDataTableClass.h"
 #include "ObjectDataTableClass.h"
 
-/*
-int UMyGameInstance::GetInventoryItemCount(int nSlot)
+UMyGameInstance::UMyGameInstance()
 {
-	FString strSlot = FString::FromInt(nSlot);
-	FInventoryDataTable* InventoryData = FInventoryTable->FindRow<FInventoryDataTable>(*strSlot, TEXT(""));
-	int ItemCount = InventoryData->ItemCount;
-	return ItemCount;
-}
+	FString AIFileDataTable = TEXT("DataTable'/Game/DataTable/AIDataTable.AIDataTable'");
 
-void UMyGameInstance::SetInventoryItemCount(int nSlot, int nCount)
-{
-	FString strSlot = FString::FromInt(nSlot);
-	FInventoryDataTable* InventoryData = FInventoryTable->FindRow<FInventoryDataTable>(*strSlot, TEXT(""));
-	InventoryData->ItemCount = nCount;
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_AIFILE(*AIFileDataTable);
+
+	if (DT_AIFILE.Succeeded())
+	{
+		FAITable = DT_AIFILE.Object;
+	}
 }
-*/
+USkeletalMesh* UMyGameInstance::GetAISkeletalMesh(FString MonsterType)
+{
+	FAIDataTable* SkeletalData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	USkeletalMesh* mySkeletalMesh = SkeletalData->CharacterMesh;
+	return mySkeletalMesh;
+}
