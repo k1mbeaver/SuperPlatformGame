@@ -4,6 +4,7 @@
 #include "MyBossMonster.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "MyGameInstance.h"
 
 // Sets default values
 AMyBossMonster::AMyBossMonster()
@@ -30,6 +31,7 @@ void AMyBossMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
 }
 
 // Called every frame

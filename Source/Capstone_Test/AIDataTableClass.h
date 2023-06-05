@@ -28,6 +28,10 @@ public:
 	// 캐릭터 메쉬
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USkeletalMesh* CharacterMesh;
+
+	// 캐릭터 애님 인스턴스
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class UAnimInstance> MyAnimation;
 };
 
 UCLASS()

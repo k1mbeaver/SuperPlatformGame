@@ -4,6 +4,7 @@
 #include "MyAICharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "MyGameInstance.h"
 
 // Sets default values
 AMyAICharacter::AMyAICharacter()
@@ -30,6 +31,9 @@ void AMyAICharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	strMonsterType = "Doozy";
+	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
+	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
 }
 
 // Called every frame

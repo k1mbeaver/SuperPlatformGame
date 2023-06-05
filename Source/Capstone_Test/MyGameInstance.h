@@ -31,6 +31,7 @@ public:
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
+	TSubclassOf<class UAnimInstance> GetAIAnimInstance(FString MonsterType);
 
 private:
 	UPROPERTY()

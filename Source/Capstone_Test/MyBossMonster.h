@@ -48,13 +48,13 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = HP, Meta = (AllowPrivateAccess = true))
 		float fMaxHp;
 
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
-		int nMonsterType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
+		FString strMonsterType;
 
 	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		//UAnimMontage* AttackMontage;
 
-	//UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+	//UPROPERTY(VisibDleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		//UAnimMontage* SkillMontage;
 
 	UPROPERTY(VisibleInstanceOnly, Category = Animation)
@@ -75,6 +75,8 @@ public:
 
 	UPROPERTY()
 		class UGameplayStatics* GameStatic;
+
+	class UMyGameInstance* myGameInstance;
 
 protected:
 	// Called when the game starts or when spawned

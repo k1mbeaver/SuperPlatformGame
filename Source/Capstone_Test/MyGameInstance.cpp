@@ -17,9 +17,17 @@ UMyGameInstance::UMyGameInstance()
 		FAITable = DT_AIFILE.Object;
 	}
 }
+
 USkeletalMesh* UMyGameInstance::GetAISkeletalMesh(FString MonsterType)
 {
 	FAIDataTable* SkeletalData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
 	USkeletalMesh* mySkeletalMesh = SkeletalData->CharacterMesh;
 	return mySkeletalMesh;
+}
+
+TSubclassOf<class UAnimInstance> UMyGameInstance::GetAIAnimInstance(FString MonsterType)
+{
+	FAIDataTable* AnimData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	TSubclassOf<class UAnimInstance> myAnimInstance = AnimData->MyAnimation;
+	return myAnimInstance;
 }
