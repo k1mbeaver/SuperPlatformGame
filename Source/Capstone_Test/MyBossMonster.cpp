@@ -31,7 +31,10 @@ void AMyBossMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
+	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
 	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
+	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
+	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
 }
 
 // Called every frame

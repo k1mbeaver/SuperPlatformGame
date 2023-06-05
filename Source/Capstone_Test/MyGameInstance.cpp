@@ -31,3 +31,10 @@ TSubclassOf<class UAnimInstance> UMyGameInstance::GetAIAnimInstance(FString Mons
 	TSubclassOf<class UAnimInstance> myAnimInstance = AnimData->MyAnimation;
 	return myAnimInstance;
 }
+
+float UMyGameInstance::GetAISpeed(FString MonsterType)
+{
+	FAIDataTable* SpeedData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	float mySpeed = SpeedData->CharacterSpeed;
+	return mySpeed;
+}
