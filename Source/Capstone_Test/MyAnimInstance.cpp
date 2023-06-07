@@ -42,6 +42,14 @@ void UMyAnimInstance::PlayAttackMontage(UAnimMontage* GetAttackMontage)
 	}
 }
 
+void UMyAnimInstance::PlayDiveMontage(UAnimMontage* GetDiveMontage)
+{
+	if (IsBash == true)
+	{
+		Montage_Play(GetDiveMontage, 1.0f);
+	}
+}
+
 void UMyAnimInstance::SetDeadAnim()
 {
 	IsDead = true;

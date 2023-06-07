@@ -131,7 +131,9 @@ void ACapstone_TestCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	myDiveMontage = MyGI->GetPlayerDiveMontage();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -304,6 +306,7 @@ void ACapstone_TestCharacter::Bash()
 	GetWorldSettings()->SetTimeDilation(0.1f);
 	bCameraMove = true;
 	myAnimInstance->IsBash = true;
+	myAnimInstance->PlayDiveMontage(myDiveMontage);
 }
 
 void ACapstone_TestCharacter::StopBash()

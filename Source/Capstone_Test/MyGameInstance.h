@@ -23,11 +23,7 @@ public:
 	UMyGameInstance();
 
 	// 플레이어 데이터 값 얻어오기
-	//USkeletalMesh* GetPlayerSkeletalMesh(FString PlayerType);
-	//float GetPlayerHP();
-	//float GetPlayerStamina();
-	//int GetPlayerStage();
-	//float GetPlayerMP();
+	UAnimMontage* GetPlayerDiveMontage();
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);

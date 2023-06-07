@@ -41,6 +41,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		ECharacterState CurrentState = ECharacterState::STAND;
 
+	UAnimMontage* myDiveMontage;
+
 protected:
 
 	/** 

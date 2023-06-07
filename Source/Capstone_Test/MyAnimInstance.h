@@ -19,6 +19,7 @@ public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	void PlayAttackMontage(UAnimMontage* GetAttackMontage);
+	void PlayDiveMontage(UAnimMontage* GetDiveMontage);
 	void SetDeadAnim();
 
 private:

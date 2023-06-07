@@ -16,6 +16,15 @@ UMyGameInstance::UMyGameInstance()
 	{
 		FAITable = DT_AIFILE.Object;
 	}
+
+	FString CharacterFileDataTable = TEXT("DataTable'/Game/DataTable/CharacterDataTable.CharacterDataTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_CHARACTERFILE(*CharacterFileDataTable);
+
+	if (DT_CHARACTERFILE.Succeeded())
+	{
+		FCharacterTable = DT_CHARACTERFILE.Object;
+	}
 }
 
 USkeletalMesh* UMyGameInstance::GetAISkeletalMesh(FString MonsterType)
@@ -37,4 +46,11 @@ float UMyGameInstance::GetAISpeed(FString MonsterType)
 	FAIDataTable* SpeedData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
 	float mySpeed = SpeedData->CharacterSpeed;
 	return mySpeed;
+}
+
+UAnimMontage* UMyGameInstance::GetPlayerDiveMontage()
+{
+	FCharacterDataTable* MontageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	UAnimMontage* myMontage = MontageData->DiveMontage;
+	return myMontage;
 }
