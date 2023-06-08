@@ -54,3 +54,13 @@ void UMyAnimInstance::SetDeadAnim()
 {
 	IsDead = true;
 }
+
+void UMyAnimInstance::AnimNotify_DiveStart()
+{
+	DiveStart_Dive.Broadcast();
+}
+
+void UMyAnimInstance::AnimNotify_DiveEnd()
+{
+	DiveEnd_Dive.Broadcast();
+}

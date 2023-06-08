@@ -6,6 +6,9 @@
 #include "Animation/AnimInstance.h"
 #include "MyAnimInstance.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FDiveStart_DiveDelegate);
+DECLARE_MULTICAST_DELEGATE(FDiveEnd_DiveDelegate);
+
 /**
  * 
  */
@@ -35,6 +38,11 @@ private:
 	//UFUNCTION()
 		//void AnimNotify_SaveAttack();
 
+	UFUNCTION()
+		void AnimNotify_DiveStart();
+	UFUNCTION()
+		void AnimNotify_DiveEnd();
+
 public:
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		bool IsAttacking;
@@ -44,4 +52,7 @@ public:
 
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		bool IsBash;
+
+	FDiveStart_DiveDelegate DiveStart_Dive;
+	FDiveEnd_DiveDelegate DiveEnd_Dive;
 };

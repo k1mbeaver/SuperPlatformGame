@@ -9,6 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "MyGameInstance.h"
 #include "MyAnimInstance.h"
+#include "Animation/AnimInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -134,6 +135,9 @@ void ACapstone_TestCharacter::BeginPlay()
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
 	myDiveMontage = MyGI->GetPlayerDiveMontage();
+
+	myAnimInstance->DiveStart_Dive.AddUObject(this, &ACapstone_TestCharacter::StartBashAnimation);
+	myAnimInstance->DiveEnd_Dive.AddUObject(this, &ACapstone_TestCharacter::StopBashAnimation);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -158,7 +162,7 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ACapstone_TestCharacter::Run);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &ACapstone_TestCharacter::StopRun);
 
-	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACapstone_TestCharacter::Crouch);
+	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACapstone_TestCharacter::Crouching);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &ACapstone_TestCharacter::StopCrouch);
 
 	PlayerInputComponent->BindAction("CharacterDown", IE_Pressed, this, &ACapstone_TestCharacter::CharacterDown);
@@ -193,6 +197,11 @@ void ACapstone_TestCharacter::LookUpAtRate(float Rate)
 */
 void ACapstone_TestCharacter::MoveForward(float Value)
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -206,6 +215,11 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 
 void ACapstone_TestCharacter::MoveRight(float Value)
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	if ( (Controller != nullptr) && (Value != 0.0f) )
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::Y);
@@ -260,6 +274,11 @@ void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
 
 void ACapstone_TestCharacter::Run()
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	CurrentState = ECharacterState::RUN;
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 	bCameraMove = true;
@@ -267,13 +286,23 @@ void ACapstone_TestCharacter::Run()
 
 void ACapstone_TestCharacter::StopRun()
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	CurrentState = ECharacterState::STAND;
 	GetCharacterMovement()->MaxWalkSpeed = 250.0f;
 	bCameraMove = false;
 }
 
-void ACapstone_TestCharacter::Crouch()
+void ACapstone_TestCharacter::Crouching()
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	CurrentState = ECharacterState::CROUCH;
 	GetCharacterMovement()->MaxWalkSpeed = 150.0f;
 	bCameraMove = true;
@@ -282,6 +311,11 @@ void ACapstone_TestCharacter::Crouch()
 
 void ACapstone_TestCharacter::StopCrouch()
 {
+	if (bCanMove == false)
+	{
+		return;
+	}
+
 	CurrentState = ECharacterState::STAND;
 	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 	bCameraMove = false;
@@ -305,6 +339,7 @@ void ACapstone_TestCharacter::Bash()
 	CurrentState = ECharacterState::BASH;
 	GetWorldSettings()->SetTimeDilation(0.1f);
 	bCameraMove = true;
+	//bCanMove = false;
 	myAnimInstance->IsBash = true;
 	myAnimInstance->PlayDiveMontage(myDiveMontage);
 }
@@ -315,5 +350,15 @@ void ACapstone_TestCharacter::StopBash()
 	GetWorldSettings()->SetTimeDilation(1.0f);
 	bCameraMove = false;
 	myAnimInstance->IsBash = false;
+}
+
+void ACapstone_TestCharacter::StartBashAnimation()
+{
+	bCanMove = false;
+}
+
+void ACapstone_TestCharacter::StopBashAnimation()
+{
+	bCanMove = true;
 }
 

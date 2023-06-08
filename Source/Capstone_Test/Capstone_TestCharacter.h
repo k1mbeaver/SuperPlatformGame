@@ -75,7 +75,7 @@ protected:
 
 private:
 	bool bCameraMove = false;
-
+	bool bCanMove = true;
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:
@@ -109,7 +109,7 @@ public:
 
 	void StopRun();
 
-	void Crouch();
+	void Crouching();
 
 	void StopCrouch();
 
@@ -120,5 +120,9 @@ public:
 	void Bash();
 
 	void StopBash();
+
+	void StartBashAnimation();
+
+	void StopBashAnimation();
 };
 
