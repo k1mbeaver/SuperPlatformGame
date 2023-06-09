@@ -4,7 +4,9 @@
 #include "MyAICharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "MyAIAnimInstance.h"
 #include "MyGameInstance.h"
+#include "Animation/AnimInstance.h"
 
 // Sets default values
 AMyAICharacter::AMyAICharacter()
@@ -31,10 +33,12 @@ void AMyAICharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	MonsterAnim = Cast<UMyAIAnimInstance>(GetMesh()->GetAnimInstance());
 	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
 	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
 	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
 	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
+	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
 }
 
 // Called every frame
@@ -49,5 +53,10 @@ void AMyAICharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMyAICharacter::Attack()
+{
+	MonsterAnim->PlayAttackMontage(AttackMontage);
 }
 

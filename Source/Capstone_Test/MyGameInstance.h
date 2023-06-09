@@ -29,6 +29,7 @@ public:
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
 	TSubclassOf<class UAnimInstance> GetAIAnimInstance(FString MonsterType);
 	float GetAISpeed(FString MonsterType);
+	UAnimMontage* GetAIAttackMontage(FString MonsterType);
 
 private:
 	UPROPERTY()

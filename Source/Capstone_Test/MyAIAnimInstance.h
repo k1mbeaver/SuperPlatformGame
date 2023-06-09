@@ -6,6 +6,8 @@
 #include "Animation/AnimInstance.h"
 #include "MyAIAnimInstance.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FAttackStart_AttackDelegate);
+DECLARE_MULTICAST_DELEGATE(FAttackEnd_AttackDelegate);
 /**
  * 
  */
@@ -31,10 +33,16 @@ private:
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		bool IsDead;
 
-	//UFUNCTION()
-		//void AnimNotify_SaveAttack();
+	UFUNCTION()
+		void AnimNotify_AttackStart();
+
+	UFUNCTION()
+		void AnimNotify_AttackEnd();
 
 public:
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		bool IsAttacking;
+
+	FAttackStart_AttackDelegate AttackStart_Attack;
+	FAttackEnd_AttackDelegate AttackEnd_Attack;
 };

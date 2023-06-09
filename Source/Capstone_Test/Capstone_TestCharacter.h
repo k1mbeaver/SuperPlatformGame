@@ -30,6 +30,9 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* myDiveMontage;
+
 	class UMyGameInstance* myGameInstance;
 public:
 	ACapstone_TestCharacter();
@@ -40,8 +43,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		ECharacterState CurrentState = ECharacterState::STAND;
-
-	UAnimMontage* myDiveMontage;
 
 protected:
 

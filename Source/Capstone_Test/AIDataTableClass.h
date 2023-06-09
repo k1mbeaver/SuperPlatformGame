@@ -32,6 +32,10 @@ public:
 	// 캐릭터 애님 인스턴스
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UAnimInstance> MyAnimation;
+
+	// 캐릭터 공격 애니메이션 몽타주
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UAnimMontage* AttackMontage;
 };
 
 UCLASS()

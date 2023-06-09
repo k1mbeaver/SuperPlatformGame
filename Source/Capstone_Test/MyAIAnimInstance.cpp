@@ -44,3 +44,13 @@ void UMyAIAnimInstance::SetDeadAnim()
 {
 	IsDead = true;
 }
+
+void UMyAIAnimInstance::AnimNotify_AttackStart()
+{
+	AttackStart_Attack.Broadcast();
+}
+
+void UMyAIAnimInstance::AnimNotify_AttackEnd()
+{
+	AttackEnd_Attack.Broadcast();
+}

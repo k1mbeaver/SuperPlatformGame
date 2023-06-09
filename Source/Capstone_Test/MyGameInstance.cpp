@@ -48,6 +48,13 @@ float UMyGameInstance::GetAISpeed(FString MonsterType)
 	return mySpeed;
 }
 
+UAnimMontage* UMyGameInstance::GetAIAttackMontage(FString MonsterType)
+{
+	FAIDataTable* MontageData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	UAnimMontage* myMontage = MontageData->AttackMontage;
+	return myMontage;
+}
+
 UAnimMontage* UMyGameInstance::GetPlayerDiveMontage()
 {
 	FCharacterDataTable* MontageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
