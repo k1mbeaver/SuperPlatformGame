@@ -4,6 +4,7 @@
 #include "BTTask_Attack.h"
 #include "MyAICharacter.h"
 #include "MyAIController.h"
+#include "MyAIAnimInstance.h"
 
 UBTTask_Attack::UBTTask_Attack()
 {
@@ -19,11 +20,11 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
     if (MyAICharacter == nullptr)
         return EBTNodeResult::Failed;
 
-    //MyAICharacter->Attack();
+    MyAICharacter->Attack();
     IsAttacking = true;
-    // MyAICharacter->OnAttackEnd.AddLambda([this]() -> void {
-        //IsAttacking = false;
-        //});
+    MyAICharacter->MonsterAnim->AttackEnd_Attack.AddLambda([this]() -> void {
+        IsAttacking = false;
+        });
 
     return EBTNodeResult::InProgress;
 }
