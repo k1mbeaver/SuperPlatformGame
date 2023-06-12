@@ -34,10 +34,11 @@ void UMyAIAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 void UMyAIAnimInstance::PlayAttackMontage(UAnimMontage* GetAttackMontage)
 {
-	if (IsAttacking == true)
-	{
-		Montage_Play(GetAttackMontage, 1.0f);
-	}
+	//if (IsAttacking == true)
+	//{
+		//Montage_Play(GetAttackMontage, 1.0f);
+	//}
+	Montage_Play(GetAttackMontage, 1.0f);
 }
 
 void UMyAIAnimInstance::SetDeadAnim()

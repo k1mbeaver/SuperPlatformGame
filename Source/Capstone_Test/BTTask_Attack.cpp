@@ -3,6 +3,7 @@
 
 #include "BTTask_Attack.h"
 #include "MyAICharacter.h"
+#include "MyBossMonster.h"
 #include "MyAIController.h"
 #include "MyAIAnimInstance.h"
 
@@ -16,7 +17,7 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 {
     EBTNodeResult::Type Result = Super::ExecuteTask(OwnerComp, NodeMemory);
 
-    auto MyAICharacter = Cast<AMyAICharacter>(OwnerComp.GetAIOwner()->GetPawn());
+    auto MyAICharacter = Cast<AMyBossMonster>(OwnerComp.GetAIOwner()->GetPawn());
     if (MyAICharacter == nullptr)
         return EBTNodeResult::Failed;
 

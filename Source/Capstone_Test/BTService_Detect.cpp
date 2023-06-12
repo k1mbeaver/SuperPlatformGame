@@ -6,7 +6,8 @@
 #include "MyAICharacter.h"
 #include "Capstone_TestCharacter.h"
 #include "BehaviorTree/BlackboardComponent.h"
-//#include "PlayerUI_HUD.h"
+#include "MyBossMonster.h"
+#include "MyBossAIController.h"
 #include "DrawDebugHelpers.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -35,7 +36,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
     FCollisionQueryParams CollisionQueryParam(NAME_None, false, ControllingPawn);
     bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel1, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
 
-    AMyAICharacter* myMonster = Cast<AMyAICharacter>(ControllingPawn);
+    AMyBossMonster* myMonster = Cast<AMyBossMonster>(ControllingPawn);
 
     if (bResult)
     {
@@ -45,7 +46,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
             if (MyCharacter)
             {
-                OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyAIController::TargetKey, MyCharacter);
+                OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyBossAIController::TargetKey, MyCharacter);
                 // DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Green, false, 0.2f);
 
                  //DrawDebugPoint(World, MyCharacter->GetActorLocation(), 10.0f, FColor::Blue, false, 0.2f);
@@ -55,7 +56,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
             else
             {
-                OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyAIController::TargetKey, nullptr);
+                OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyBossAIController::TargetKey, nullptr);
             }
         }
     }
