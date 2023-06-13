@@ -26,6 +26,7 @@ AMyBossMonster::AMyBossMonster()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
+	bCanAttack = false;
 }
 
 // Called when the game starts or when spawned
@@ -33,12 +34,15 @@ void AMyBossMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
-	MonsterAnim = Cast<UMyAIAnimInstance>(GetMesh()->GetAnimInstance());
 	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
 	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
 	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
 	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
+	MonsterAnim = Cast<UMyAIAnimInstance>(GetMesh()->GetAnimInstance());
 	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
+
+	MonsterAnim->AttackStart_Attack.AddUObject(this, &AMyBossMonster::StartAttackAnimation);
+	MonsterAnim->AttackEnd_Attack.AddUObject(this, &AMyBossMonster::StopAttackAnimation);
 }
 
 // Called every frame
@@ -57,5 +61,19 @@ void AMyBossMonster::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AMyBossMonster::Attack()
 {
-	MonsterAnim->PlayAttackMontage(AttackMontage);
+	if (!bCanAttack)
+	{
+		bCanAttack = true;
+		MonsterAnim->PlayAttackMontage(AttackMontage);
+	}
+}
+
+void AMyBossMonster::StartAttackAnimation()
+{
+	bCanAttack = true;
+}
+
+void AMyBossMonster::StopAttackAnimation()
+{
+	bCanAttack = false;
 }

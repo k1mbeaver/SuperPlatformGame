@@ -5,6 +5,7 @@
 #include "MyAIController.h"
 #include "MyAICharacter.h"
 #include "Capstone_TestCharacter.h"
+#include "MyBossAIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 UBTDecorator_IsInAttackRange::UBTDecorator_IsInAttackRange()
@@ -20,10 +21,10 @@ bool UBTDecorator_IsInAttackRange::CalculateRawConditionValue(UBehaviorTreeCompo
     if (ControllingPawn == nullptr)
         return false;
 
-    auto Target = Cast<ACapstone_TestCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(AMyAIController::TargetKey));
+    auto Target = Cast<ACapstone_TestCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(AMyBossAIController::TargetKey));
     if (Target == nullptr)
         return false;
 
-    bResult = (Target->GetDistanceTo(ControllingPawn) <= 500.0f);
+    bResult = (Target->GetDistanceTo(ControllingPawn) <= 100.0f);
     return bResult;
 }

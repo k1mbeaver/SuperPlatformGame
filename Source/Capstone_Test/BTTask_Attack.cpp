@@ -5,6 +5,7 @@
 #include "MyAICharacter.h"
 #include "MyBossMonster.h"
 #include "MyAIController.h"
+#include "MyBossAIController.h"
 #include "MyAIAnimInstance.h"
 
 UBTTask_Attack::UBTTask_Attack()

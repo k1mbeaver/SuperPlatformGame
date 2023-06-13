@@ -94,6 +94,8 @@ public:
 	//float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamasgeCauser) override;
 
 	void Attack();
+	void StartAttackAnimation();
+	void StopAttackAnimation();
 	//void Skill();
 	//void AttackEnd();
 	//void SkillEnd();

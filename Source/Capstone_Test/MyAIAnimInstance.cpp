@@ -10,6 +10,7 @@ UMyAIAnimInstance::UMyAIAnimInstance()
 	CurrentPawnSpeed = 0.0f;
 	IsInAir = false;
 	IsDead = false;
+	IsAttacking = false;
 
 	// 몽타주는 게임 인스턴스에서 직접 가져오는걸로?
 }
@@ -49,9 +50,11 @@ void UMyAIAnimInstance::SetDeadAnim()
 void UMyAIAnimInstance::AnimNotify_AttackStart()
 {
 	AttackStart_Attack.Broadcast();
+	IsAttacking = true;
 }
 
 void UMyAIAnimInstance::AnimNotify_AttackEnd()
 {
 	AttackEnd_Attack.Broadcast();
+	IsAttacking = false;
 }
