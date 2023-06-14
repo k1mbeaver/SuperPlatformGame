@@ -3,8 +3,10 @@
 
 #include "BTTask_TurnToTarget.h"
 #include "MyAICharacter.h"
+#include "MyBossMonster.h"
 #include "Capstone_TestCharacter.h"
 #include "MyAIController.h"
+#include "MyBossAIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 UBTTask_TurnToTarget::UBTTask_TurnToTarget()
@@ -16,11 +18,11 @@ EBTNodeResult::Type UBTTask_TurnToTarget::ExecuteTask(UBehaviorTreeComponent& Ow
 {
     EBTNodeResult::Type Result = Super::ExecuteTask(OwnerComp, NodeMemory);
 
-    auto MyAI = Cast<AMyAICharacter>(OwnerComp.GetAIOwner()->GetPawn());
+    auto MyAI = Cast<AMyBossMonster>(OwnerComp.GetAIOwner()->GetPawn());
     if (nullptr == MyAI)
         return EBTNodeResult::Failed;
 
-    auto Target = Cast<ACapstone_TestCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(AMyAIController::TargetKey));
+    auto Target = Cast<ACapstone_TestCharacter>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(AMyBossAIController::TargetKey));
     if (nullptr == Target)
         return EBTNodeResult::Failed;
 
