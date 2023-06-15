@@ -48,6 +48,9 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = HP, Meta = (AllowPrivateAccess = true))
 		float fMaxHp;
 
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Alive, Meta = (AllowPrivateAccess = true))
+		bool bAlive;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		FString strMonsterType;
 
@@ -96,6 +99,7 @@ public:
 	void Attack();
 	void StartAttackAnimation();
 	void StopAttackAnimation();
+	void Death();
 	//void Skill();
 	//void AttackEnd();
 	//void SkillEnd();

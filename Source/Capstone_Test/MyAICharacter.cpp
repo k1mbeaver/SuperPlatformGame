@@ -26,6 +26,7 @@ AMyAICharacter::AMyAICharacter()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 20.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
+	bAlive = true;
 }
 
 // Called when the game starts or when spawned
@@ -60,3 +61,8 @@ void AMyAICharacter::Attack()
 	MonsterAnim->PlayAttackMontage(AttackMontage);
 }
 
+void AMyAICharacter::Death()
+{
+	bAlive = false;
+	MonsterAnim->SetDeadAnim();
+}

@@ -48,6 +48,9 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = HP, Meta = (AllowPrivateAccess = true))
 		float fMaxHp;
 
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Alive, Meta = (AllowPrivateAccess = true))
+		bool bAlive;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		FString strMonsterType;
 
@@ -94,6 +97,7 @@ public:
 	//float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamasgeCauser) override;
 
 	void Attack();
+	void Death();
 	//void Skill();
 	//void AttackEnd();
 	//void SkillEnd();

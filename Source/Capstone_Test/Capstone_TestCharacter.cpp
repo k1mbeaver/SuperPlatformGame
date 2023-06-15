@@ -362,3 +362,9 @@ void ACapstone_TestCharacter::StopBashAnimation()
 	bCanMove = true;
 }
 
+void ACapstone_TestCharacter::Death()
+{
+	bAlive = false;
+	myAnimInstance->SetDeadAnim();
+}
+

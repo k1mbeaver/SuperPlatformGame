@@ -27,6 +27,7 @@ AMyBossMonster::AMyBossMonster()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
 	bCanAttack = false;
+	bAlive = true;
 }
 
 // Called when the game starts or when spawned
@@ -76,4 +77,10 @@ void AMyBossMonster::StartAttackAnimation()
 void AMyBossMonster::StopAttackAnimation()
 {
 	bCanAttack = false;
+}
+
+void AMyBossMonster::Death()
+{
+	bAlive = false;
+	MonsterAnim->SetDeadAnim();
 }

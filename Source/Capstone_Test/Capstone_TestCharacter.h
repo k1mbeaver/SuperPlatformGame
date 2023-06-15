@@ -14,7 +14,8 @@ enum class ECharacterState : uint8
 	STAND, // 서있는 상태
 	RUN, // 달리는 상태
 	BASH, // 가속 상태
-		// 이후에 추가하자
+	DEATH,	// 죽은 상태
+	//이후에 추가하자
 };
 
 UCLASS(config=Game)
@@ -77,6 +78,7 @@ protected:
 private:
 	bool bCameraMove = false;
 	bool bCanMove = true;
+	bool bAlive = true;
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:
@@ -125,5 +127,7 @@ public:
 	void StartBashAnimation();
 
 	void StopBashAnimation();
+
+	void Death();
 };
 
