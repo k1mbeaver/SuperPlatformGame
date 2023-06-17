@@ -40,6 +40,9 @@ void AMyAICharacter::BeginPlay()
 	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
 	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
 	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
+
+	//CharacterDefaultHP = myGameInstance->GetAIHP(strMonsterType);
+	//CharacterHP = CharacterDefaultHP;
 }
 
 // Called every frame

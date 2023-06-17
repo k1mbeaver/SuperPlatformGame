@@ -79,6 +79,8 @@ private:
 	bool bCameraMove = false;
 	bool bCanMove = true;
 	bool bAlive = true;
+	float CharacterHP = 0.0f;
+	float CharacterDefaultHP = 0.0f;
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:

@@ -24,11 +24,17 @@ public:
 
 	// 플레이어 데이터 값 얻어오기
 	UAnimMontage* GetPlayerDiveMontage();
+	float GetPlayerHP();
+	float GetPlayerSpeed();
+	float GetPlayerDamage();
+	USkeletalMesh* GetPlayerSkeletalMesh();
+	TSubclassOf<class UAnimInstance> GetPlayerAnimInstance();
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
 	TSubclassOf<class UAnimInstance> GetAIAnimInstance(FString MonsterType);
 	float GetAISpeed(FString MonsterType);
+	float GetAIHP(FString MonsterType);
 	UAnimMontage* GetAIAttackMontage(FString MonsterType);
 
 private:

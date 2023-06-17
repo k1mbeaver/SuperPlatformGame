@@ -48,6 +48,13 @@ float UMyGameInstance::GetAISpeed(FString MonsterType)
 	return mySpeed;
 }
 
+float UMyGameInstance::GetAIHP(FString MonsterType)
+{
+	FAIDataTable* HPData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	float myHP = HPData->CharacterHP;
+	return myHP;
+}
+
 UAnimMontage* UMyGameInstance::GetAIAttackMontage(FString MonsterType)
 {
 	FAIDataTable* MontageData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
@@ -60,4 +67,39 @@ UAnimMontage* UMyGameInstance::GetPlayerDiveMontage()
 	FCharacterDataTable* MontageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
 	UAnimMontage* myMontage = MontageData->DiveMontage;
 	return myMontage;
+}
+
+float UMyGameInstance::GetPlayerHP()
+{
+	FCharacterDataTable* HPData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	float myHP = HPData->CharacterHP;
+	return myHP;
+}
+
+float UMyGameInstance::GetPlayerSpeed()
+{
+	FCharacterDataTable* SpeedData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	float mySpeed = SpeedData->CharacterSpeed;
+	return mySpeed;
+}
+
+float UMyGameInstance::GetPlayerDamage()
+{
+	FCharacterDataTable* DamageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	float myDamage = DamageData->CharacterDamage;
+	return myDamage;
+}
+
+USkeletalMesh* UMyGameInstance::GetPlayerSkeletalMesh()
+{
+	FCharacterDataTable* SkeletalMeshData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	USkeletalMesh* mySkeletal = SkeletalMeshData->CharacterMesh;
+	return mySkeletal;
+}
+
+TSubclassOf<class UAnimInstance> UMyGameInstance::GetPlayerAnimInstance()
+{
+	FCharacterDataTable* AnimationData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	TSubclassOf<class UAnimInstance> myAnimation = AnimationData->MyAnimation;
+	return myAnimation;
 }

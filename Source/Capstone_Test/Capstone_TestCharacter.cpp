@@ -138,6 +138,9 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	myAnimInstance->DiveStart_Dive.AddUObject(this, &ACapstone_TestCharacter::StartBashAnimation);
 	myAnimInstance->DiveEnd_Dive.AddUObject(this, &ACapstone_TestCharacter::StopBashAnimation);
+
+	//CharacterDefaultHP = MyGI->GetPlayerHP();
+	//CharacterHP = CharacterDefaultHP;
 }
 
 //////////////////////////////////////////////////////////////////////////

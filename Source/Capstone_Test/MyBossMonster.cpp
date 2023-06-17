@@ -44,6 +44,9 @@ void AMyBossMonster::BeginPlay()
 
 	MonsterAnim->AttackStart_Attack.AddUObject(this, &AMyBossMonster::StartAttackAnimation);
 	MonsterAnim->AttackEnd_Attack.AddUObject(this, &AMyBossMonster::StopAttackAnimation);
+
+	//CharacterDefaultHP = myGameInstance->GetAIHP(strMonsterType);
+	//CharacterHP = CharacterDefaultHP;
 }
 
 // Called every frame
