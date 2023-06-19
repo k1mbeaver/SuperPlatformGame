@@ -2,6 +2,9 @@
 
 
 #include "HitObject.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "MyGameInstance.h"
 
 // Sets default values
 AHitObject::AHitObject()

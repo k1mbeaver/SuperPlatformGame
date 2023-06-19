@@ -3,17 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
-#include "HitObject.generated.h"
+#include "GameFramework/Character.h"
+#include "MyHitObject.generated.h"
 
 UCLASS()
-class CAPSTONE_TEST_API AHitObject : public APawn
+class CAPSTONE_TEST_API AMyHitObject : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AHitObject();
+	AMyHitObject();
 
 	//UPROPERTY(VisibleInstanceOnly, Category = Animation)
 		//class UAIAnimInstance* AIAnim;
@@ -94,5 +94,4 @@ public:
 	//void SkillParticleEnd();
 	//void DropItem();
 	//void MonsterDestory();
-
 };
