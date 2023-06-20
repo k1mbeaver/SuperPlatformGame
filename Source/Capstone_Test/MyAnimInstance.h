@@ -7,6 +7,7 @@
 #include "MyAnimInstance.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FDiveStart_DiveDelegate);
+DECLARE_MULTICAST_DELEGATE(FDiveBash_DiveDelegate);
 DECLARE_MULTICAST_DELEGATE(FDiveEnd_DiveDelegate);
 
 /**
@@ -42,6 +43,8 @@ private:
 		void AnimNotify_DiveStart();
 	UFUNCTION()
 		void AnimNotify_DiveEnd();
+	UFUNCTION()
+		void AnimNotify_DiveBash();
 
 public:
 	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
@@ -55,4 +58,5 @@ public:
 
 	FDiveStart_DiveDelegate DiveStart_Dive;
 	FDiveEnd_DiveDelegate DiveEnd_Dive;
+	FDiveBash_DiveDelegate DiveBash_Dive;
 };

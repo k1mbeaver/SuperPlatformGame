@@ -58,9 +58,15 @@ void UMyAnimInstance::SetDeadAnim()
 void UMyAnimInstance::AnimNotify_DiveStart()
 {
 	DiveStart_Dive.Broadcast();
+	IsInAir = true;
 }
 
 void UMyAnimInstance::AnimNotify_DiveEnd()
 {
 	DiveEnd_Dive.Broadcast();
+}
+
+void UMyAnimInstance::AnimNotify_DiveBash()
+{
+	DiveBash_Dive.Broadcast();
 }

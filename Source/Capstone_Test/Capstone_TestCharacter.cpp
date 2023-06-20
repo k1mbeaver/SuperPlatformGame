@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "MyGameInstance.h"
 #include "MyAnimInstance.h"
@@ -138,6 +139,7 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	myAnimInstance->DiveStart_Dive.AddUObject(this, &ACapstone_TestCharacter::StartBashAnimation);
 	myAnimInstance->DiveEnd_Dive.AddUObject(this, &ACapstone_TestCharacter::StopBashAnimation);
+	myAnimInstance->DiveBash_Dive.AddUObject(this, &ACapstone_TestCharacter::CurrentBash);
 
 	//CharacterDefaultHP = MyGI->GetPlayerHP();
 	//CharacterHP = CharacterDefaultHP;
@@ -357,7 +359,13 @@ void ACapstone_TestCharacter::StopBash()
 
 void ACapstone_TestCharacter::StartBashAnimation()
 {
-	bCanMove = false;
+	//bCanMove = false;
+	LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
+}
+
+void ACapstone_TestCharacter::CurrentBash()
+{
+	//
 }
 
 void ACapstone_TestCharacter::StopBashAnimation()

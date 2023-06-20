@@ -4,6 +4,7 @@
 #include "MyHitObject.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "MyGameInstance.h"
 
 // Sets default values
@@ -11,6 +12,10 @@ AMyHitObject::AMyHitObject()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Create a camera boom (pulls in towards the player if there is a collision)
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+	StaticMesh->SetupAttachment(RootComponent);
 
 	// Configure character movement
 	//GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	

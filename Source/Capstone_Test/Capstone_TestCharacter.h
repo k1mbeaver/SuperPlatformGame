@@ -128,6 +128,8 @@ public:
 
 	void StartBashAnimation();
 
+	void CurrentBash();
+
 	void StopBashAnimation();
 
 	void Death();

@@ -11,6 +11,9 @@ class CAPSTONE_TEST_API AMyHitObject : public ACharacter
 {
 	GENERATED_BODY()
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Mesh, meta = (AllowPrivateAccess = "true"))
+		class UStaticMeshComponent* StaticMesh;
+
 public:
 	// Sets default values for this character's properties
 	AMyHitObject();
@@ -44,6 +47,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		FString strObjectType;
+
 
 	// damage particle
 	UPROPERTY()
