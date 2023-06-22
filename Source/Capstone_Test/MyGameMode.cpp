@@ -3,6 +3,7 @@
 
 #include "MyGameMode.h"
 #include "MyPlayerController.h"
+#include "PlayerHUD.h"
 
 AMyGameMode::AMyGameMode()
 //: Super()
@@ -16,6 +17,9 @@ AMyGameMode::AMyGameMode()
 
 	// PlayerController
 	PlayerControllerClass = AMyPlayerController::StaticClass();
+
+	// use our custom HUD class
+	HUDClass = APlayerHUD::StaticClass();
 }
 
 void AMyGameMode::PostLogin(APlayerController* NewPlayer)
