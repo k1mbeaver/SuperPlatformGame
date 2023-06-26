@@ -34,6 +34,7 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* myDiveMontage;
 
+
 	class UMyGameInstance* myGameInstance;
 public:
 	ACapstone_TestCharacter();
@@ -79,8 +80,15 @@ private:
 	bool bCameraMove = false;
 	bool bCanMove = true;
 	bool bAlive = true;
+
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
+
+	int CurrentLife = 0;
+	int CurrentCoin = 0;
+	int CurrentStar = 0;
+	int CurrentGem = 0;
+
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:
@@ -133,5 +141,14 @@ public:
 	void StopBashAnimation();
 
 	void Death();
+
+	UFUNCTION(BlueprintCallable)
+		void CoinGet();
+
+	UFUNCTION(BlueprintCallable)
+		void StarGet();
+
+	UFUNCTION(BlueprintCallable)
+		void GemGet();
 };
 

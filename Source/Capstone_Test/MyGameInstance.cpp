@@ -25,6 +25,15 @@ UMyGameInstance::UMyGameInstance()
 	{
 		FCharacterTable = DT_CHARACTERFILE.Object;
 	}
+
+	FString ObjFileDataTable = TEXT("DataTable'/Game/DataTable/ObjectDataTable.ObjectDataTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_OBJFILE(*ObjFileDataTable);
+
+	if (DT_OBJFILE.Succeeded())
+	{
+		FObjectTable = DT_OBJFILE.Object;
+	}
 }
 
 USkeletalMesh* UMyGameInstance::GetAISkeletalMesh(FString MonsterType)
@@ -90,6 +99,59 @@ float UMyGameInstance::GetPlayerDamage()
 	return myDamage;
 }
 
+int UMyGameInstance::GetPlayerLife()
+{
+	FCharacterDataTable* LifeData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myLife = LifeData->CharacterLife;
+	return myLife;
+}
+
+int UMyGameInstance::GetPlayerStar()
+{
+	FCharacterDataTable* StarData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myStar = StarData->CharacterStar;
+	return myStar;
+}
+
+int UMyGameInstance::GetPlayerCoin()
+{
+	FCharacterDataTable* CoinData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myCoin = CoinData->CharacterCoin;
+	return myCoin;
+}
+
+int UMyGameInstance::GetPlayerGem()
+{
+	FCharacterDataTable* GemData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myGem = GemData->CharacterGem;
+	return myGem;
+}
+
+void UMyGameInstance::SetPlayerLife(int nLife)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->CharacterLife = nLife;
+}
+
+void UMyGameInstance::SetPlayerGem(int nGem)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->CharacterGem = nGem;
+}
+
+void UMyGameInstance::SetPlayerStar(int nStar)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->CharacterStar = nStar;
+}
+
+void UMyGameInstance::SetPlayerCoin(int nCoin)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->CharacterCoin = nCoin;
+}
+
+
 USkeletalMesh* UMyGameInstance::GetPlayerSkeletalMesh()
 {
 	FCharacterDataTable* SkeletalMeshData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
@@ -102,4 +164,11 @@ TSubclassOf<class UAnimInstance> UMyGameInstance::GetPlayerAnimInstance()
 	FCharacterDataTable* AnimationData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
 	TSubclassOf<class UAnimInstance> myAnimation = AnimationData->MyAnimation;
 	return myAnimation;
+}
+
+UStaticMesh* UMyGameInstance::GetObjStaticMesh(FString ObjType)
+{
+	FObjectDataTable* StaticMeshData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
+	UStaticMesh* myStatic = StaticMeshData->ObjectStaticMesh;
+	return myStatic;
 }

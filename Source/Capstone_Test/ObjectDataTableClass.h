@@ -20,6 +20,9 @@ public:
 	// 오브젝트 공격력
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float ObjectDamage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* ObjectStaticMesh;
 };
 
 UCLASS()

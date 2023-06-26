@@ -29,6 +29,14 @@ public:
 	float GetPlayerDamage();
 	USkeletalMesh* GetPlayerSkeletalMesh();
 	TSubclassOf<class UAnimInstance> GetPlayerAnimInstance();
+	int GetPlayerLife();
+	int GetPlayerStar();
+	int GetPlayerCoin();
+	int GetPlayerGem();
+	void SetPlayerLife(int nLife);
+	void SetPlayerStar(int nStar);
+	void SetPlayerCoin(int nCoin);
+	void SetPlayerGem(int nGem);
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
@@ -36,6 +44,9 @@ public:
 	float GetAISpeed(FString MonsterType);
 	float GetAIHP(FString MonsterType);
 	UAnimMontage* GetAIAttackMontage(FString MonsterType);
+
+	// Object 데이터 값 얻어오기
+	UStaticMesh* GetObjStaticMesh(FString ObjType);
 
 private:
 	UPROPERTY()

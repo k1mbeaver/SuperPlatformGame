@@ -12,14 +12,14 @@ AMyGameMode::AMyGameMode()
 	//DefaultPawnClass = AMyCharacter::StaticClass();
 	//DefaultPawnClass = APlayerCharacter::StaticClass();
 
+	// use our custom HUD class
+	HUDClass = APlayerHUD::StaticClass();
+
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/BluePrint/BP_ThirdPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
 	// PlayerController
 	PlayerControllerClass = AMyPlayerController::StaticClass();
-
-	// use our custom HUD class
-	HUDClass = APlayerHUD::StaticClass();
 }
 
 void AMyGameMode::PostLogin(APlayerController* NewPlayer)

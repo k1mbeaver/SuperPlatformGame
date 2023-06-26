@@ -2,129 +2,24 @@
 
 
 #include "PlayerMainUI.h"
-/*
-#include "PlayerGageUI.h"
-#include "PlayerWeaponUI.h"
-#include "PlayerInventoryUI.h"
-#include "PlayerGameEndUI.h"
+#include "PlayerPlayUI.h"
 
-void UPlayerMainUI::SetHealthPersent(float PlayerHP)
+void UPlayerMainUI::SetCharacterCount(int nCount)
 {
-	PlayerGageUI->SetHealthPersent(PlayerHP);
+	UW_PlayerPlay->SetCharacterCount(nCount);
 }
 
-void UPlayerMainUI::SetStaminaPersent(float PlayerStamina)
+void UPlayerMainUI::SetCoinCount(int nCount)
 {
-	PlayerGageUI->SetStaminaPersent(PlayerStamina);
+	UW_PlayerPlay->SetCoinCount(nCount);
 }
 
-void UPlayerMainUI::SetImage(UTexture2D* CurrentImage)
+void UPlayerMainUI::SetGemCount(int nCount)
 {
-	PlayerWeaponUI->SetImage(CurrentImage);
-}
-void UPlayerMainUI::SetImageUse()
-{
-	PlayerWeaponUI->SetImageUse();
+	UW_PlayerPlay->SetGemCount(nCount);
 }
 
-void UPlayerMainUI::SetImageNotUse()
+void UPlayerMainUI::SetStarCount(int nCount)
 {
-	PlayerWeaponUI->SetImageNotUse();
+	UW_PlayerPlay->SetStarCount(nCount);
 }
-
-void UPlayerMainUI::SetImageVisible()
-{
-	PlayerWeaponUI->SetImageVisible();
-}
-
-void UPlayerMainUI::SetImageHidden()
-{
-	PlayerWeaponUI->SetImageHidden();
-}
-
-void UPlayerMainUI::SetProjectileText(int nProjectile)
-{
-	PlayerWeaponUI->SetProjectileText(nProjectile);
-}
-
-void UPlayerMainUI::SetDefaultText(int nProjectile)
-{
-	PlayerWeaponUI->SetDefaultText(nProjectile);
-}
-
-void UPlayerMainUI::SetTextVisible()
-{
-	PlayerWeaponUI->SetTextVisible();
-}
-
-void UPlayerMainUI::SetTextHidden()
-{
-	PlayerWeaponUI->SetTextHidden();
-}
-
-void UPlayerMainUI::SetInventoryVisible()
-{
-	PlayerInventoryUI->SetVisible();
-}
-
-void UPlayerMainUI::SetInventoryHidden()
-{
-	PlayerInventoryUI->SetHidden();
-}
-
-void UPlayerMainUI::SetListInit(int nIndex, FString strName, int nCount, UTexture2D* setImage)
-{
-	PlayerInventoryUI->SetListInit(nIndex, strName, nCount, setImage);
-}
-
-void UPlayerMainUI::SetListCount(int nIndex, int nCount)
-{
-	PlayerInventoryUI->SetListCount(nIndex, nCount);
-}
-
-void UPlayerMainUI::SetListView(int nIndex, FString strName, int nCount, UTexture2D* setImage)
-{
-	PlayerInventoryUI->SetListView(nIndex, strName, nCount, setImage);
-}
-
-void UPlayerMainUI::ListUpdate()
-{
-	PlayerInventoryUI->ListUpdate();
-}
-
-void UPlayerMainUI::SetWeaponImage(UTexture2D* setImage)
-{
-	PlayerInventoryUI->SetWeaponImage(setImage);
-}
-
-void UPlayerMainUI::SetEndVisible()
-{
-	PlayerEndUI->SetVisible();
-}
-
-void UPlayerMainUI::SetEndHidden()
-{
-	PlayerEndUI->SetHidden();
-}
-
-void UPlayerMainUI::SetWin()
-{
-	PlayerEndUI->SetWin();
-}
-
-void UPlayerMainUI::SetLose()
-{
-	PlayerEndUI->SetLose();
-}
-
-void UPlayerMainUI::SetPreviewUI()
-{
-	PlayerGageUI->SetHidden();
-	PlayerWeaponUI->SetHidden();
-}
-
-void UPlayerMainUI::SetEsc(bool IsEsc)
-{
-	PlayerEndUI->SetEsc(IsEsc);
-}
-*/

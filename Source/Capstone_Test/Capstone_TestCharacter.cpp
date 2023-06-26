@@ -11,6 +11,8 @@
 #include "MyGameInstance.h"
 #include "MyAnimInstance.h"
 #include "Animation/AnimInstance.h"
+#include "PlayerHUD.h"
+#include "Kismet/GameplayStatics.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -141,6 +143,16 @@ void ACapstone_TestCharacter::BeginPlay()
 	myAnimInstance->DiveEnd_Dive.AddUObject(this, &ACapstone_TestCharacter::StopBashAnimation);
 	myAnimInstance->DiveBash_Dive.AddUObject(this, &ACapstone_TestCharacter::CurrentBash);
 
+	CurrentCoin = MyGI->GetPlayerCoin();
+	CurrentStar = MyGI->GetPlayerStar();
+	CurrentGem = MyGI->GetPlayerGem();
+	CurrentLife = MyGI->GetPlayerLife();
+
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	myHUD->SetGemCount(MyGI->GetPlayerGem());
+	myHUD->SetStarCount(MyGI->GetPlayerStar());
+	myHUD->SetCoinCount(MyGI->GetPlayerCoin());
+	myHUD->SetCharacterCount(MyGI->GetPlayerLife());
 	//CharacterDefaultHP = MyGI->GetPlayerHP();
 	//CharacterHP = CharacterDefaultHP;
 }
@@ -379,3 +391,29 @@ void ACapstone_TestCharacter::Death()
 	myAnimInstance->SetDeadAnim();
 }
 
+void ACapstone_TestCharacter::CoinGet()
+{
+	CurrentCoin++;
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	MyGI->SetPlayerCoin(CurrentCoin);
+	myHUD->SetCoinCount(MyGI->GetPlayerCoin());
+}
+
+void ACapstone_TestCharacter::StarGet()
+{
+	CurrentStar++;
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	MyGI->SetPlayerStar(CurrentStar);
+	myHUD->SetStarCount(MyGI->GetPlayerStar());
+}
+
+void ACapstone_TestCharacter::GemGet()
+{
+	CurrentGem++;
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	MyGI->SetPlayerGem(CurrentGem);
+	myHUD->SetGemCount(MyGI->GetPlayerGem());
+}

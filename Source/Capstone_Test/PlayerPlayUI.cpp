@@ -3,34 +3,42 @@
 
 #include "PlayerPlayUI.h"
 #include "Components/TextBlock.h"
-#include "Components/ProgressBar.h"
 #include "Components/Image.h"
 #include "MyGameInstance.h"
 
-/*
+
 void UPlayerPlayUI::NativeOnInitialized()
 {
-	HealthPersent = Cast<UProgressBar>(GetWidgetFromName(TEXT("HealthPersent")));
-	StaminaPersent = Cast<UProgressBar>(GetWidgetFromName(TEXT("StaminaPersent")));
+	TextCharacterCount = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextCharacterCount")));
+	TextCoinCount = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextCoinCount")));
+	TextGemCount = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextGemCount")));
+	TextStarCount = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextStarCount")));
 }
 
-void UPlayerPlayUI::SetHealthPersent(float PlayerHP)
+void UPlayerPlayUI::SetCharacterCount(int nCount)
 {
-	HealthPersent->SetPercent(PlayerHP);
+	FString nToString = FString::FromInt(nCount);
+	FText strToft = FText::FromString(nToString);
+	TextCharacterCount->SetText(strToft);
 }
 
-void UPlayerPlayUI::SetStaminaPersent(float PlayerStamina)
+void UPlayerPlayUI::SetCoinCount(int nCount)
 {
-	StaminaPersent->SetPercent(PlayerStamina);
+	FString nToString = FString::FromInt(nCount);
+	FText strToft = FText::FromString(nToString);
+	TextCoinCount->SetText(strToft);
 }
 
-void UPlayerPlayUI::SetHidden()
+void UPlayerPlayUI::SetGemCount(int nCount)
 {
-	SetVisibility(ESlateVisibility::Hidden);
+	FString nToString = FString::FromInt(nCount);
+	FText strToft = FText::FromString(nToString);
+	TextGemCount->SetText(strToft);
 }
 
-void UPlayerPlayUI::SetVisible()
+void UPlayerPlayUI::SetStarCount(int nCount)
 {
-	SetVisibility(ESlateVisibility::Visible);
+	FString nToString = FString::FromInt(nCount);
+	FText strToft = FText::FromString(nToString);
+	TextStarCount->SetText(strToft);
 }
-*/

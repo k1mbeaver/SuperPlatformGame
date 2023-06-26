@@ -4,10 +4,10 @@
 #include "PlayerHUD.h"
 #include "PlayerMainUI.h"
 
-/*
+
 APlayerHUD::APlayerHUD()
 {
-	static ConstructorHelpers::FClassFinder<UPlayerMainUI> WB_Main(TEXT("WidgetBlueprint'/Game/WIdget/PlayerMainUI'"));
+	static ConstructorHelpers::FClassFinder<UPlayerMainUI> WB_Main(TEXT("WidgetBlueprint'/Game/UI/UW_PlayerMain'"));
 	if (WB_Main.Succeeded())
 	{
 		MainUIClass = WB_Main.Class;
@@ -44,123 +44,22 @@ bool APlayerHUD::CreateUIObject()
 	return false; // 못 만들었다면 false.
 }
 
-void APlayerHUD::SetHealthPersent(float PlayerHP)
+void APlayerHUD::SetCharacterCount(int nCount)
 {
-	MainUIObject->SetHealthPersent(PlayerHP);
+	MainUIObject->SetCharacterCount(nCount);
 }
 
-void APlayerHUD::SetStaminaPersent(float PlayerStamina)
+void APlayerHUD::SetCoinCount(int nCount)
 {
-	MainUIObject->SetStaminaPersent(PlayerStamina);
+	MainUIObject->SetCoinCount(nCount);
 }
 
-void APlayerHUD::SetImage(UTexture2D* CurrentImage)
+void APlayerHUD::SetGemCount(int nCount)
 {
-	MainUIObject->SetImage(CurrentImage);
+	MainUIObject->SetGemCount(nCount);
 }
 
-void APlayerHUD::SetImageUse()
+void APlayerHUD::SetStarCount(int nCount)
 {
-	MainUIObject->SetImageUse();
+	MainUIObject->SetStarCount(nCount);
 }
-
-void APlayerHUD::SetImageNotUse()
-{
-	MainUIObject->SetImageNotUse();
-}
-
-void APlayerHUD::SetImageVisible()
-{
-	MainUIObject->SetImageVisible();
-}
-
-void APlayerHUD::SetImageHidden()
-{
-	MainUIObject->SetImageHidden();
-}
-
-void APlayerHUD::SetProjectileText(int nProjectile)
-{
-	MainUIObject->SetProjectileText(nProjectile);
-}
-
-void APlayerHUD::SetDefaultText(int nProjectile)
-{
-	MainUIObject->SetDefaultText(nProjectile);
-}
-
-void APlayerHUD::SetTextVisible()
-{
-	MainUIObject->SetTextVisible();
-}
-
-void APlayerHUD::SetTextHidden()
-{
-	MainUIObject->SetTextHidden();
-}
-
-void APlayerHUD::SetInventoryHidden()
-{
-	MainUIObject->SetInventoryHidden();
-}
-
-void APlayerHUD::SetInventoryVisible()
-{
-	MainUIObject->SetInventoryVisible();
-}
-
-void APlayerHUD::SetListInit(int nIndex, FString strName, int nCount, UTexture2D* setImage)
-{
-	MainUIObject->SetListInit(nIndex, strName, nCount, setImage);
-}
-
-void APlayerHUD::SetListCount(int nIndex, int nCount)
-{
-	MainUIObject->SetListCount(nIndex, nCount);
-}
-
-void APlayerHUD::SetListView(int nIndex, FString strName, int nCount, UTexture2D* setImage)
-{
-	MainUIObject->SetListView(nIndex, strName, nCount, setImage);
-}
-
-void APlayerHUD::ListUpdate()
-{
-	MainUIObject->ListUpdate();
-}
-
-void APlayerHUD::SetWeaponImage(UTexture2D* setImage)
-{
-	MainUIObject->SetWeaponImage(setImage);
-}
-
-void APlayerHUD::SetEndHidden()
-{
-	MainUIObject->SetEndHidden();
-}
-
-void APlayerHUD::SetEndVisible()
-{
-	MainUIObject->SetEndVisible();
-}
-
-void APlayerHUD::SetWin()
-{
-	MainUIObject->SetWin();
-}
-
-void APlayerHUD::SetLose()
-{
-	MainUIObject->SetLose();
-}
-
-void APlayerHUD::SetPreviewUI()
-{
-	MainUIObject->SetPreviewUI();
-}
-
-void APlayerHUD::SetEsc(bool IsEsc)
-{
-	MainUIObject->SetEsc(IsEsc);
-}
-*/

@@ -35,6 +35,22 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UAnimMontage* DiveMontage;
+
+	// 캐릭터 코인
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int CharacterCoin;
+
+	// 캐릭터 젬
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int CharacterGem;
+
+	// 캐릭터 스타
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int CharacterStar;
+
+	// 캐릭터 목숨
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int CharacterLife;
 };
 
 UCLASS()

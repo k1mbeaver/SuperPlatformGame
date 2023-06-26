@@ -14,22 +14,28 @@ class CAPSTONE_TEST_API UPlayerPlayUI : public UUserWidget
 {
 	GENERATED_BODY()
 
-		/*
+		
 private:
 	UPROPERTY(Meta = (BindWidget))
-		class UProgressBar* HealthPersent;
+		class UTextBlock* TextCharacterCount;
 
 	UPROPERTY(Meta = (BindWidget))
-		class UProgressBar* StaminaPersent;
+		class UTextBlock* TextCoinCount;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UTextBlock* TextGemCount;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UTextBlock* TextStarCount;
 
 protected:
 	virtual void NativeOnInitialized() override;
 
 public:
 	// 사용할 함수들을 정리
-	void SetHealthPersent(float PlayerHP);
-	void SetStaminaPersent(float PlayerStamina);
-	void SetHidden();
-	void SetVisible();
-	*/
+	void SetCharacterCount(int nCount);
+	void SetCoinCount(int nCount);
+	void SetGemCount(int nCount);
+	void SetStarCount(int nCount);
+	
 };
