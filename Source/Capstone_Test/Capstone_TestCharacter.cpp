@@ -394,6 +394,17 @@ void ACapstone_TestCharacter::Death()
 void ACapstone_TestCharacter::CoinGet()
 {
 	CurrentCoin++;
+
+	if (CurrentCoin == 10)
+	{
+		CurrentLife++;
+		UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+		MyGI->SetPlayerLife(CurrentLife);
+		myHUD->SetCharacterCount(MyGI->GetPlayerLife());
+		CurrentCoin = 0;
+	}
+
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	MyGI->SetPlayerCoin(CurrentCoin);
