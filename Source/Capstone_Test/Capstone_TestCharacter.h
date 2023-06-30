@@ -150,5 +150,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void GemGet();
+
+	UFUNCTION(BlueprintCallable)
+		void PlayerDead();
 };
 

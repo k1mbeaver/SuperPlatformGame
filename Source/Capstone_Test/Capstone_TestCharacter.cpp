@@ -94,6 +94,12 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 		{
 			// 나중에 편집하기
 		}
+
+		else if (CurrentState == ECharacterState::DEATH)
+		{
+			// 나중에 편집하기
+			TransCameraPos(0.05, 0.2);
+		}
 	}
 
 	else
@@ -427,4 +433,14 @@ void ACapstone_TestCharacter::GemGet()
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	MyGI->SetPlayerGem(CurrentGem);
 	myHUD->SetGemCount(MyGI->GetPlayerGem());
+}
+
+void ACapstone_TestCharacter::PlayerDead()
+{
+	bAlive = false;
+	bCameraMove = true;
+	bCanMove = false;
+	CurrentState = ECharacterState::DEATH;
+	myAnimInstance->SetDeadAnim();
+	LaunchCharacter(FVector(100.0f, 100.0f, 1000.f), 0, 1);
 }
