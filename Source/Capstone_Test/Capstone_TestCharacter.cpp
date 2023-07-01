@@ -442,5 +442,5 @@ void ACapstone_TestCharacter::PlayerDead()
 	bCanMove = false;
 	CurrentState = ECharacterState::DEATH;
 	myAnimInstance->SetDeadAnim();
-	LaunchCharacter(FVector(100.0f, 100.0f, 1000.f), 0, 1);
+	LaunchCharacter(FVector(100.0f, 100.0f, 500.f), 0, 1);
 }

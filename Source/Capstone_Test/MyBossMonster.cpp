@@ -7,6 +7,7 @@
 #include "MyGameInstance.h"
 #include "MyAIAnimInstance.h"
 #include "Animation/AnimInstance.h"
+#include "MyBossAIController.h"
 
 // Sets default values
 AMyBossMonster::AMyBossMonster()
@@ -86,4 +87,6 @@ void AMyBossMonster::Death()
 {
 	bAlive = false;
 	MonsterAnim->SetDeadAnim();
+	AMyBossAIController* myAIController = Cast<AMyBossAIController>(GetController());
+	myAIController->StopAI();
 }
