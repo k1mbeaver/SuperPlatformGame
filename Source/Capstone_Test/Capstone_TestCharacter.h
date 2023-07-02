@@ -89,6 +89,9 @@ private:
 	int CurrentStar = 0;
 	int CurrentGem = 0;
 
+	float AttackRange = 50.0f;
+	float AttackRadius = 50.0f;
+
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:
@@ -141,6 +144,8 @@ public:
 	void StopBashAnimation();
 
 	void Death();
+
+	void AttackCheck();
 
 	UFUNCTION(BlueprintCallable)
 		void CoinGet();

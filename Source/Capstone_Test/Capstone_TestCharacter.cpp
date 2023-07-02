@@ -13,6 +13,7 @@
 #include "Animation/AnimInstance.h"
 #include "PlayerHUD.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -155,10 +156,10 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentLife = MyGI->GetPlayerLife();
 
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
-	myHUD->SetGemCount(MyGI->GetPlayerGem());
-	myHUD->SetStarCount(MyGI->GetPlayerStar());
-	myHUD->SetCoinCount(MyGI->GetPlayerCoin());
-	myHUD->SetCharacterCount(MyGI->GetPlayerLife());
+	myHUD->SetGemCount(CurrentGem);
+	myHUD->SetStarCount(CurrentStar);
+	myHUD->SetCoinCount(CurrentCoin);
+	myHUD->SetCharacterCount(CurrentLife);
 	//CharacterDefaultHP = MyGI->GetPlayerHP();
 	//CharacterHP = CharacterDefaultHP;
 }
@@ -365,6 +366,7 @@ void ACapstone_TestCharacter::Bash()
 	//bCanMove = false;
 	myAnimInstance->IsBash = true;
 	myAnimInstance->PlayDiveMontage(myDiveMontage);
+	AttackCheck();
 }
 
 void ACapstone_TestCharacter::StopBash()
@@ -443,4 +445,55 @@ void ACapstone_TestCharacter::PlayerDead()
 	CurrentState = ECharacterState::DEATH;
 	myAnimInstance->SetDeadAnim();
 	LaunchCharacter(FVector(100.0f, 100.0f, 500.f), 0, 1);
+}
+
+void ACapstone_TestCharacter::AttackCheck()
+{
+	FHitResult HitResult;
+	FCollisionQueryParams Params(NAME_None, false, this);
+	bool bResult = GetWorld()->SweepSingleByChannel(
+		HitResult,
+		GetActorLocation(),
+		GetActorLocation() + (GetActorUpVector() * -1) * AttackRange,
+		FQuat::Identity,
+		ECollisionChannel::ECC_GameTraceChannel2, // Attack 채널 player의 경우에만 충돌 한다
+		FCollisionShape::MakeSphere(AttackRadius),
+		Params);
+	
+	#if ENABLE_DRAW_DEBUG
+			FVector TraceVec = (GetActorUpVector() * -1) * AttackRange;
+			FVector Center = GetActorLocation() + TraceVec * 0.5f;
+			float HalfHeight = AttackRange * 0.5f + AttackRadius;
+			FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
+			FColor DrawColor = bResult ? FColor::Green : FColor::Red;
+			float DebugLifeTime = 5.0f;
+
+			// 이거는 에디터에서만 사용하는거
+			DrawDebugCapsule(GetWorld(),
+				Center,
+				HalfHeight,
+				AttackRadius,
+				CapsuleRot,
+				DrawColor,
+				false,
+				DebugLifeTime);
+
+			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("PlayerPunch!")); // 플레이어가 펀치하는지 확인용
+
+	#endif
+	
+
+	if (bResult)
+	{
+		/*
+		if (HitResult.Actor.IsValid())
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
+			FDamageEvent DamageEvent;
+			//AttackParticleStart(HitResult.ImpactPoint); // 몬스터 공격 파티클 출력하기
+			//APlayerCharacter* HitCharacter = Cast<APlayerCharacter>(HitResult.Actor);
+			//HitCharacter->TakeDamage(AttackPower, DamageEvent, GetController(), this);
+		}
+		*/
+	}
 }
