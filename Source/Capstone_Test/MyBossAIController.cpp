@@ -11,7 +11,7 @@
 
 const FName AMyBossAIController::HomePosKey(TEXT("HomePos"));
 const FName AMyBossAIController::PatrolPosKey(TEXT("PatrolPos"));
-const FName AMyBossAIController::TargetKey(TEXT("SelfActor"));
+const FName AMyBossAIController::TargetKey(TEXT("Target"));
 
 
 AMyBossAIController::AMyBossAIController(FObjectInitializer const& object_initializer)
