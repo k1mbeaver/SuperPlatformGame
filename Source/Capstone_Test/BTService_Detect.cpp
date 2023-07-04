@@ -34,7 +34,7 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
     TArray<FOverlapResult> OverlapResults;
     FCollisionQueryParams CollisionQueryParam(NAME_None, false, ControllingPawn);
-    bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel1, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
+    bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel2, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
 
     AMyBossMonster* myMonster = Cast<AMyBossMonster>(ControllingPawn);
 
@@ -47,10 +47,10 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
             if (MyCharacter)
             {
                 OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyBossAIController::TargetKey, MyCharacter);
-                // DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Green, false, 0.2f);
+                DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Green, false, 0.2f);
 
-                 //DrawDebugPoint(World, MyCharacter->GetActorLocation(), 10.0f, FColor::Blue, false, 0.2f);
-                 //DrawDebugLine(World, ControllingPawn->GetActorLocation(), MyCharacter->GetActorLocation(), FColor::Blue, false, 0.2f);
+                DrawDebugPoint(World, MyCharacter->GetActorLocation(), 10.0f, FColor::Blue, false, 0.2f);
+                DrawDebugLine(World, ControllingPawn->GetActorLocation(), MyCharacter->GetActorLocation(), FColor::Blue, false, 0.2f);
                 return;
             }
 
@@ -61,5 +61,5 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
         }
     }
 
-    //DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Red, false, 0.2f);
+    DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Red, false, 0.2f);
 }

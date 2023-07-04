@@ -89,7 +89,7 @@ private:
 	int CurrentStar = 0;
 	int CurrentGem = 0;
 
-	float AttackRange = 50.0f;
+	float AttackRange = 100.0f;
 	float AttackRadius = 50.0f;
 
 private:

@@ -14,6 +14,8 @@
 #include "PlayerHUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "MyBossMonster.h"
+#include "MyAICharacter.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -456,10 +458,11 @@ void ACapstone_TestCharacter::AttackCheck()
 		GetActorLocation(),
 		GetActorLocation() + (GetActorUpVector() * -1) * AttackRange,
 		FQuat::Identity,
-		ECollisionChannel::ECC_GameTraceChannel2, // Attack 채널 player의 경우에만 충돌 한다
+		ECollisionChannel::ECC_GameTraceChannel3, // Attack 채널 player의 경우에만 충돌 한다
 		FCollisionShape::MakeSphere(AttackRadius),
 		Params);
 	
+	/*
 	#if ENABLE_DRAW_DEBUG
 			FVector TraceVec = (GetActorUpVector() * -1) * AttackRange;
 			FVector Center = GetActorLocation() + TraceVec * 0.5f;
@@ -481,19 +484,17 @@ void ACapstone_TestCharacter::AttackCheck()
 			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("PlayerPunch!")); // 플레이어가 펀치하는지 확인용
 
 	#endif
-	
+	*/
 
 	if (bResult)
 	{
-		/*
-		if (HitResult.Actor.IsValid())
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
-			FDamageEvent DamageEvent;
+			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
+			//FDamageEvent DamageEvent;
 			//AttackParticleStart(HitResult.ImpactPoint); // 몬스터 공격 파티클 출력하기
-			//APlayerCharacter* HitCharacter = Cast<APlayerCharacter>(HitResult.Actor);
-			//HitCharacter->TakeDamage(AttackPower, DamageEvent, GetController(), this);
+			AMyBossMonster* HitCharacter = Cast<AMyBossMonster>(HitResult.GetActor());
+			HitCharacter->Death();
 		}
-		*/
+		
 	}
 }
