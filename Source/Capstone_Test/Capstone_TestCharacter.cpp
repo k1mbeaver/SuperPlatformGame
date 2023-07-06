@@ -16,6 +16,9 @@
 #include "DrawDebugHelpers.h"
 #include "MyBossMonster.h"
 #include "MyAICharacter.h"
+#include "Particles/ParticleSystem.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -59,6 +62,8 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
+	NiagaraComponent->SetupAttachment(RootComponent);
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -162,6 +167,8 @@ void ACapstone_TestCharacter::BeginPlay()
 	myHUD->SetStarCount(CurrentStar);
 	myHUD->SetCoinCount(CurrentCoin);
 	myHUD->SetCharacterCount(CurrentLife);
+
+	//BashParticle = MyGI->GetPlayerBashParticle();
 	//CharacterDefaultHP = MyGI->GetPlayerHP();
 	//CharacterHP = CharacterDefaultHP;
 }
@@ -368,6 +375,10 @@ void ACapstone_TestCharacter::Bash()
 	//bCanMove = false;
 	myAnimInstance->IsBash = true;
 	myAnimInstance->PlayDiveMontage(myDiveMontage);
+
+	//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
+	NiagaraComponent->Activate();
+
 	AttackCheck();
 }
 

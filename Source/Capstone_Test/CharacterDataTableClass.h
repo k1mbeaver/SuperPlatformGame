@@ -51,6 +51,10 @@ public:
 	// 캐릭터 목숨
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int CharacterLife;
+
+	// 캐릭터 파티클
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		//UNiagaraSystem* CharacterBashParticle;
 };
 
 UCLASS()

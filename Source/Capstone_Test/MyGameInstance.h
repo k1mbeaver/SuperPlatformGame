@@ -33,6 +33,7 @@ public:
 	int GetPlayerStar();
 	int GetPlayerCoin();
 	int GetPlayerGem();
+	//UParticleSystem* GetPlayerBashParticle();
 	void SetPlayerLife(int nLife);
 	void SetPlayerStar(int nStar);
 	void SetPlayerCoin(int nCoin);

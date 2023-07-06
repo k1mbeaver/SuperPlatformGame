@@ -120,6 +120,13 @@ int UMyGameInstance::GetPlayerCoin()
 	return myCoin;
 }
 
+//UParticleSystem* UMyGameInstance::GetPlayerBashParticle()
+//{
+	//FCharacterDataTable* ParticleData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	//UParticleSystem* myParticle = ParticleData->CharacterBashParticle;
+	//return myParticle;
+//}
+
 int UMyGameInstance::GetPlayerGem()
 {
 	FCharacterDataTable* GemData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));

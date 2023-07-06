@@ -34,8 +34,16 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* myDiveMontage;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+		USceneComponent* BashMuzzleLocation;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
+		class UNiagaraComponent* NiagaraComponent;
 
 	class UMyGameInstance* myGameInstance;
+
+	UPROPERTY()
+		class UGameplayStatics* GameStatic;
 public:
 	ACapstone_TestCharacter();
 
