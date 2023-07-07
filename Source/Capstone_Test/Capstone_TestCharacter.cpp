@@ -379,6 +379,13 @@ void ACapstone_TestCharacter::Bash()
 	//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
 	NiagaraComponent->Activate();
 
+	float Duration = 0.1f; // Duration in seconds
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+		{
+			NiagaraComponent->Deactivate();
+		}, Duration, false);
+
 	AttackCheck();
 }
 
