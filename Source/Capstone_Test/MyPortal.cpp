@@ -2,6 +2,9 @@
 
 
 #include "MyPortal.h"
+#include "Particles/ParticleSystem.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 // Sets default values
 AMyPortal::AMyPortal()

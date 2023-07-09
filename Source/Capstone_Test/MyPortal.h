@@ -15,6 +15,17 @@ public:
 	// Sets default values for this actor's properties
 	AMyPortal();
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
+		class UNiagaraComponent* PortalCloseNiagara;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
+		class UNiagaraComponent* PortalOpenNiagara;
+
+	class UMyGameInstance* myGameInstance;
+
+	UPROPERTY()
+		class UGameplayStatics* GameStatic;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
