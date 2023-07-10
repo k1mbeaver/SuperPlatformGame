@@ -21,6 +21,9 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
 		class UNiagaraComponent* PortalOpenNiagara;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
+		class UCapsuleComponent* CapsuleComponent;
+
 	class UMyGameInstance* myGameInstance;
 
 	UPROPERTY()
@@ -34,4 +37,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+		void PlayerEnter();
 };
