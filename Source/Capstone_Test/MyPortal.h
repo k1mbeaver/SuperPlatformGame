@@ -24,6 +24,9 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
 		class UCapsuleComponent* CapsuleComponent;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Clear, Meta = (AllowPrivateAccess = true))
+		bool bClear;
+
 	class UMyGameInstance* myGameInstance;
 
 	UPROPERTY()
@@ -38,5 +41,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-		void PlayerEnter();
+		void PlayerClear();
+
+	UFUNCTION(BlueprintCallable)
+		void NextMap();
 };

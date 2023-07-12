@@ -19,6 +19,7 @@
 #include "Particles/ParticleSystem.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "MyPortal.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -203,6 +204,8 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	PlayerInputComponent->BindAction("Bash", IE_Pressed, this, &ACapstone_TestCharacter::Bash);
 	PlayerInputComponent->BindAction("Bash", IE_Released, this, &ACapstone_TestCharacter::StopBash);
+
+	PlayerInputComponent->BindAction("CameraChange", IE_Pressed, this, &ACapstone_TestCharacter::CameraChange);
 }
 
 void ACapstone_TestCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -235,6 +238,11 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 		return;
 	}
 
+	if (bCameraForward)
+	{
+		Value = Value * -1;
+	}
+
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -251,6 +259,11 @@ void ACapstone_TestCharacter::MoveRight(float Value)
 	if (bCanMove == false)
 	{
 		return;
+	}
+
+	if (bCameraForward)
+	{
+		Value = Value * -1;
 	}
 
 	if ( (Controller != nullptr) && (Value != 0.0f) )
@@ -285,6 +298,25 @@ void ACapstone_TestCharacter::TransCamera()
 void ACapstone_TestCharacter::StopTransCamera()
 {
 	bCameraMove = false;
+}
+
+void ACapstone_TestCharacter::CameraChange()
+{
+	if (bCameraForward)
+	{
+		bCameraForward = false;
+		CameraBoom->SocketOffset = FVector(0.0f, 0.0f, 200.0f);
+		FQuat DesiredRotation = FRotator(-30.0f, 0.0f, 0.0f).Quaternion();
+		FollowCamera->SetRelativeRotation(DesiredRotation);
+	}
+
+	else
+	{
+		bCameraForward = true;
+		CameraBoom->SocketOffset = FVector(1000.0f, 0.0f, 200.0f);
+		FQuat DesiredRotation = FRotator(-30.0f, 180.0f, 0.0f).Quaternion();
+		FollowCamera->SetRelativeRotation(DesiredRotation);
+	}
 }
 
 void ACapstone_TestCharacter::TransCameraPos(float t, float targetRatio) {
@@ -446,6 +478,31 @@ void ACapstone_TestCharacter::StarGet()
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	MyGI->SetPlayerStar(CurrentStar);
 	myHUD->SetStarCount(MyGI->GetPlayerStar());
+
+	if (CurrentStar == 1 && CurrentGem == 1)
+	{
+		bGameClear = true;
+
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			TArray<AActor*> FoundActors;
+			FString PortalTag = "PlayerPortal";
+
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), FoundActors);
+
+			if (FoundActors.Num() > 0)
+			{
+				AActor* PortalActor = FoundActors[0];
+
+				if (AMyPortal* CastedPortal = Cast<AMyPortal>(PortalActor))
+				{
+					PlayerPortal = CastedPortal;
+				}
+			}
+		}
+	}
 }
 
 void ACapstone_TestCharacter::GemGet()
@@ -455,6 +512,32 @@ void ACapstone_TestCharacter::GemGet()
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	MyGI->SetPlayerGem(CurrentGem);
 	myHUD->SetGemCount(MyGI->GetPlayerGem());
+
+	if (CurrentStar == 1 && CurrentGem == 1)
+	{
+		bGameClear = true;
+
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			TArray<AActor*> FoundActors;
+			FString PortalTag = "PlayerPortal";
+
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), FoundActors);
+
+			if (FoundActors.Num() > 0)
+			{
+				AActor* PortalActor = FoundActors[0];
+
+				if (AMyPortal* CastedPortal = Cast<AMyPortal>(PortalActor))
+				{
+					PlayerPortal = CastedPortal;
+					PlayerPortal->PlayerClear();
+				}
+			}
+		}
+	}
 }
 
 void ACapstone_TestCharacter::PlayerDead()

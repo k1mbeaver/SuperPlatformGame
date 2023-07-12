@@ -9,6 +9,7 @@
 struct FAIDataTable;
 struct FObjectDataTable;
 struct FCharacterDataTable;
+struct FMapDataTable;
 class UDataTable;
 
 /**
@@ -33,11 +34,13 @@ public:
 	int GetPlayerStar();
 	int GetPlayerCoin();
 	int GetPlayerGem();
+	int GetCurrentStage();
 	//UParticleSystem* GetPlayerBashParticle();
 	void SetPlayerLife(int nLife);
 	void SetPlayerStar(int nStar);
 	void SetPlayerCoin(int nCoin);
 	void SetPlayerGem(int nGem);
+	void SetCurrentStage(int nStage);
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);
@@ -49,6 +52,12 @@ public:
 	// Object 데이터 값 얻어오기
 	UStaticMesh* GetObjStaticMesh(FString ObjType);
 
+	// Map 데이터 값 얻어오기
+	FVector GetMapPortal(int nMap);
+	int GetMapNext(int nMap);
+	FString GetMapStrNext(int nMap);
+	FString GetMapName(int nMap);
+
 private:
 	UPROPERTY()
 		UDataTable* FAITable;
@@ -58,4 +67,7 @@ private:
 
 	UPROPERTY()
 		UDataTable* FCharacterTable;
+
+	UPROPERTY()
+		UDataTable* FMapTable;
 };

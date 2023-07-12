@@ -5,6 +5,7 @@
 #include "AIDataTableClass.h"
 #include "CharacterDataTableClass.h"
 #include "ObjectDataTableClass.h"
+#include "MapDataTableClass.h"
 
 UMyGameInstance::UMyGameInstance()
 {
@@ -33,6 +34,15 @@ UMyGameInstance::UMyGameInstance()
 	if (DT_OBJFILE.Succeeded())
 	{
 		FObjectTable = DT_OBJFILE.Object;
+	}
+
+	FString MapDataTable = TEXT("DataTable'/Game/DataTable/MapDataTable.MapDataTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_MAPFILE(*MapDataTable);
+
+	if (DT_MAPFILE.Succeeded())
+	{
+		FMapTable = DT_MAPFILE.Object;
 	}
 }
 
@@ -134,6 +144,19 @@ int UMyGameInstance::GetPlayerGem()
 	return myGem;
 }
 
+int UMyGameInstance::GetCurrentStage()
+{
+	FCharacterDataTable* StageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myStage = StageData->CharacterStage;
+	return myStage;
+}
+
+void UMyGameInstance::SetCurrentStage(int nStage)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->CharacterStage = nStage;
+}
+
 void UMyGameInstance::SetPlayerLife(int nLife)
 {
 	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
@@ -178,4 +201,36 @@ UStaticMesh* UMyGameInstance::GetObjStaticMesh(FString ObjType)
 	FObjectDataTable* StaticMeshData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
 	UStaticMesh* myStatic = StaticMeshData->ObjectStaticMesh;
 	return myStatic;
+}
+
+FVector UMyGameInstance::GetMapPortal(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* PortalData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	FVector myMap = PortalData->MapPortalLocation;
+	return myMap;
+}
+
+int UMyGameInstance::GetMapNext(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* NextData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	int myMap = NextData->NextMap;
+	return myMap;
+}
+
+FString UMyGameInstance::GetMapStrNext(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* NextData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	FString myMap = NextData->strNextMap;
+	return myMap;
+}
+
+FString UMyGameInstance::GetMapName(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* NameData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	FString myMap = NameData->strMapName;
+	return myMap;
 }

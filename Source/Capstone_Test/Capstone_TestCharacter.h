@@ -44,6 +44,9 @@ class ACapstone_TestCharacter : public ACharacter
 
 	UPROPERTY()
 		class UGameplayStatics* GameStatic;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		class AMyPortal* PlayerPortal;
 public:
 	ACapstone_TestCharacter();
 
@@ -54,6 +57,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		ECharacterState CurrentState = ECharacterState::STAND;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
+		bool bGameClear = false;
 protected:
 
 	/** 
@@ -88,6 +93,7 @@ private:
 	bool bCameraMove = false;
 	bool bCanMove = true;
 	bool bAlive = true;
+	bool bCameraForward = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
@@ -128,6 +134,8 @@ public:
 	void TransCamera();
 
 	void StopTransCamera();
+
+	void CameraChange();
 
 	void Run();
 

@@ -52,6 +52,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int CharacterLife;
 
+	// 현재 스테이지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int CharacterStage;
+
 	// 캐릭터 파티클
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		//UNiagaraSystem* CharacterBashParticle;

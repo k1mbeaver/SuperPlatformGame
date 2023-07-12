@@ -6,6 +6,8 @@
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "MyGameInstance.h"
 
 // Sets default values
 AMyPortal::AMyPortal()
@@ -22,6 +24,7 @@ AMyPortal::AMyPortal()
 	PortalOpenNiagara = CreateDefaultSubobject<UNiagaraComponent>(TEXT("PortalOpenNiagara"));
 	PortalOpenNiagara->SetupAttachment(CapsuleComponent);
 
+	bClear = false;
 }
 
 // Called when the game starts or when spawned
@@ -40,9 +43,18 @@ void AMyPortal::Tick(float DeltaTime)
 
 }
 
-void AMyPortal::PlayerEnter()
+void AMyPortal::PlayerClear()
 {
 	PortalCloseNiagara->Deactivate();
 	PortalOpenNiagara->Activate();
+	bClear = true;
 }
 
+void AMyPortal::NextMap()
+{
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	int CurrentStage = MyGI->GetCurrentStage();
+	FString NextStage = MyGI->GetMapStrNext(CurrentStage);
+	FName fnNextStage = FName(*NextStage);
+	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
+}
