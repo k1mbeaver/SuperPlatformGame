@@ -325,7 +325,18 @@ void ACapstone_TestCharacter::TransCameraPos(float t, float targetRatio) {
 	float EndArmValue = LerpFun(500.0f, 0, targetRatio);
 	float EndSocketValue = LerpFun(200.0f, 0, targetRatio);
 	CameraBoom->TargetArmLength = LerpFun(CameraBoom->TargetArmLength, EndArmValue, t);
-	CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+
+	if (bCameraForward)
+	{
+		float EndSocketValueX = LerpFun(1000.0f, 0, targetRatio);
+		CameraBoom->SocketOffset.X = LerpFun(CameraBoom->SocketOffset.X, EndSocketValueX, t);
+		CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+	}
+
+	else
+	{
+		CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+	}
 }
 
 void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
@@ -334,7 +345,18 @@ void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
 	float EndArmValue = LerpFun(CameraBoom->TargetArmLength, 500.0f, targetRatio);
 	float EndSocketValue = LerpFun(CameraBoom->SocketOffset.Z, 200.0f, targetRatio);
 	CameraBoom->TargetArmLength = LerpFun(CameraBoom->TargetArmLength, EndArmValue, t);
-	CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+
+	if (bCameraForward)
+	{
+		float EndSocketValueX = LerpFun(CameraBoom->SocketOffset.X, 1000.0f, targetRatio);
+		CameraBoom->SocketOffset.X = LerpFun(CameraBoom->SocketOffset.X, EndSocketValueX, t);
+		CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+	}
+
+	else
+	{
+		CameraBoom->SocketOffset.Z = LerpFun(CameraBoom->SocketOffset.Z, EndSocketValue, t);
+	}
 }
 
 void ACapstone_TestCharacter::Run()
@@ -499,6 +521,7 @@ void ACapstone_TestCharacter::StarGet()
 				if (AMyPortal* CastedPortal = Cast<AMyPortal>(PortalActor))
 				{
 					PlayerPortal = CastedPortal;
+					PlayerPortal->PlayerClear();
 				}
 			}
 		}
