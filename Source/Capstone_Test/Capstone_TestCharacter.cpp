@@ -622,8 +622,17 @@ void ACapstone_TestCharacter::AttackCheck()
 			if (!HitCharacter)
 			{
 				AMyAICharacter* AIHitCharacter = Cast<AMyAICharacter>(HitResult.GetActor());
-				AIHitCharacter->Death();
-				return;
+
+				if (!AIHitCharacter)
+				{
+					return;
+				}
+
+				else
+				{
+					AIHitCharacter->Death();
+					return;
+				}
 			}
 			HitCharacter->Death();
 		}
