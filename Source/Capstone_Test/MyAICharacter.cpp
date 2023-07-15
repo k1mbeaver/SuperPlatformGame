@@ -42,8 +42,8 @@ void AMyAICharacter::BeginPlay()
 	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
 	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
 
-	//CharacterDefaultHP = myGameInstance->GetAIHP(strMonsterType);
-	//CharacterHP = CharacterDefaultHP;
+	CharacterDefaultHP = myGameInstance->GetAIHP(strMonsterType);
+	CharacterHP = CharacterDefaultHP;
 }
 
 // Called every frame
