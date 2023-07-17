@@ -20,6 +20,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
 #include "MyPortal.h"
+#include "PortalCamera.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -509,19 +510,33 @@ void ACapstone_TestCharacter::StarGet()
 
 		if (World)
 		{
-			TArray<AActor*> FoundActors;
+			TArray<AActor*> PortalFoundActors;
+			TArray<AActor*> CameraFoundActors;
+
 			FString PortalTag = "PlayerPortal";
+			FString CameraTag = "PlayerPortalCamera";
 
-			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), FoundActors);
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), PortalFoundActors);
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*CameraTag), CameraFoundActors);
 
-			if (FoundActors.Num() > 0)
+			if (PortalFoundActors.Num() > 0)
 			{
-				AActor* PortalActor = FoundActors[0];
+				AActor* PortalActor = PortalFoundActors[0];
 
 				if (AMyPortal* CastedPortal = Cast<AMyPortal>(PortalActor))
 				{
 					PlayerPortal = CastedPortal;
 					PlayerPortal->PlayerClear();
+				}
+			}
+
+			if (CameraFoundActors.Num() > 0)
+			{
+				AActor* CameraActor = CameraFoundActors[0];
+
+				if (APortalCamera* CastedCamera = Cast<APortalCamera>(CameraActor))
+				{
+					CastedCamera->PlayerGameClear();
 				}
 			}
 		}
@@ -544,19 +559,33 @@ void ACapstone_TestCharacter::GemGet()
 
 		if (World)
 		{
-			TArray<AActor*> FoundActors;
+			TArray<AActor*> PortalFoundActors;
+			TArray<AActor*> CameraFoundActors;
+
 			FString PortalTag = "PlayerPortal";
+			FString CameraTag = "PlayerPortalCamera";
 
-			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), FoundActors);
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*PortalTag), PortalFoundActors);
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*CameraTag), CameraFoundActors);
 
-			if (FoundActors.Num() > 0)
+			if (PortalFoundActors.Num() > 0)
 			{
-				AActor* PortalActor = FoundActors[0];
+				AActor* PortalActor = PortalFoundActors[0];
 
 				if (AMyPortal* CastedPortal = Cast<AMyPortal>(PortalActor))
 				{
 					PlayerPortal = CastedPortal;
 					PlayerPortal->PlayerClear();
+				}
+			}
+
+			if (CameraFoundActors.Num() > 0)
+			{
+				AActor* CameraActor = CameraFoundActors[0];
+
+				if (APortalCamera* CastedCamera = Cast<APortalCamera>(CameraActor))
+				{
+					CastedCamera->PlayerGameClear();
 				}
 			}
 		}
