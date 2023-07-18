@@ -64,13 +64,9 @@ void APortalCamera::PlayerGameClear()
 				{
 					float Duration = 2.0f; // Duration in seconds
 					FTimerHandle TimerHandle;
-					GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+					GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this, PlayerController]()
 						{
-							float CameraSwitchDelay = 0.1f; // The duration after which the camera will switch back
-							GetWorldTimerManager().SetTimer(CameraSwitchTimerHandle, [this, PlayerController]() {
-								// Switch back to the original camera
-								PlayerController->SetViewTargetWithBlend(GetPlayer, 0.1f);
-								}, CameraSwitchDelay, false);
+							PlayerController->SetViewTargetWithBlend(GetPlayer, 0.1f);
 						}, Duration, false);
 				}
 			}
