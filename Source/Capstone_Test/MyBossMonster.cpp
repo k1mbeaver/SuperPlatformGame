@@ -90,3 +90,15 @@ void AMyBossMonster::Death()
 	AMyBossAIController* myAIController = Cast<AMyBossAIController>(GetController());
 	myAIController->StopAI();
 }
+
+void AMyBossMonster::Skill()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 450.0f;
+
+	float Duration = 10.0f; // Duration in seconds
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		}, Duration, false);
+}

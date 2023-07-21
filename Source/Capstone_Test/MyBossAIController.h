@@ -25,6 +25,7 @@ public:
 	static const FName PatrolPosKey;
 	static const FName TargetKey;
 	static const FName NewTargetKey;
+	static const FName SkillTime;
 
 	void RunAI();
 	void StopAI();

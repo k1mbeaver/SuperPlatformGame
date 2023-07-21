@@ -104,7 +104,7 @@ public:
 	void StopAttackAnimation();
 	UFUNCTION(BlueprintCallable)
 		void Death();
-	//void Skill();
+	void Skill();
 	//void AttackEnd();
 	//void SkillEnd();
 	//void AttackCheck();

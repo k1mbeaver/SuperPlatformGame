@@ -20,7 +20,7 @@ EBTNodeResult::Type UBTTask_Skill::ExecuteTask(UBehaviorTreeComponent& OwnerComp
         return EBTNodeResult::Failed;
 
     // 나중에 스킬 추가 시 주석 해제하기
-    //MyAICharacter->Skill();
+    MyAICharacter->Skill();
     IsSkill = true;
     // MyAICharacter->OnAttackEnd.AddLambda([this]() -> void {
         //IsAttacking = false;
