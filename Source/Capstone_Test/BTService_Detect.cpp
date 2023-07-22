@@ -10,6 +10,7 @@
 #include "MyBossAIController.h"
 #include "DrawDebugHelpers.h"
 #include "Kismet/GameplayStatics.h"
+#include "MyBossAIController.h"
 
 UBTService_Detect::UBTService_Detect()
 {
@@ -46,7 +47,16 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
             if (MyCharacter)
             {
+                int SkillTime = OwnerComp.GetBlackboardComponent()->GetValueAsInt(ABossAIController::SkillTime);
+                SkillTime++;
+
+                if (SkillTime > 20) // 스킬 쿨이 50이 넘어가면 사용후
+                {
+                    SkillTime = 0; // 초기화
+                }
+
                 OwnerComp.GetBlackboardComponent()->SetValueAsObject(AMyBossAIController::TargetKey, MyCharacter);
+                OwnerComp.GetBlackboardComponent()->SetValueAsInt(AMyBossAIController::SkillTime, SkillTime);
                 DrawDebugSphere(World, Center, DetectRadius, 16, FColor::Green, false, 0.2f);
 
                 DrawDebugPoint(World, MyCharacter->GetActorLocation(), 10.0f, FColor::Blue, false, 0.2f);
