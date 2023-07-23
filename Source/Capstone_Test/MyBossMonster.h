@@ -105,6 +105,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void Death();
 	void Skill();
+	void SkillEnd();
 	//void AttackEnd();
 	//void SkillEnd();
 	//void AttackCheck();

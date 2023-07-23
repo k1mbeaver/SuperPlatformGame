@@ -47,8 +47,13 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
             if (MyCharacter)
             {
-                int SkillTime = OwnerComp.GetBlackboardComponent()->GetValueAsInt(ABossAIController::SkillTime);
+                int SkillTime = OwnerComp.GetBlackboardComponent()->GetValueAsInt(AMyBossAIController::SkillTime);
                 SkillTime++;
+
+                if (SkillTime == 10)
+                {
+                    myMonster->SkillEnd();
+                }
 
                 if (SkillTime > 20) // 스킬 쿨이 50이 넘어가면 사용후
                 {

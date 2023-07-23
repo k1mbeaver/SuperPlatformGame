@@ -95,10 +95,26 @@ void AMyBossMonster::Skill()
 {
 	GetCharacterMovement()->MaxWalkSpeed = 450.0f;
 
+	/*
 	float Duration = 10.0f; // Duration in seconds
 	FTimerHandle TimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
 		{
 			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 		}, Duration, false);
+	*/
+}
+
+void AMyBossMonster::SkillEnd()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 200.0f;
+
+	/*
+	float Duration = 10.0f; // Duration in seconds
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		}, Duration, false);
+	*/
 }
