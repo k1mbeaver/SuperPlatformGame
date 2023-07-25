@@ -93,7 +93,7 @@ void AMyBossMonster::Death()
 
 void AMyBossMonster::Skill()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 450.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 
 	/*
 	float Duration = 10.0f; // Duration in seconds
@@ -107,7 +107,7 @@ void AMyBossMonster::Skill()
 
 void AMyBossMonster::SkillEnd()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 200.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 
 	/*
 	float Duration = 10.0f; // Duration in seconds

@@ -18,8 +18,9 @@ bool UBTDecorator_SkillTime::CalculateRawConditionValue(UBehaviorTreeComponent& 
     // 나중에 이부분 구현 되면 조치하기
     
     int SkillTime = OwnerComp.GetBlackboardComponent()->GetValueAsInt(AMyBossAIController::SkillTime);
-    bResult = (SkillTime == 20);
-    
+
+    bResult = (SkillTime == 40);
+
     return bResult;
 }
 

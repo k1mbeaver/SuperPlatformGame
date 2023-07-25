@@ -164,11 +164,14 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+	// 여기는 나중에 보스 몬스터 실험 끝나면 주석 되돌려놓기
+	/* 
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	myHUD->SetGemCount(CurrentGem);
 	myHUD->SetStarCount(CurrentStar);
 	myHUD->SetCoinCount(CurrentCoin);
 	myHUD->SetCharacterCount(CurrentLife);
+	*/
 
 	//BashParticle = MyGI->GetPlayerBashParticle();
 	//CharacterDefaultHP = MyGI->GetPlayerHP();
