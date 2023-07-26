@@ -21,6 +21,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float ObjectDamage;
 
+	// 오브젝트 이동속도
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float ObjectSpeed;
+
+	// 오브젝트 이름
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString ObjectName;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMesh* ObjectStaticMesh;
 };

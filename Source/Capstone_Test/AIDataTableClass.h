@@ -25,6 +25,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float CharacterSpeed;
 
+	// 캐릭터 이름
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString CharacterName;
+
 	// 캐릭터 메쉬
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USkeletalMesh* CharacterMesh;
