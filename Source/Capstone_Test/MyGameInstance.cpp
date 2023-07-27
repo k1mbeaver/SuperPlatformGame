@@ -60,6 +60,13 @@ TSubclassOf<class UAnimInstance> UMyGameInstance::GetAIAnimInstance(FString Mons
 	return myAnimInstance;
 }
 
+FString UMyGameInstance::GetAIName(FString MonsterType)
+{
+	FAIDataTable* NameData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
+	FString myName = NameData->CharacterName;
+	return myName;
+}
+
 float UMyGameInstance::GetAISpeed(FString MonsterType)
 {
 	FAIDataTable* SpeedData = FAITable->FindRow<FAIDataTable>(*MonsterType, TEXT(""));
@@ -201,6 +208,20 @@ UStaticMesh* UMyGameInstance::GetObjStaticMesh(FString ObjType)
 	FObjectDataTable* StaticMeshData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
 	UStaticMesh* myStatic = StaticMeshData->ObjectStaticMesh;
 	return myStatic;
+}
+
+FString UMyGameInstance::GetObjectName(FString ObjType)
+{
+	FObjectDataTable* NameData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
+	FString myName = NameData->ObjectName;
+	return myName;
+}
+
+float UMyGameInstance::GetObjectSpeed(FString ObjType)
+{
+	FObjectDataTable* SpeedData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
+	float mySpeed = SpeedData->ObjectSpeed;
+	return mySpeed;
 }
 
 FVector UMyGameInstance::GetMapPortal(int nMap)

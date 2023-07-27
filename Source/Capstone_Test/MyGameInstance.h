@@ -48,9 +48,12 @@ public:
 	float GetAISpeed(FString MonsterType);
 	float GetAIHP(FString MonsterType);
 	UAnimMontage* GetAIAttackMontage(FString MonsterType);
+	FString GetAIName(FString MonsterType);
 
 	// Object 데이터 값 얻어오기
 	UStaticMesh* GetObjStaticMesh(FString ObjType);
+	float GetObjectSpeed(FString ObjType);
+	FString GetObjectName(FString ObjType);
 
 	// Map 데이터 값 얻어오기
 	FVector GetMapPortal(int nMap);
