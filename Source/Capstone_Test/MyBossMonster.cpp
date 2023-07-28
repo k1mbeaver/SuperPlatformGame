@@ -36,15 +36,7 @@ void AMyBossMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
-	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
-	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
-	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
-	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
-	MonsterAnim = Cast<UMyAIAnimInstance>(GetMesh()->GetAnimInstance());
-	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
-
-	MonsterAnim->AttackStart_Attack.AddUObject(this, &AMyBossMonster::StartAttackAnimation);
-	MonsterAnim->AttackEnd_Attack.AddUObject(this, &AMyBossMonster::StopAttackAnimation);
+	InitBossMonster();
 
 	//CharacterDefaultHP = myGameInstance->GetAIHP(strMonsterType);
 	//CharacterHP = CharacterDefaultHP;
@@ -117,4 +109,17 @@ void AMyBossMonster::SkillEnd()
 			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 		}, Duration, false);
 	*/
+}
+
+void AMyBossMonster::InitBossMonster()
+{
+	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strMonsterType));
+	GetMesh()->SetAnimInstanceClass(myGameInstance->GetAIAnimInstance(strMonsterType));
+	GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strMonsterType);
+	MonsterAnim = Cast<UMyAIAnimInstance>(GetMesh()->GetAnimInstance());
+	AttackMontage = myGameInstance->GetAIAttackMontage(strMonsterType);
+
+	MonsterAnim->AttackStart_Attack.AddUObject(this, &AMyBossMonster::StartAttackAnimation);
+	MonsterAnim->AttackEnd_Attack.AddUObject(this, &AMyBossMonster::StopAttackAnimation);
 }
