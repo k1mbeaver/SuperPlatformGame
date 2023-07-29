@@ -38,6 +38,8 @@ void AMyHitObject::BeginPlay()
 	Super::BeginPlay();
 
 	myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+
+	InitObject(myGameInstance->GetObjectName(strObjectType));
 	//GetMesh()->SetSkeletalMesh(myGameInstance->GetAISkeletalMesh(strObjectType));
 	//GetCharacterMovement()->MaxWalkSpeed = myGameInstance->GetAISpeed(strObjectType);
 
@@ -57,4 +59,14 @@ void AMyHitObject::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMyHitObject::InitObject(FString ObjectName)
+{
+	ObjectSpeed = myGameInstance->GetObjectSpeed(ObjectName);
+	GetCharacterMovement()->MaxWalkSpeed = ObjectSpeed;
+
+	StaticMesh->SetStaticMesh(myGameInstance->GetObjStaticMesh(ObjectName));
+
+	// Damage까지 추가한 후에 적용시켜서 사용해보자(충돌처리)
 }

@@ -31,7 +31,7 @@ public:
 		float AttackRadius;
 
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Speed, Meta = (AllowPrivateAccess = true))
-		float MonsterSpeed;
+		float ObjectSpeed;
 
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		bool bCanAttack;
@@ -76,6 +76,8 @@ public:
 	//virtual void PostInitializeComponents() override;
 
 	//float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamasgeCauser) override;
+
+	void InitObject(FString ObjectName);
 
 	//void Attack();
 	//void Death();
