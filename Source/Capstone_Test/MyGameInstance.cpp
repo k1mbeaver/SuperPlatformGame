@@ -224,6 +224,13 @@ float UMyGameInstance::GetObjectSpeed(FString ObjType)
 	return mySpeed;
 }
 
+float UMyGameInstance::GetObjectDamage(FString ObjType)
+{
+	FObjectDataTable* DamageData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));
+	float myDamage = DamageData->ObjectDamage;
+	return myDamage;
+}
+
 FVector UMyGameInstance::GetMapPortal(int nMap)
 {
 	FString strMap = FString::FromInt(nMap);

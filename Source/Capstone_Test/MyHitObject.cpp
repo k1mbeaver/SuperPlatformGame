@@ -67,6 +67,6 @@ void AMyHitObject::InitObject(FString ObjectName)
 	GetCharacterMovement()->MaxWalkSpeed = ObjectSpeed;
 
 	StaticMesh->SetStaticMesh(myGameInstance->GetObjStaticMesh(ObjectName));
-
+	AttackPower = myGameInstance->GetObjectDamage(ObjectName);
 	// Damage까지 추가한 후에 적용시켜서 사용해보자(충돌처리)
 }

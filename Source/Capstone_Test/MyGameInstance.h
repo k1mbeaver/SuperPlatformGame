@@ -54,6 +54,7 @@ public:
 	UStaticMesh* GetObjStaticMesh(FString ObjType);
 	float GetObjectSpeed(FString ObjType);
 	FString GetObjectName(FString ObjType);
+	float GetObjectDamage(FString ObjType);
 
 	// Map 데이터 값 얻어오기
 	FVector GetMapPortal(int nMap);
