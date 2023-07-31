@@ -603,6 +603,18 @@ void ACapstone_TestCharacter::PlayerDead()
 	CurrentState = ECharacterState::DEATH;
 	myAnimInstance->SetDeadAnim();
 	LaunchCharacter(FVector(100.0f, 100.0f, 500.f), 0, 1);
+
+	TArray<ACapstone_TestCharacter*> ActorsToPause;
+	// 나중에 여기 수정하기 죽었을 때 플레이어를 제외한 모든 사물이 멈추도록
+	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapstone_TestCharacter::StaticClass(), ActorsToPause);
+
+	for (ACapstone_TestCharacter* Actor : ActorsToPause)
+	{
+		if (Actor != this) // Skip the player character
+		{
+			Actor->SetActorTickEnabled(false);
+		}
+	}
 }
 
 void ACapstone_TestCharacter::AttackCheck()
