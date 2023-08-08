@@ -25,7 +25,7 @@ public:
 		class UGameplayStatics* GameStatic;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
-		int nMaxHeight;
+		bool bUpDown; // Up = true, Down = false;
 
 	class UMyGameInstance* myGameInstance;
 
@@ -38,8 +38,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-		void InitMaxHeight();
+		void UpObject();
 
 	UFUNCTION(BlueprintCallable)
-		void IncreaseMaxHeight();
+		void DownObject();
 };
