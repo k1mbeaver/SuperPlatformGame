@@ -27,6 +27,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		bool bUpDown; // Up = true, Down = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
+		int nMaxUpDown;
+
+	float CurrentActorLocationZ;
+
 	class UMyGameInstance* myGameInstance;
 
 protected:
