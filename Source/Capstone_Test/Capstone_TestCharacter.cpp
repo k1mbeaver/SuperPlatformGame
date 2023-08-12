@@ -258,6 +258,11 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 	}
 }
 
+void ACapstone_TestCharacter::StageMove()
+{
+	// 나중에 스테이지 맵 추가하면 여기 추가하기
+}
+
 void ACapstone_TestCharacter::MoveRight(float Value)
 {
 	if (bCanMove == false)
