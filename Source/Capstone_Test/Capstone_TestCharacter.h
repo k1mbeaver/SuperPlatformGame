@@ -15,6 +15,7 @@ enum class ECharacterState : uint8
 	RUN, // 달리는 상태
 	BASH, // 가속 상태
 	DEATH,	// 죽은 상태
+	STAGE, // 스테이지 선택상태
 	//이후에 추가하자
 };
 
