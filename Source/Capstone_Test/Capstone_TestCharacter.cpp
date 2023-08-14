@@ -64,8 +64,18 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Create a follow camera
+	SideCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("SideCamera"));
+	//SideCamera->SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f));
+	SideCamera->SetupAttachment(RootComponent);
+	SideCamera->Deactivate();
+
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
 	NiagaraComponent->SetupAttachment(RootComponent);
+
+	// 나중에 수정
+	CurrentState = ECharacterState::STAGE;
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -164,6 +174,12 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+
+	if (CurrentState == ECharacterState::STAGE)
+	{
+		FollowCamera->Deactivate();
+		SideCamera->Activate();
+	}
 	// 여기는 나중에 보스 몬스터 실험 끝나면 주석 되돌려놓기
 	/* 
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
