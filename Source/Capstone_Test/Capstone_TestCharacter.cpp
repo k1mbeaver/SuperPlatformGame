@@ -66,8 +66,8 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 
 	// Create a follow camera
 	SideCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("SideCamera"));
-	//SideCamera->SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f));
-	SideCamera->SetupAttachment(RootComponent);
+	//SideCamera->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f));
+	//SideCamera->SetupAttachment(RootComponent);
 	SideCamera->Deactivate();
 
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
@@ -84,6 +84,14 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
+	if (CurrentState == ECharacterState::STAGE)
+	{
+		FVector NewLocation = GetActorLocation();
+		FVector CameraNewLocation = FVector(NewLocation.X + 800.0f, NewLocation.Y, NewLocation.Z);
+		SideCamera->SetRelativeLocation(CameraNewLocation);
+		SideCamera->SetRelativeRotation(FRotator(180.0f, 0.0f, 180.0f));
+	}
+
 	if (bCameraMove)
 	{
 		if (CurrentState == ECharacterState::STAND)
