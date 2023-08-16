@@ -98,6 +98,7 @@ private:
 	bool bCanMove = true;
 	bool bAlive = true;
 	bool bCameraForward = false;
+	bool bSideMode = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;

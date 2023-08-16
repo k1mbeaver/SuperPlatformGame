@@ -75,6 +75,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 
 	// 나중에 수정
 	CurrentState = ECharacterState::STAGE;
+	bSideMode = true;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -84,7 +85,7 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (CurrentState == ECharacterState::STAGE)
+	if (bSideMode == true)
 	{
 		FVector NewLocation = GetActorLocation();
 		FVector CameraNewLocation = FVector(NewLocation.X + 800.0f, NewLocation.Y, NewLocation.Z);
@@ -183,7 +184,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentLife = MyGI->GetPlayerLife();
 
 
-	if (CurrentState == ECharacterState::STAGE)
+	if (bSideMode == true)
 	{
 		FollowCamera->Deactivate();
 		SideCamera->Activate();
