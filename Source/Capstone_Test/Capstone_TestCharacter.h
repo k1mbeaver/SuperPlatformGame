@@ -128,6 +128,9 @@ public:
 
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
+
+	void SideMoveForward(float Value);
+
 	void StageMove();
 	/** Called for side to side input */
 	void MoveRight(float Value);

@@ -210,6 +210,18 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
+
+	if (bSideMode)
+	{
+		PlayerInputComponent->BindAxis("Side MoveForward / Backward", this, &ACapstone_TestCharacter::SideMoveForward);
+	}
+
+	else
+	{
+		PlayerInputComponent->BindAxis("Move Forward / Backward", this, &ACapstone_TestCharacter::MoveForward);
+		PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
+	}
+
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
@@ -218,9 +230,6 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
 	PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
-
-	PlayerInputComponent->BindAxis("Move Forward / Backward", this, &ACapstone_TestCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ACapstone_TestCharacter::Run);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &ACapstone_TestCharacter::StopRun);
@@ -261,6 +270,29 @@ void ACapstone_TestCharacter::LookUpAtRate(float Rate)
 }
 */
 void ACapstone_TestCharacter::MoveForward(float Value)
+{
+	if (bCanMove == false)
+	{
+		return;
+	}
+
+	if (bCameraForward)
+	{
+		Value = Value * -1;
+	}
+
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
+
+		Direction.Z = 0.0f;
+		Direction.Normalize();
+
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void ACapstone_TestCharacter::SideMoveForward(float Value)
 {
 	if (bCanMove == false)
 	{
