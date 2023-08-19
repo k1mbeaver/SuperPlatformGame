@@ -292,6 +292,31 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 	}
 }
 
+void ACapstone_TestCharacter::StageUpDown(float Value)
+{
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
+
+		Direction.Z = 0.0f;
+		Direction.Normalize();
+
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void ACapstone_TestCharacter::StageLeftRight(float Value)
+{
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
+
+		Direction.Z = 0.0f;
+		Direction.Normalize();
+
+		AddMovementInput(Direction, Value);
+	}
+}
 void ACapstone_TestCharacter::SideMoveForward(float Value)
 {
 	if (bCanMove == false)
@@ -313,11 +338,6 @@ void ACapstone_TestCharacter::SideMoveForward(float Value)
 
 		AddMovementInput(Direction, Value);
 	}
-}
-
-void ACapstone_TestCharacter::StageMove()
-{
-	// 나중에 스테이지 맵 추가하면 여기 추가하기
 }
 
 void ACapstone_TestCharacter::MoveRight(float Value)

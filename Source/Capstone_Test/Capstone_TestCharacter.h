@@ -131,7 +131,9 @@ public:
 
 	void SideMoveForward(float Value);
 
-	void StageMove();
+	void StageUpDown(float Value);
+
+	void StageLeftRight(float Value);
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
