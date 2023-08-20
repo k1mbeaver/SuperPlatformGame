@@ -107,6 +107,7 @@ private:
 	int CurrentCoin = 0;
 	int CurrentStar = 0;
 	int CurrentGem = 0;
+	int CurrentSelectStage = 0;
 
 	float AttackRange = 100.0f;
 	float AttackRadius = 50.0f;
@@ -134,6 +135,8 @@ public:
 	void StageUpDown(float Value);
 
 	void StageLeftRight(float Value);
+
+	void StageSelect(int nSelectStage);
 	/** Called for side to side input */
 	void MoveRight(float Value);
 

@@ -302,6 +302,8 @@ void ACapstone_TestCharacter::StageUpDown(float Value)
 		Direction.Normalize();
 
 		AddMovementInput(Direction, Value);
+
+		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
 
@@ -315,8 +317,16 @@ void ACapstone_TestCharacter::StageLeftRight(float Value)
 		Direction.Normalize();
 
 		AddMovementInput(Direction, Value);
+
+		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
+
+void ACapstone_TestCharacter::StageSelect(int nSelectStage)
+{
+	// 나중에 선택한 스테이지를 갈 코드를 구현하기
+}
+
 void ACapstone_TestCharacter::SideMoveForward(float Value)
 {
 	if (bCanMove == false)
@@ -339,6 +349,7 @@ void ACapstone_TestCharacter::SideMoveForward(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
 
 void ACapstone_TestCharacter::MoveRight(float Value)
 {
