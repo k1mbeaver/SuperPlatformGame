@@ -18,6 +18,8 @@ class CAPSTONE_TEST_API UPlayerMainUI : public UUserWidget
 	UPROPERTY(Meta = (BindWidget))
 		class UPlayerPlayUI* UW_PlayerPlay;
 
+	UPROPERTY(Meta = (BindWidget))
+		class UPlayerStageUI* UW_PlayerStage;
 
 public:
 	// PlayUI
@@ -25,4 +27,9 @@ public:
 	void SetCoinCount(int nCount);
 	void SetGemCount(int nCount);
 	void SetStarCount(int nCount);
+	void SetPlayMode(bool bActive);
+
+	// StageUI
+	void SetStageMode(bool bActive);
+	void SetStage(int nStage);
 };

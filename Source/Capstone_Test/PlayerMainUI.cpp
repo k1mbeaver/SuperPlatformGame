@@ -3,6 +3,7 @@
 
 #include "PlayerMainUI.h"
 #include "PlayerPlayUI.h"
+#include "PlayerStageUI.h"
 
 void UPlayerMainUI::SetCharacterCount(int nCount)
 {
@@ -22,4 +23,36 @@ void UPlayerMainUI::SetGemCount(int nCount)
 void UPlayerMainUI::SetStarCount(int nCount)
 {
 	UW_PlayerPlay->SetStarCount(nCount);
+}
+
+void UPlayerMainUI::SetPlayMode(bool bActive)
+{
+	if (bActive)
+	{
+		UW_PlayerPlay->SetVisibility(ESlateVisibility::Visible);
+	}
+
+	else
+	{
+		UW_PlayerPlay->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+
+void UPlayerMainUI::SetStageMode(bool bActive)
+{
+	if (bActive)
+	{
+		UW_PlayerStage->SetVisibility(ESlateVisibility::Visible);
+	}
+
+	else
+	{
+		UW_PlayerStage->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void UPlayerMainUI::SetStage(int nStage)
+{
+	UW_PlayerStage->SetStage(nStage);
 }

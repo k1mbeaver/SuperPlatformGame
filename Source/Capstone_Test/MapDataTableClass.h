@@ -25,6 +25,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString strMapName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int IsSide; // 1이 사이드 0은 기본
 };
 
 UCLASS()

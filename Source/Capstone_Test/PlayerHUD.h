@@ -24,6 +24,9 @@ public:
 	void SetCoinCount(int nCount);
 	void SetGemCount(int nCount);
 	void SetStarCount(int nCount);
+	void SetPlayMode(bool bActive);
+	void SetStageMode(bool bActive);
+	void SetStage(int nStage);
 private:
 	TSubclassOf<class UPlayerMainUI> MainUIClass;
 	class UPlayerMainUI* MainUIObject;

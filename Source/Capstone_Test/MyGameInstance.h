@@ -61,6 +61,7 @@ public:
 	int GetMapNext(int nMap);
 	FString GetMapStrNext(int nMap);
 	FString GetMapName(int nMap);
+	int GetMapIsSide(int nMap);
 
 private:
 	UPROPERTY()

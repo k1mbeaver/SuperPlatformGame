@@ -9,6 +9,8 @@ ASelectStage::ASelectStage()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	OnStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+	OnStaticMesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -16,6 +18,7 @@ void ASelectStage::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	nStageNumber = FCString::Atoi(*strStageNumber);
 }
 
 // Called every frame

@@ -18,6 +18,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		FString strStageNumber;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
+		int nStageNumber;
+
 	UPROPERTY()
 		class UGameplayStatics* GameStatic;
 

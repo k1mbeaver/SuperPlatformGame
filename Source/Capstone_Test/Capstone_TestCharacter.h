@@ -99,6 +99,8 @@ private:
 	bool bAlive = true;
 	bool bCameraForward = false;
 	bool bSideMode = false;
+	bool bStageMode = false;
+	bool bCurrentStageOn = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
@@ -136,7 +138,7 @@ public:
 
 	void StageLeftRight(float Value);
 
-	void StageSelect(int nSelectStage);
+	void StageSelect();
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
@@ -187,5 +189,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void PlayerDead();
+
+	UFUNCTION(BlueprintCallable)
+		void PlayerOnStage(int nStage);
+
+	UFUNCTION(BlueprintCallable)
+		void PlayerOffStage();
 };
 

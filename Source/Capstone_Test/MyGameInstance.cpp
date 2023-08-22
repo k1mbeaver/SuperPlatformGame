@@ -247,6 +247,14 @@ int UMyGameInstance::GetMapNext(int nMap)
 	return myMap;
 }
 
+int UMyGameInstance::GetMapIsSide(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* NextData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	int myMap = NextData->IsSide;
+	return myMap;
+}
+
 FString UMyGameInstance::GetMapStrNext(int nMap)
 {
 	FString strMap = FString::FromInt(nMap);

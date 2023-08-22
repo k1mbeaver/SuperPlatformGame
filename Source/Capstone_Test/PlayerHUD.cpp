@@ -63,3 +63,18 @@ void APlayerHUD::SetStarCount(int nCount)
 {
 	MainUIObject->SetStarCount(nCount);
 }
+
+void APlayerHUD::SetPlayMode(bool bActive)
+{
+	MainUIObject->SetPlayMode(bActive);
+}
+
+void APlayerHUD::SetStageMode(bool bActive)
+{
+	MainUIObject->SetStageMode(bActive);
+}
+
+void APlayerHUD::SetStage(int nStage)
+{
+	MainUIObject->SetStage(nStage);
+}

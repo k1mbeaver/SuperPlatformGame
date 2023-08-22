@@ -75,7 +75,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 
 	// 나중에 수정
 	CurrentState = ECharacterState::STAGE;
-	bSideMode = true;
+	//bStageMode = true;
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -183,12 +183,42 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+	/*
+	if (MyGI->GetCurrentStage() == 7)
+	{
+		bStageMode = true;
+	}
 
+	if (MyGI->GetMapIsSide(MyGI->GetCurrentStage()) == 0)
+	{
+		bSideMode = false;
+	}
+
+	else
+	{
+		bSideMode = true;
+	}
+	*/
 	if (bSideMode == true)
 	{
 		FollowCamera->Deactivate();
 		SideCamera->Activate();
 	}
+
+	if (bStageMode)
+	{
+		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+		myHUD->SetPlayMode(false);
+		myHUD->SetStageMode(false);
+	}
+
+	else
+	{
+		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+		myHUD->SetPlayMode(true);
+		myHUD->SetStageMode(false);
+	}
+
 	// 여기는 나중에 보스 몬스터 실험 끝나면 주석 되돌려놓기
 	/* 
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
@@ -211,6 +241,23 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	if (MyGI->GetCurrentStage() == 7)
+	{
+		bStageMode = true;
+	}
+
+	if (MyGI->GetMapIsSide(MyGI->GetCurrentStage()) == 0)
+	{
+		bSideMode = false;
+	}
+
+	else
+	{
+		bSideMode = true;
+	}
+
 	if (bSideMode)
 	{
 		PlayerInputComponent->BindAxis("Side MoveForward / Backward", this, &ACapstone_TestCharacter::SideMoveForward);
@@ -222,8 +269,16 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 		PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
 	}
 
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	if (bStageMode)
+	{
+		PlayerInputComponent->BindAction("StageSelect", IE_Pressed, this, &ACapstone_TestCharacter::StageSelect);
+	}
+
+	else
+	{
+		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	}
 
 	PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
 	PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
@@ -322,9 +377,33 @@ void ACapstone_TestCharacter::StageLeftRight(float Value)
 	}
 }
 
-void ACapstone_TestCharacter::StageSelect(int nSelectStage)
+void ACapstone_TestCharacter::StageSelect()
 {
-	// 나중에 선택한 스테이지를 갈 코드를 구현하기
+	if (bCurrentStageOn)
+	{
+		UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+		FString MapStage = MyGI->GetMapName(CurrentSelectStage);
+		FName fnNextStage = FName(*MapStage);
+
+		MyGI->SetCurrentStage(CurrentSelectStage);
+		UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
+	}
+}
+
+void ACapstone_TestCharacter::PlayerOnStage(int nStage)
+{
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	myHUD->SetStageMode(true);
+	myHUD->SetStage(nStage);
+	CurrentSelectStage = nStage;
+	bCurrentStageOn = true;
+}
+
+void ACapstone_TestCharacter::PlayerOffStage()
+{
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	myHUD->SetStageMode(false);
+	bCurrentStageOn = false;
 }
 
 void ACapstone_TestCharacter::SideMoveForward(float Value)
