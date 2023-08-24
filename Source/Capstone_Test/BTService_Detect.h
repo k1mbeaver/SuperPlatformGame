@@ -9,6 +9,14 @@
 /**
  * 
  */
+
+UENUM()
+enum class ECustomCollisionChannel_Detect : uint8
+{
+	ECC_AIDetect UMETA(DisplayName = "AIDetect"),
+	// Add more custom collision channels if needed
+};
+
 UCLASS()
 class CAPSTONE_TEST_API UBTService_Detect : public UBTService
 {
