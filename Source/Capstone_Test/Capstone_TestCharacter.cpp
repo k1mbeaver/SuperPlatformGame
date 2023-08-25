@@ -267,6 +267,8 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	{
 		PlayerInputComponent->BindAxis("Move Forward / Backward", this, &ACapstone_TestCharacter::MoveForward);
 		PlayerInputComponent->BindAxis("Move Right / Left", this, &ACapstone_TestCharacter::MoveRight);
+
+		PlayerInputComponent->BindAction("CameraChange", IE_Pressed, this, &ACapstone_TestCharacter::CameraChange);
 	}
 
 	if (bStageMode)
@@ -278,10 +280,10 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	{
 		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	}
 
-	PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
-	PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
+		PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
+		PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
+	}
 
 	PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
 	PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
@@ -297,8 +299,6 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	PlayerInputComponent->BindAction("Bash", IE_Pressed, this, &ACapstone_TestCharacter::Bash);
 	PlayerInputComponent->BindAction("Bash", IE_Released, this, &ACapstone_TestCharacter::StopBash);
-
-	PlayerInputComponent->BindAction("CameraChange", IE_Pressed, this, &ACapstone_TestCharacter::CameraChange);
 }
 
 void ACapstone_TestCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
