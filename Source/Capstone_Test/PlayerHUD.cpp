@@ -78,3 +78,23 @@ void APlayerHUD::SetStage(int nStage)
 {
 	MainUIObject->SetStage(nStage);
 }
+
+void APlayerHUD::GameRestart()
+{
+	MainUIObject->GameRestart();
+}
+
+void APlayerHUD::GameExit()
+{
+	MainUIObject->GameExit();
+}
+
+void APlayerHUD::GameStage()
+{
+	MainUIObject->GameStage();
+}
+
+void APlayerHUD::SettingPauseVisible(bool Istrue)
+{
+	MainUIObject->SettingPauseVisible(Istrue);
+}

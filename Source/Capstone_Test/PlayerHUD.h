@@ -27,6 +27,10 @@ public:
 	void SetPlayMode(bool bActive);
 	void SetStageMode(bool bActive);
 	void SetStage(int nStage);
+	void GameRestart();
+	void GameExit();
+	void GameStage();
+	void SettingPauseVisible(bool Istrue);
 private:
 	TSubclassOf<class UPlayerMainUI> MainUIClass;
 	class UPlayerMainUI* MainUIObject;

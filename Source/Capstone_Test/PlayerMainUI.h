@@ -21,6 +21,9 @@ class CAPSTONE_TEST_API UPlayerMainUI : public UUserWidget
 	UPROPERTY(Meta = (BindWidget))
 		class UPlayerStageUI* UW_PlayerStage;
 
+	UPROPERTY(Meta = (BindWidget))
+		class UPlayerPauseUI* UW_PlayerPause;
+
 public:
 	// PlayUI
 	void SetCharacterCount(int nCount);
@@ -32,4 +35,10 @@ public:
 	// StageUI
 	void SetStageMode(bool bActive);
 	void SetStage(int nStage);
+
+	// PauseUI
+	void GameRestart();
+	void GameExit();
+	void GameStage();
+	void SettingPauseVisible(bool Istrue);
 };

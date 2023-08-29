@@ -299,6 +299,8 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	PlayerInputComponent->BindAction("Bash", IE_Pressed, this, &ACapstone_TestCharacter::Bash);
 	PlayerInputComponent->BindAction("Bash", IE_Released, this, &ACapstone_TestCharacter::StopBash);
+
+	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &ACapstone_TestCharacter::VisiblePause);
 }
 
 void ACapstone_TestCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -786,6 +788,37 @@ void ACapstone_TestCharacter::PlayerDead()
 		{
 			Actor->SetActorTickEnabled(false);
 		}
+	}
+}
+
+void ACapstone_TestCharacter::VisiblePause()
+{
+	if (!bPause)
+	{
+		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+
+		myHUD->SettingPauseVisible(true);
+		bPause = true;
+
+		//GameStatic->SetGamePaused(GetWorld(), true);
+
+		FInputModeUIOnly InputMode;
+		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
+	}
+
+	else
+	{
+		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+
+		myHUD->SettingPauseVisible(false);
+		bPause = false;
+
+		//GameStatic->SetGamePaused(GetWorld(), false);
+
+		FInputModeGameOnly GameMode;
+		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
+		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
 	}
 }
 

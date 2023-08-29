@@ -14,4 +14,27 @@ class CAPSTONE_TEST_API UPlayerPauseUI : public UUserWidget
 {
 	GENERATED_BODY()
 	
+private:
+	UPROPERTY(Meta = (BindWidget))
+		class UButton* BtExit;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UButton* BtRestart;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UButton* BtStage;
+
+protected:
+	virtual void NativeOnInitialized() override;
+
+public:
+	// 사용할 함수들을 정리
+	UFUNCTION(BlueprintCallable)
+		void GameRestart();
+
+	UFUNCTION(BlueprintCallable)
+		void GameExit();
+
+	UFUNCTION(BlueprintCallable)
+		void GameStage();
 };

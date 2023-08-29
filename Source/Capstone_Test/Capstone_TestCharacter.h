@@ -101,6 +101,7 @@ private:
 	bool bSideMode = false;
 	bool bStageMode = false;
 	bool bCurrentStageOn = false;
+	bool bPause = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
@@ -177,6 +178,8 @@ public:
 	void Death();
 
 	void AttackCheck();
+
+	void VisiblePause();
 
 	UFUNCTION(BlueprintCallable)
 		void CoinGet();
