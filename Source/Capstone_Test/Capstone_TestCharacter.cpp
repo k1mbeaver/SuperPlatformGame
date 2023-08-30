@@ -802,8 +802,8 @@ void ACapstone_TestCharacter::VisiblePause()
 
 		//GameStatic->SetGamePaused(GetWorld(), true);
 
-		FInputModeUIOnly InputMode;
-		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+		//FInputModeUIOnly InputMode;
+		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
 		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
 	}
 
@@ -816,8 +816,8 @@ void ACapstone_TestCharacter::VisiblePause()
 
 		//GameStatic->SetGamePaused(GetWorld(), false);
 
-		FInputModeGameOnly GameMode;
-		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
+		//FInputModeGameOnly GameMode;
+		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
 		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
 	}
 }
