@@ -632,6 +632,11 @@ void ACapstone_TestCharacter::StopBash()
 void ACapstone_TestCharacter::StartBashAnimation()
 {
 	//bCanMove = false;
+	// 여기서 온갖 계산다하고 구한 값을 PlayerBashDirect에 넣기
+
+	// PlayerBashDirection = 구한값
+
+	// 여기다가 매개변수로 넣어
 	LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
 }
 
