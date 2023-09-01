@@ -21,6 +21,7 @@
 #include "NiagaraComponent.h"
 #include "MyPortal.h"
 #include "PortalCamera.h"
+#include "Components/ArrowComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -63,6 +64,10 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	FollowCamera->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
+	PlayerDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("PlayerDirection"));
+	PlayerDirection->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+	PlayerDirection->SetVisibility(false);
 
 	// Create a follow camera
 	SideCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("SideCamera"));
@@ -602,11 +607,13 @@ void ACapstone_TestCharacter::StopDown()
 void ACapstone_TestCharacter::Bash()
 {
 	CurrentState = ECharacterState::BASH;
-	GetWorldSettings()->SetTimeDilation(0.1f);
+	GetWorldSettings()->SetTimeDilation(0.0f);
 	bCameraMove = true;
 	//bCanMove = false;
 	myAnimInstance->IsBash = true;
 	myAnimInstance->PlayDiveMontage(myDiveMontage);
+
+	PlayerDirection->SetVisibility(true);
 
 	//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
 	NiagaraComponent->Activate();
@@ -627,6 +634,7 @@ void ACapstone_TestCharacter::StopBash()
 	GetWorldSettings()->SetTimeDilation(1.0f);
 	bCameraMove = false;
 	myAnimInstance->IsBash = false;
+	PlayerDirection->SetVisibility(false);
 }
 
 void ACapstone_TestCharacter::StartBashAnimation()

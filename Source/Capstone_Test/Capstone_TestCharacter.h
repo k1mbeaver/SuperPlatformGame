@@ -35,6 +35,9 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* SideCamera;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Direction, meta = (AllowPrivateAccess = "true"))
+		class UArrowComponent* PlayerDirection;
+
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* myDiveMontage;
 
