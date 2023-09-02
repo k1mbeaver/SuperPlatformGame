@@ -105,6 +105,7 @@ private:
 	bool bStageMode = false;
 	bool bCurrentStageOn = false;
 	bool bPause = false;
+	bool bBash = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
@@ -184,6 +185,10 @@ public:
 	void AttackCheck();
 
 	void VisiblePause();
+
+	void BashDirectionForward(float Value);
+
+	void BashDirectionRight(float Value);
 
 	UFUNCTION(BlueprintCallable)
 		void CoinGet();

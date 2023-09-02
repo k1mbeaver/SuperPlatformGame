@@ -290,6 +290,9 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 		PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
 	}
 
+	PlayerInputComponent->BindAxis("BashDirectionForward", this, &ACapstone_TestCharacter::BashDirectionForward);
+	PlayerInputComponent->BindAxis("BashDirectionRight", this, &ACapstone_TestCharacter::BashDirectionRight);
+
 	PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
 	PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
 
@@ -609,6 +612,7 @@ void ACapstone_TestCharacter::Bash()
 	CurrentState = ECharacterState::BASH;
 	GetWorldSettings()->SetTimeDilation(0.0f);
 	bCameraMove = true;
+	bBash = true;
 	//bCanMove = false;
 	myAnimInstance->IsBash = true;
 	myAnimInstance->PlayDiveMontage(myDiveMontage);
@@ -656,6 +660,7 @@ void ACapstone_TestCharacter::CurrentBash()
 void ACapstone_TestCharacter::StopBashAnimation()
 {
 	bCanMove = true;
+	bBash = false;
 }
 
 void ACapstone_TestCharacter::Death()
@@ -898,5 +903,35 @@ void ACapstone_TestCharacter::AttackCheck()
 			}
 			HitCharacter->Death();
 		}
+	}
+}
+
+void ACapstone_TestCharacter::BashDirectionForward(float Value)
+{
+	if (bBash)
+	{
+		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+
+		//if (PlayerRotator.Pitch > 0)
+		//{
+			
+		//}
+
+		PlayerRotator.Pitch = PlayerRotator.Pitch + Value;
+
+		FRotator CurrentRotator = PlayerRotator;
+		PlayerDirection->SetRelativeRotation(CurrentRotator);
+	}
+}
+
+void ACapstone_TestCharacter::BashDirectionRight(float Value)
+{
+	if (bBash)
+	{
+		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+		PlayerRotator.Yaw = PlayerRotator.Yaw + Value;
+
+		FRotator CurrentRotator = PlayerRotator;
+		PlayerDirection->SetRelativeRotation(CurrentRotator);
 	}
 }
