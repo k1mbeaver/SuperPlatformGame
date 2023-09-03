@@ -118,6 +118,7 @@ private:
 
 	float AttackRange = 100.0f;
 	float AttackRadius = 50.0f;
+	float BashPower = 1000.0f;
 
 	FVector PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
 private:

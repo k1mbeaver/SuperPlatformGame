@@ -647,9 +647,18 @@ void ACapstone_TestCharacter::StartBashAnimation()
 	// 여기서 온갖 계산다하고 구한 값을 PlayerBashDirect에 넣기
 
 	// PlayerBashDirection = 구한값
+	FRotator LaunchRotator;
+	FVector LaunchDirection;
+	
+	LaunchRotator = PlayerDirection->GetComponentRotation();
+	LaunchDirection.X = FMath::Cos(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Yaw);
+	LaunchDirection.Y = FMath::Sin(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Pitch);
+	LaunchDirection.Z = FMath::Sin(LaunchRotator.Pitch);
+
+	LaunchDirection = LaunchDirection * BashPower;
 
 	// 여기다가 매개변수로 넣어
-	LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
+	LaunchCharacter(LaunchDirection, 0, 1);
 }
 
 void ACapstone_TestCharacter::CurrentBash()
