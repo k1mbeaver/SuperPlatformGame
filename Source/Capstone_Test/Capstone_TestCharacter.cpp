@@ -649,16 +649,21 @@ void ACapstone_TestCharacter::StartBashAnimation()
 	// PlayerBashDirection = 구한값
 	FRotator LaunchRotator;
 	FVector LaunchDirection;
-	
+	FVector StartArrow = PlayerDirection->GetComponentLocation();
+	FVector DirectionArrow = PlayerDirection->GetForwardVector();
+
 	LaunchRotator = PlayerDirection->GetComponentRotation();
-	LaunchDirection.X = FMath::Cos(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Yaw);
-	LaunchDirection.Y = FMath::Sin(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Pitch);
-	LaunchDirection.Z = FMath::Sin(LaunchRotator.Pitch);
+	//LaunchDirection.X = FMath::Cos(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Yaw);
+	//LaunchDirection.Y = FMath::Sin(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Pitch);
+	//LaunchDirection.Z = FMath::Sin(LaunchRotator.Pitch);
+	LaunchDirection = DirectionArrow;
+	LaunchDirection.Normalize();
 
 	LaunchDirection = LaunchDirection * BashPower;
 
 	// 여기다가 매개변수로 넣어
-	LaunchCharacter(LaunchDirection, 0, 1);
+	LaunchCharacter(LaunchDirection, 1, 1);
+	//LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
 }
 
 void ACapstone_TestCharacter::CurrentBash()
@@ -917,30 +922,40 @@ void ACapstone_TestCharacter::AttackCheck()
 
 void ACapstone_TestCharacter::BashDirectionForward(float Value)
 {
-	if (bBash)
+	if (!bBash)
+	{
+		return;
+	}
+
+	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
 
-		//if (PlayerRotator.Pitch > 0)
-		//{
-			
-		//}
+			//if (PlayerRotator.Pitch > 0)
+			//{
+
+			//}
 
 		PlayerRotator.Pitch = PlayerRotator.Pitch + Value;
 
 		FRotator CurrentRotator = PlayerRotator;
-		PlayerDirection->SetRelativeRotation(CurrentRotator);
+		PlayerDirection->SetWorldRotation(CurrentRotator);
 	}
 }
 
 void ACapstone_TestCharacter::BashDirectionRight(float Value)
 {
-	if (bBash)
+	if (!bBash)
+	{
+		return;
+	}
+
+	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
 		PlayerRotator.Yaw = PlayerRotator.Yaw + Value;
 
 		FRotator CurrentRotator = PlayerRotator;
-		PlayerDirection->SetRelativeRotation(CurrentRotator);
+		PlayerDirection->SetWorldRotation(CurrentRotator);
 	}
 }
