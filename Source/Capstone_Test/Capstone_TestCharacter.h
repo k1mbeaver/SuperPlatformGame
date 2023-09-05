@@ -66,6 +66,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		bool bGameClear = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash)
+		FVector PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
+
 protected:
 
 	/** 
@@ -119,8 +123,6 @@ private:
 	float AttackRange = 100.0f;
 	float AttackRadius = 50.0f;
 	float BashPower = 1000.0f;
-
-	FVector PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
 private:
 	class UMyAnimInstance* myAnimInstance;
 public:

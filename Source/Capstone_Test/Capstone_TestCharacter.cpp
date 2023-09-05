@@ -168,6 +168,10 @@ void ACapstone_TestCharacter::Tick(float DeltaTime)
 		}
 	}
 	
+	if (bBash)
+	{
+		PlayerBashDirection = PlayerDirection->GetForwardVector();
+	}
 }
 
 void ACapstone_TestCharacter::BeginPlay()
@@ -638,14 +642,24 @@ void ACapstone_TestCharacter::StopBash()
 	GetWorldSettings()->SetTimeDilation(1.0f);
 	bCameraMove = false;
 	myAnimInstance->IsBash = false;
+
+	//PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
+	//PlayerBashDirection = PlayerDirection->GetForwardVector();
+	PlayerBashDirection.Normalize();
+
+	PlayerBashDirection = PlayerBashDirection * BashPower;
+
 	PlayerDirection->SetVisibility(false);
+
+	// 여기다가 매개변수로 넣어
+	LaunchCharacter(PlayerBashDirection, 1, 1);
 }
 
 void ACapstone_TestCharacter::StartBashAnimation()
 {
 	//bCanMove = false;
 	// 여기서 온갖 계산다하고 구한 값을 PlayerBashDirect에 넣기
-
+	/*
 	// PlayerBashDirection = 구한값
 	FRotator LaunchRotator;
 	FVector LaunchDirection;
@@ -658,11 +672,12 @@ void ACapstone_TestCharacter::StartBashAnimation()
 	//LaunchDirection.Z = FMath::Sin(LaunchRotator.Pitch);
 	LaunchDirection = DirectionArrow;
 	LaunchDirection.Normalize();
+	*/
 
-	LaunchDirection = LaunchDirection * BashPower;
+	//PlayerBashDirection = PlayerBashDirection * BashPower;
 
 	// 여기다가 매개변수로 넣어
-	LaunchCharacter(LaunchDirection, 1, 1);
+	//LaunchCharacter(PlayerBashDirection, 1, 1);
 	//LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
 }
 
