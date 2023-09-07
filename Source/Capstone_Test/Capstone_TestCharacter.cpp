@@ -3,6 +3,7 @@
 #include "Capstone_TestCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
@@ -68,6 +69,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	PlayerDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("PlayerDirection"));
 	PlayerDirection->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	PlayerDirection->SetVisibility(false);
+	PlayerDirection->Deactivate();
 
 	// Create a follow camera
 	SideCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("SideCamera"));
@@ -77,6 +79,9 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
 	NiagaraComponent->SetupAttachment(RootComponent);
+
+	BashCollision = CreateDefaultSubobject<USphereComponent>(TEXT("BashCollision"));
+	BashCollision->SetupAttachment(RootComponent);
 
 	// 나중에 수정
 	CurrentState = ECharacterState::STAGE;
@@ -613,45 +618,72 @@ void ACapstone_TestCharacter::StopDown()
 
 void ACapstone_TestCharacter::Bash()
 {
-	CurrentState = ECharacterState::BASH;
-	GetWorldSettings()->SetTimeDilation(0.0f);
-	bCameraMove = true;
-	bBash = true;
-	//bCanMove = false;
-	myAnimInstance->IsBash = true;
-	myAnimInstance->PlayDiveMontage(myDiveMontage);
+	if (bCanBash)
+	{
+		CurrentState = ECharacterState::BASH;
+		GetWorldSettings()->SetTimeDilation(0.0f);
+		bCameraMove = true;
+		bBash = true;
+		//bCanMove = false;
+		myAnimInstance->IsBash = true;
+		myAnimInstance->PlayDiveMontage(myDiveMontage);
 
-	PlayerDirection->SetVisibility(true);
+		PlayerDirection->Activate();
+		PlayerDirection->SetVisibility(true);
 
-	//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
-	NiagaraComponent->Activate();
+		//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
+		NiagaraComponent->Activate();
 
-	float Duration = 0.1f; // Duration in seconds
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
-		{
-			NiagaraComponent->Deactivate();
-		}, Duration, false);
+		float Duration = 0.1f; // Duration in seconds
+		FTimerHandle TimerHandle;
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+			{
+				NiagaraComponent->Deactivate();
+			}, Duration, false);
 
-	AttackCheck();
+		AttackCheck();
+	}
+}
+
+void ACapstone_TestCharacter::VisibleBash()
+{
+	bCanBash = true;
+}
+
+void ACapstone_TestCharacter::HiddenBash()
+{
+	bCanBash = false;
 }
 
 void ACapstone_TestCharacter::StopBash()
 {
-	CurrentState = ECharacterState::STAND;
-	GetWorldSettings()->SetTimeDilation(1.0f);
-	bCameraMove = false;
-	myAnimInstance->IsBash = false;
+	if (bCanBash)
+	{
+		CurrentState = ECharacterState::STAND;
+		GetWorldSettings()->SetTimeDilation(1.0f);
+		bCameraMove = false;
+		myAnimInstance->IsBash = false;
 
-	//PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
-	//PlayerBashDirection = PlayerDirection->GetForwardVector();
+		//PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
+		//PlayerBashDirection = PlayerDirection->GetForwardVector();
+		//PlayerBashDirection.Normalize();
+
+		//PlayerBashDirection = PlayerBashDirection * BashPower;
+
+		PlayerDirection->Deactivate();
+		PlayerDirection->SetVisibility(false);
+
+		// 여기다가 매개변수로 넣어
+		//LaunchCharacter(PlayerBashDirection, 1, 1);
+	}
+}
+
+void ACapstone_TestCharacter::LaunchBash()
+{
+	PlayerBashDirection = PlayerDirection->GetForwardVector();
 	PlayerBashDirection.Normalize();
-
 	PlayerBashDirection = PlayerBashDirection * BashPower;
 
-	PlayerDirection->SetVisibility(false);
-
-	// 여기다가 매개변수로 넣어
 	LaunchCharacter(PlayerBashDirection, 1, 1);
 }
 

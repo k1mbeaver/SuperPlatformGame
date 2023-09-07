@@ -38,6 +38,9 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Direction, meta = (AllowPrivateAccess = "true"))
 		class UArrowComponent* PlayerDirection;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class USphereComponent* BashCollision;
+
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		UAnimMontage* myDiveMontage;
 
@@ -110,6 +113,7 @@ private:
 	bool bCurrentStageOn = false;
 	bool bPause = false;
 	bool bBash = false;
+	bool bCanBash = false;
 
 	float CharacterHP = 0.0f;
 	float CharacterDefaultHP = 0.0f;
@@ -210,5 +214,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void PlayerOffStage();
+
+	UFUNCTION(BlueprintCallable)
+		void LaunchBash();
+
+	UFUNCTION(BlueprintCallable)
+		void VisibleBash();
+
+	UFUNCTION(BlueprintCallable)
+		void HiddenBash();
 };
 

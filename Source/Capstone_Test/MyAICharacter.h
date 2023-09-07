@@ -63,6 +63,8 @@ public:
 	UPROPERTY(VisibleInstanceOnly, Category = Animation)
 		class UMyAIAnimInstance* MonsterAnim;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class USphereComponent* BashCollision;
 	//UPROPERTY()
 		//class UParticleSystem* AttackParticle;
 
