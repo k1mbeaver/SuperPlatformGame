@@ -62,7 +62,7 @@ public:
 	FString GetMapStrNext(int nMap);
 	FString GetMapName(int nMap);
 	int GetMapIsSide(int nMap);
-
+	UTexture2D* GetMapImage(int nMap);
 private:
 	UPROPERTY()
 		UDataTable* FAITable;

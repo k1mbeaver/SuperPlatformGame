@@ -24,6 +24,9 @@ class CAPSTONE_TEST_API UPlayerMainUI : public UUserWidget
 	UPROPERTY(Meta = (BindWidget))
 		class UPlayerPauseUI* UW_PlayerPause;
 
+	UPROPERTY(Meta = (BindWidget))
+		class UPlayerLoadingUI* UW_PlayerLoading;
+
 public:
 	// PlayUI
 	void SetCharacterCount(int nCount);
@@ -41,4 +44,10 @@ public:
 	void GameExit();
 	void GameStage();
 	void SettingPauseVisible(bool Istrue);
+
+	// LoadingUI
+	void VisibleLoading(bool bVisible);
+	void SetLoadingImage(int nMap);
+	void SetLoadingText(int nMap);
+	void InitProgressBar();
 };

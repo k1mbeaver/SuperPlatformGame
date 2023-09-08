@@ -31,6 +31,10 @@ public:
 	void GameExit();
 	void GameStage();
 	void SettingPauseVisible(bool Istrue);
+	void VisibleLoading(bool bIstrue);
+	void SetLoadingImage(int nMap);
+	void SetLoadingText(int nMap);
+	void InitProgressBar();
 private:
 	TSubclassOf<class UPlayerMainUI> MainUIClass;
 	class UPlayerMainUI* MainUIObject;

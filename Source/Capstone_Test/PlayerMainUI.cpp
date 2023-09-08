@@ -5,6 +5,7 @@
 #include "PlayerPlayUI.h"
 #include "PlayerStageUI.h"
 #include "PlayerPauseUI.h"
+#include "PlayerLoadingUI.h"
 
 void UPlayerMainUI::SetCharacterCount(int nCount)
 {
@@ -84,4 +85,32 @@ void UPlayerMainUI::SettingPauseVisible(bool Istrue)
 	{
 		UW_PlayerPause->SetVisibility(ESlateVisibility::Hidden);
 	}
+}
+
+void UPlayerMainUI::VisibleLoading(bool bVisible)
+{
+	if (bVisible)
+	{
+		UW_PlayerLoading->SetVisibility(ESlateVisibility::Visible);
+	}
+
+	else
+	{
+		UW_PlayerLoading->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void UPlayerMainUI::SetLoadingImage(int nMap)
+{
+	UW_PlayerLoading->SetLoadingImage(nMap);
+}
+
+void UPlayerMainUI::SetLoadingText(int nMap)
+{
+	//UW_PlayerPause->GameStage();
+}
+
+void UPlayerMainUI::InitProgressBar()
+{
+	//UW_PlayerPause->GameStage();
 }

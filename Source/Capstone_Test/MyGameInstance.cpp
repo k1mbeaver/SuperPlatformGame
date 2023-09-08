@@ -270,3 +270,11 @@ FString UMyGameInstance::GetMapName(int nMap)
 	FString myMap = NameData->strMapName;
 	return myMap;
 }
+
+UTexture2D* UMyGameInstance::GetMapImage(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* ImageData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	UTexture2D* myMap = ImageData->MapImage;
+	return myMap;
+}

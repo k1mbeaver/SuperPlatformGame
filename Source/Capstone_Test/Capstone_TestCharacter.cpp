@@ -185,6 +185,11 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	myHUD->VisibleLoading(true);
+	myHUD->SetLoadingImage(MyGI->GetCurrentStage());
+
 	myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
 	myDiveMontage = MyGI->GetPlayerDiveMontage();
 
@@ -221,14 +226,14 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	if (bStageMode)
 	{
-		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+		//APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 		myHUD->SetPlayMode(false);
 		myHUD->SetStageMode(false);
 	}
 
 	else
 	{
-		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+		//APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 		myHUD->SetPlayMode(true);
 		myHUD->SetStageMode(false);
 	}

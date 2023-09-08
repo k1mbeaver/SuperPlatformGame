@@ -28,6 +28,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int IsSide; // 1이 사이드 0은 기본
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTexture2D* MapImage;
 };
 
 UCLASS()

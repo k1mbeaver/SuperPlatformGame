@@ -98,3 +98,23 @@ void APlayerHUD::SettingPauseVisible(bool Istrue)
 {
 	MainUIObject->SettingPauseVisible(Istrue);
 }
+
+void APlayerHUD::VisibleLoading(bool Istrue)
+{
+	MainUIObject->VisibleLoading(Istrue);
+}
+
+void APlayerHUD::SetLoadingImage(int nMap)
+{
+	MainUIObject->SetLoadingImage(nMap);
+}
+
+void APlayerHUD::SetLoadingText(int nMap)
+{
+	MainUIObject->SetLoadingText(nMap);
+}
+
+void APlayerHUD::InitProgressBar()
+{
+	MainUIObject->InitProgressBar();
+}
