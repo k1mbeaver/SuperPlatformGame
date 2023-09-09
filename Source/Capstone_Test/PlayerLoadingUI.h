@@ -24,7 +24,6 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 		class UTextBlock* LoadingText;
 
-	int CurrentPercent = 0;
 	bool bOnLoading = true;
 protected:
 	virtual void NativeOnInitialized() override;
@@ -33,5 +32,5 @@ public:
 	void SetLoadingImage(int nMap);
 	void SetLoadingText(int nMap);
 	void InitProgressBar();
-	void EngageProgressBar();
+	bool EngageProgressBar(float LoadingPercent);
 };

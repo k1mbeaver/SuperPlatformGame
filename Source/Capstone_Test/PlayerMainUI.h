@@ -27,6 +27,7 @@ class CAPSTONE_TEST_API UPlayerMainUI : public UUserWidget
 	UPROPERTY(Meta = (BindWidget))
 		class UPlayerLoadingUI* UW_PlayerLoading;
 
+	float CurrentLoading = 0.0f;
 public:
 	// PlayUI
 	void SetCharacterCount(int nCount);
@@ -50,4 +51,6 @@ public:
 	void SetLoadingImage(int nMap);
 	void SetLoadingText(int nMap);
 	void InitProgressBar();
+	UFUNCTION(BlueprintCallable)
+		void EngagePercent();
 };

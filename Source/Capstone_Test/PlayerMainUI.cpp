@@ -114,3 +114,19 @@ void UPlayerMainUI::InitProgressBar()
 {
 	//UW_PlayerPause->GameStage();
 }
+
+void UPlayerMainUI::EngagePercent()
+{
+	CurrentLoading = CurrentLoading + 0.01f;
+
+	if (CurrentLoading < 1)
+	{
+		VisibleLoading(UW_PlayerLoading->EngageProgressBar(CurrentLoading));
+	}
+
+	else
+	{
+		VisibleLoading(UW_PlayerLoading->EngageProgressBar(CurrentLoading));
+	}
+	
+}

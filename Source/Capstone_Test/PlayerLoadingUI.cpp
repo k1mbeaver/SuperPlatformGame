@@ -33,21 +33,25 @@ void UPlayerLoadingUI::InitProgressBar()
 {
 	// 프로그래스바 초기화 시키기
 	LoadingBar->SetPercent(0.0f);
-	CurrentPercent = 0.0f;
 	//UW_PlayerPause->GameStage();
 }
 
-void UPlayerLoadingUI::EngageProgressBar()
+bool UPlayerLoadingUI::EngageProgressBar(float LoadingPercent)
 {
-	// 프로그래스바 초기화 시키기
-	CurrentPercent++;
-	LoadingBar->SetPercent(CurrentPercent);
+	LoadingBar->SetPercent(LoadingPercent);
 
-	if (CurrentPercent == 100)
+	if (LoadingPercent < 1)
+	{
+		//InitProgressBar();
+		//SetVisibility(ESlateVisibility::Hidden);
+		//bOnLoading = false;
+		return true;
+	}
+
+	else
 	{
 		InitProgressBar();
-		//SetVisibility(ESlateVisibility::Hidden);
-		bOnLoading = false;
+		return false;
 	}
 	//UW_PlayerPause->GameStage();
 }
