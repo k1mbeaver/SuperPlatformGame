@@ -26,7 +26,10 @@ void UPlayerLoadingUI::SetLoadingImage(int nMap)
 void UPlayerLoadingUI::SetLoadingText(int nMap)
 {
 	// 게임 인스턴스에 텍스트를 얻어오는 함수도 가져오자
-	//UW_PlayerPause->GameStage();
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	FString strText = MyGI->GetMapText(nMap);
+	FText strToft = FText::FromString(strText);
+	LoadingText->SetText(strToft);
 }
 
 void UPlayerLoadingUI::InitProgressBar()

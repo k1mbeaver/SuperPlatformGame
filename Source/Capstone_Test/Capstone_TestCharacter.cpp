@@ -189,6 +189,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	myHUD->VisibleLoading(true);
 	myHUD->SetLoadingImage(MyGI->GetCurrentStage());
+	myHUD->SetLoadingText(MyGI->GetCurrentStage());
 
 	myAnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
 	myDiveMontage = MyGI->GetPlayerDiveMontage();

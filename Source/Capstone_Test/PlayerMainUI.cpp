@@ -107,7 +107,7 @@ void UPlayerMainUI::SetLoadingImage(int nMap)
 
 void UPlayerMainUI::SetLoadingText(int nMap)
 {
-	//UW_PlayerPause->GameStage();
+	UW_PlayerLoading->SetLoadingText(nMap);
 }
 
 void UPlayerMainUI::InitProgressBar()

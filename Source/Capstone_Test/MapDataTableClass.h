@@ -31,6 +31,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UTexture2D* MapImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString MapText;
 };
 
 UCLASS()
