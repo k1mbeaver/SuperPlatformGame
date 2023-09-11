@@ -55,6 +55,9 @@ void AMyPortal::NextMap()
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	int CurrentStage = MyGI->GetCurrentStage();
 	MyGI->SetCurrentStage(CurrentStage + 1);
+	MyGI->SetPlayerGem(0);
+	MyGI->SetPlayerStar(0);
+
 	FString NextStage = MyGI->GetMapStrNext(CurrentStage);
 	FName fnNextStage = FName(*NextStage);
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);

@@ -117,7 +117,7 @@ void UPlayerMainUI::InitProgressBar()
 
 void UPlayerMainUI::EngagePercent()
 {
-	CurrentLoading = CurrentLoading + 0.01f;
+	CurrentLoading = CurrentLoading + 0.005f;
 
 	if (CurrentLoading < 1)
 	{
