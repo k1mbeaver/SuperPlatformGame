@@ -23,6 +23,7 @@
 #include "MyPortal.h"
 #include "PortalCamera.h"
 #include "Components/ArrowComponent.h"
+#include "Sound/SoundWave.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter

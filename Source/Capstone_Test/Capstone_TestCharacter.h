@@ -50,6 +50,18 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Niagara, Meta = (AllowPrivateAccess = true))
 		class UNiagaraComponent* NiagaraComponent;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* PlayerJumpSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* PlayerRunSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* PlayerWalkSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* PlayerBashSound;
+
 	class UMyGameInstance* myGameInstance;
 
 	UPROPERTY()
