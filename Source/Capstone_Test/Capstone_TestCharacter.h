@@ -115,6 +115,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void Jump() override;
+	virtual void StopJumping() override;
+
 private:
 	bool bCameraMove = false;
 	bool bCanMove = true;

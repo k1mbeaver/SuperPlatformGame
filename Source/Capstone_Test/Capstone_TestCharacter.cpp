@@ -479,6 +479,22 @@ void ACapstone_TestCharacter::MoveRight(float Value)
 	}
 }
 
+void ACapstone_TestCharacter::Jump()
+{
+	Super::Jump();
+
+	if (PlayerJumpSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, PlayerJumpSound, GetActorLocation());
+	}
+}
+
+void ACapstone_TestCharacter::StopJumping()
+{
+	Super::StopJumping();
+}
+
+
 void ACapstone_TestCharacter::BulletTime()
 {
 	GetWorldSettings()->SetTimeDilation(0.5f);
@@ -690,6 +706,11 @@ void ACapstone_TestCharacter::LaunchBash()
 	PlayerBashDirection = PlayerDirection->GetForwardVector();
 	PlayerBashDirection.Normalize();
 	PlayerBashDirection = PlayerBashDirection * BashPower;
+
+	if (PlayerBashSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, PlayerBashSound, GetActorLocation());
+	}
 
 	LaunchCharacter(PlayerBashDirection, 1, 1);
 }
