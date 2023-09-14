@@ -203,6 +203,27 @@ TSubclassOf<class UAnimInstance> UMyGameInstance::GetPlayerAnimInstance()
 	return myAnimation;
 }
 
+USoundWave* UMyGameInstance::GetPlayerJumpSound()
+{
+	FCharacterDataTable* SoundWaveData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	USoundWave* mySound = SoundWaveData->PlayerJumpSound;
+	return mySound;
+}
+
+USoundWave* UMyGameInstance::GetPlayerBashSound()
+{
+	FCharacterDataTable* SoundWaveData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	USoundWave* mySound = SoundWaveData->PlayerBashSound;
+	return mySound;
+}
+
+USoundWave* UMyGameInstance::GetPlayerWalkSound()
+{
+	FCharacterDataTable* SoundWaveData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	USoundWave* mySound = SoundWaveData->PlayerWalkSound;
+	return mySound;
+}
+
 UStaticMesh* UMyGameInstance::GetObjStaticMesh(FString ObjType)
 {
 	FObjectDataTable* StaticMeshData = FObjectTable->FindRow<FObjectDataTable>(*ObjType, TEXT(""));

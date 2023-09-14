@@ -56,6 +56,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int CharacterStage;
 
+	// 점프 사운드
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USoundWave* PlayerJumpSound;
+
+	// 걷기 사운드
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USoundWave* PlayerWalkSound;
+
+	// Bash 사운드
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USoundWave* PlayerBashSound;
+
+
 	// 캐릭터 파티클
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		//UNiagaraSystem* CharacterBashParticle;

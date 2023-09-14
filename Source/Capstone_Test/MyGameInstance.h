@@ -41,6 +41,10 @@ public:
 	void SetPlayerCoin(int nCoin);
 	void SetPlayerGem(int nGem);
 	void SetCurrentStage(int nStage);
+	USoundWave* GetPlayerJumpSound();
+	USoundWave* GetPlayerBashSound();
+	USoundWave* GetPlayerWalkSound();
+
 
 	// AI 몬스터 데이터 얻어오기
 	USkeletalMesh* GetAISkeletalMesh(FString MonsterType);

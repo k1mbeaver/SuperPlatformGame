@@ -204,6 +204,10 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+	PlayerBashSound = MyGI->GetPlayerBashSound();
+	PlayerJumpSound = MyGI->GetPlayerJumpSound();
+	PlayerWalkSound = MyGI->GetPlayerWalkSound();
+
 	/*
 	if (MyGI->GetCurrentStage() == 7)
 	{
@@ -299,8 +303,8 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	else
 	{
-		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACapstone_TestCharacter::Jump);
+		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACapstone_TestCharacter::StopJumping);
 
 		PlayerInputComponent->BindAction("BulletTime", IE_Pressed, this, &ACapstone_TestCharacter::BulletTime);
 		PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
