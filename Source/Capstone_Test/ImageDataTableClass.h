@@ -4,31 +4,35 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "StageScreen.generated.h"
+#include "Engine/DataTable.h"
+#include "ImageDataTableClass.generated.h"
+
+USTRUCT(BlueprintType)
+struct FImageDataTable : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// »ç¿îµå
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTexture2D* myImage;
+};
 
 UCLASS()
-class CAPSTONE_TEST_API AStageScreen : public AActor
+class CAPSTONE_TEST_API AImageDataTableClass : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AStageScreen();
+	AImageDataTableClass();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
-	AActor* GetPlayer;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
-		class UStaticMeshComponent* ImageSquare;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION(BlueprintCallable)
-		void SetImage(int nMap);
 
 };

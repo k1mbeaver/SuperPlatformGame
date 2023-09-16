@@ -6,6 +6,8 @@
 #include "CharacterDataTableClass.h"
 #include "ObjectDataTableClass.h"
 #include "MapDataTableClass.h"
+#include "SoundDataTableClass.h"
+#include "ImageDataTableClass.h"
 
 UMyGameInstance::UMyGameInstance()
 {
@@ -43,6 +45,24 @@ UMyGameInstance::UMyGameInstance()
 	if (DT_MAPFILE.Succeeded())
 	{
 		FMapTable = DT_MAPFILE.Object;
+	}
+
+	FString ImageDataTable = TEXT("DataTable'/Game/DataTable/ImageDataTable.ImageDataTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_IMAGEFILE(*ImageDataTable);
+
+	if (DT_IMAGEFILE.Succeeded())
+	{
+		FImageTable = DT_IMAGEFILE.Object;
+	}
+
+	FString SoundDataTable = TEXT("DataTable'/Game/DataTable/SoundDataTable.SoundDataTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SOUNDFILE(*SoundDataTable);
+
+	if (DT_SOUNDFILE.Succeeded())
+	{
+		FSoundTable = DT_SOUNDFILE.Object;
 	}
 }
 
@@ -306,4 +326,18 @@ FString UMyGameInstance::GetMapText(int nMap)
 	FMapDataTable* TextData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
 	FString myText = TextData->MapText;
 	return myText;
+}
+
+UTexture2D* UMyGameInstance::GetImage(FString ImageName)
+{
+	FImageDataTable* ImageData = FImageTable->FindRow<FImageDataTable>(*ImageName, TEXT(""));
+	UTexture2D* myImage = ImageData->myImage;
+	return myImage;
+}
+
+USoundWave* UMyGameInstance::GetSound(FString SoundName)
+{
+	FSoundDataTable* SoundData = FSoundTable->FindRow<FSoundDataTable>(*SoundName, TEXT(""));
+	USoundWave* mySound = SoundData->mySound;
+	return mySound;
 }

@@ -68,6 +68,13 @@ public:
 	int GetMapIsSide(int nMap);
 	UTexture2D* GetMapImage(int nMap);
 	FString GetMapText(int nMap);
+
+	// Image 데이터 값 얻어오기
+	UTexture2D* GetImage(FString ImageName);
+
+	// Sound 데이터 값 얻어오기
+	USoundWave* GetSound(FString SoundName);
+
 private:
 	UPROPERTY()
 		UDataTable* FAITable;
@@ -80,4 +87,10 @@ private:
 
 	UPROPERTY()
 		UDataTable* FMapTable;
+
+	UPROPERTY()
+		UDataTable* FImageTable;
+
+	UPROPERTY()
+		UDataTable* FSoundTable;
 };
