@@ -68,6 +68,7 @@ public:
 	int GetMapIsSide(int nMap);
 	UTexture2D* GetMapImage(int nMap);
 	FString GetMapText(int nMap);
+	UMaterial* GetMapMaterial(int nMap);
 
 	// Image 데이터 값 얻어오기
 	UTexture2D* GetImage(FString ImageName);

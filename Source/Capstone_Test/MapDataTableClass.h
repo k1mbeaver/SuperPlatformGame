@@ -34,6 +34,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString MapText;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UMaterial* MapMaterial;
 };
 
 UCLASS()

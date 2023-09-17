@@ -31,4 +31,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void SetImage(int nMap);
 
+	UFUNCTION(BlueprintCallable)
+		void ImageOnOff(bool bOnOff);
 };

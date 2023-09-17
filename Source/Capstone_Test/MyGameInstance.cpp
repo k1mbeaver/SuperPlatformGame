@@ -320,6 +320,14 @@ UTexture2D* UMyGameInstance::GetMapImage(int nMap)
 	return myMap;
 }
 
+UMaterial* UMyGameInstance::GetMapMaterial(int nMap)
+{
+	FString strMap = FString::FromInt(nMap);
+	FMapDataTable* MaterialData = FMapTable->FindRow<FMapDataTable>(*strMap, TEXT(""));
+	UMaterial* myMap = MaterialData->MapMaterial;
+	return myMap;
+}
+
 FString UMyGameInstance::GetMapText(int nMap)
 {
 	FString strMap = FString::FromInt(nMap);

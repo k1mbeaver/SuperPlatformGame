@@ -4,6 +4,7 @@
 #include "StageScreen.h"
 #include "Capstone_TestCharacter.h"
 #include "Kismet/GameplayStatics.h"
+#include "MyGameInstance.h"
 
 // Sets default values
 AStageScreen::AStageScreen()
@@ -45,4 +46,20 @@ void AStageScreen::Tick(float DeltaTime)
 void AStageScreen::SetImage(int nMap)
 {
 	// 여기다가 평면에 그림을 그리도록 설정하기
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	ImageSquare->SetMaterial(0, MyGI->GetMapMaterial(nMap));
+}
+
+void AStageScreen::ImageOnOff(bool bOnOff)
+{
+	if (bOnOff)
+	{
+		ImageSquare->SetVisibility(true);
+	}
+
+	else
+	{
+		ImageSquare->SetVisibility(false);
+	}
 }
