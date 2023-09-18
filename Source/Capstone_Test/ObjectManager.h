@@ -18,6 +18,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Type)
 		FString strObjectType;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* ObjectSound;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -28,5 +31,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void InitObj(UStaticMeshComponent* myStaticMesh);
+
+	UFUNCTION(BlueprintCallable)
+		void PlaySound();
 
 };

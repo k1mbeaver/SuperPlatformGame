@@ -34,6 +34,8 @@ void AMyPortal::BeginPlay()
 	
 	PortalCloseNiagara->Activate();
 	PortalOpenNiagara->Deactivate();
+
+	// 게임 인스턴스에서 값을 가져와서 PortalSound에 사용할 데이터를 적용할 수 있게 구현하기
 }
 
 // Called every frame
@@ -61,4 +63,12 @@ void AMyPortal::NextMap()
 	FString NextStage = MyGI->GetMapStrNext(CurrentStage);
 	FName fnNextStage = FName(*NextStage);
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
+}
+
+void AMyPortal::PlaySound()
+{
+	if (PortalSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, PortalSound, GetActorLocation());
+	}
 }

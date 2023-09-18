@@ -4,6 +4,7 @@
 #include "ObjectManager.h"
 #include "MyGameInstance.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AObjectManager::AObjectManager()
@@ -18,6 +19,7 @@ void AObjectManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// 게임 인스턴스에서 값을 가져와서 ObjectSound에 사용할 데이터를 적용할 수 있게 구현하기
 }
 
 // Called every frame
@@ -34,3 +36,10 @@ void AObjectManager::InitObj(UStaticMeshComponent* myStaticMesh)
 	myStaticMesh->SetStaticMesh(MyGI->GetObjStaticMesh(strObjectType));
 }
 
+void AObjectManager::PlaySound()
+{
+	if (ObjectSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ObjectSound, GetActorLocation());
+	}
+}

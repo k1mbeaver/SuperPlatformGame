@@ -32,6 +32,9 @@ public:
 	UPROPERTY()
 		class UGameplayStatics* GameStatic;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* PortalSound;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -45,4 +48,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void NextMap();
+
+	UFUNCTION(BlueprintCallable)
+		void PlaySound();
 };
