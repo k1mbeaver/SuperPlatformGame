@@ -36,6 +36,8 @@ void AMyPortal::BeginPlay()
 	PortalOpenNiagara->Deactivate();
 
 	// 게임 인스턴스에서 값을 가져와서 PortalSound에 사용할 데이터를 적용할 수 있게 구현하기
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	PortalSound = MyGI->GetSound("PortalActivated");
 }
 
 // Called every frame
@@ -49,6 +51,9 @@ void AMyPortal::PlayerClear()
 {
 	PortalCloseNiagara->Deactivate();
 	PortalOpenNiagara->Activate();
+
+	PlaySound();
+
 	bClear = true;
 }
 

@@ -29,6 +29,8 @@ public:
 
 	class UMyGameInstance* myGameInstance;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* OnSound;
 public:	
 	// Sets default values for this actor's properties
 	ASelectStage();

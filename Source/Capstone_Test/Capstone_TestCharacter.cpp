@@ -24,6 +24,8 @@
 #include "PortalCamera.h"
 #include "Components/ArrowComponent.h"
 #include "Sound/SoundWave.h"
+#include "Sound/SoundCue.h"
+#include "Components/AudioComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -83,6 +85,9 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 
 	BashCollision = CreateDefaultSubobject<USphereComponent>(TEXT("BashCollision"));
 	BashCollision->SetupAttachment(RootComponent);
+
+	WalkSound = CreateDefaultSubobject<UAudioComponent>(TEXT("WalkSound"));
+	WalkSound->SetupAttachment(RootComponent);
 
 	// 나중에 수정
 	CurrentState = ECharacterState::STAGE;
@@ -204,10 +209,18 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
-	PlayerBashSound = MyGI->GetPlayerBashSound();
+	PlayerBashSound = MyGI->GetSound("BashStart");
 	PlayerJumpSound = MyGI->GetPlayerJumpSound();
-	PlayerWalkSound = MyGI->GetPlayerWalkSound();
+	PlayerWalkSound = MyGI->GetSound("Walking");
+	LifeUpSound = MyGI->GetSound("HeartUp");
+	JumpEndSound = MyGI->GetSound("JumpEnd");
+	BashEndSound = MyGI->GetSound("BashEnd");
+	DamagedSound = MyGI->GetSound("PlayerDamaged");
+	MapSound = MyGI->GetSound("MapClear");
+	PlayerRunSound = MyGI->GetSound("Walking");
+	PlayerRunSound->Pitch = 2.0f;
 
+	WalkSound->SetSound(PlayerWalkSound);
 	/*
 	if (MyGI->GetCurrentStage() == 7)
 	{
@@ -374,6 +387,16 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 		Direction.Normalize();
 
 		AddMovementInput(Direction, Value);
+
+		if (WalkSound->IsPlaying())
+		{
+			return;
+		}
+
+		else
+		{
+			WalkSound->Play();
+		}
 	}
 }
 
@@ -388,6 +411,15 @@ void ACapstone_TestCharacter::StageUpDown(float Value)
 
 		AddMovementInput(Direction, Value);
 
+		if (WalkSound->IsPlaying())
+		{
+			return;
+		}
+
+		else
+		{
+			WalkSound->Play();
+		}
 		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
@@ -403,6 +435,15 @@ void ACapstone_TestCharacter::StageLeftRight(float Value)
 
 		AddMovementInput(Direction, Value);
 
+		if (WalkSound->IsPlaying())
+		{
+			return;
+		}
+
+		else
+		{
+			WalkSound->Play();
+		}
 		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
@@ -456,6 +497,16 @@ void ACapstone_TestCharacter::SideMoveForward(float Value)
 		Direction.Normalize();
 
 		AddMovementInput(Direction, Value);
+
+		if (WalkSound->IsPlaying())
+		{
+			return;
+		}
+
+		else
+		{
+			WalkSound->Play();
+		}
 	}
 }
 
@@ -480,6 +531,16 @@ void ACapstone_TestCharacter::MoveRight(float Value)
 		Direction.Normalize();
 
 		AddMovementInput(Direction, Value);
+
+		if (WalkSound->IsPlaying())
+		{
+			return;
+		}
+
+		else
+		{
+			WalkSound->Play();
+		}
 	}
 }
 
@@ -489,13 +550,20 @@ void ACapstone_TestCharacter::Jump()
 
 	if (PlayerJumpSound != nullptr)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, PlayerJumpSound, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(this, PlayerJumpSound, GetActorLocation(), 0.1f);
 	}
 }
 
 void ACapstone_TestCharacter::StopJumping()
 {
 	Super::StopJumping();
+
+	// 착지는 일단 나중에
+	// 
+	//if (JumpEndSound != nullptr)
+	//{
+		//UGameplayStatics::PlaySoundAtLocation(this, JumpEndSound, GetActorLocation());
+	//}
 }
 
 
@@ -590,6 +658,8 @@ void ACapstone_TestCharacter::Run()
 
 	CurrentState = ECharacterState::RUN;
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+
+	WalkSound->SetSound(PlayerRunSound);
 	bCameraMove = true;
 }
 
@@ -602,6 +672,8 @@ void ACapstone_TestCharacter::StopRun()
 
 	CurrentState = ECharacterState::STAND;
 	GetCharacterMovement()->MaxWalkSpeed = 250.0f;
+
+	WalkSound->SetSound(PlayerWalkSound);
 	bCameraMove = false;
 }
 
@@ -648,6 +720,12 @@ void ACapstone_TestCharacter::Bash()
 	if (bCanBash)
 	{
 		CurrentState = ECharacterState::BASH;
+
+		if (PlayerBashSound != nullptr)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, PlayerBashSound, GetActorLocation(), 0.5f);
+		}
+
 		GetWorldSettings()->SetTimeDilation(0.0f);
 		bCameraMove = true;
 		bBash = true;
@@ -711,9 +789,9 @@ void ACapstone_TestCharacter::LaunchBash()
 	PlayerBashDirection.Normalize();
 	PlayerBashDirection = PlayerBashDirection * BashPower;
 
-	if (PlayerBashSound != nullptr)
+	if (BashEndSound != nullptr)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, PlayerBashSound, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(this, BashEndSound, GetActorLocation(), 0.5f);
 	}
 
 	LaunchCharacter(PlayerBashDirection, 1, 1);
@@ -773,6 +851,12 @@ void ACapstone_TestCharacter::CoinGet()
 		APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 		MyGI->SetPlayerLife(CurrentLife);
 		myHUD->SetCharacterCount(MyGI->GetPlayerLife());
+
+		if (LifeUpSound != nullptr)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, LifeUpSound, GetActorLocation(), 0.7f);
+		}
+
 		CurrentCoin = 0;
 	}
 
@@ -827,6 +911,11 @@ void ACapstone_TestCharacter::StarGet()
 					CastedCamera->PlayerGameClear();
 				}
 			}
+
+			if (MapSound != nullptr)
+			{
+				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), 0.7f);
+			}
 		}
 	}
 }
@@ -875,6 +964,11 @@ void ACapstone_TestCharacter::GemGet()
 				{
 					CastedCamera->PlayerGameClear();
 				}
+			}
+
+			if (MapSound != nullptr)
+			{
+				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), 0.7f);
 			}
 		}
 	}

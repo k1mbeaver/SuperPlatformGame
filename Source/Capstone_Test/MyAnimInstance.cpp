@@ -4,6 +4,7 @@
 #include "MyAnimInstance.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
+#include "Capstone_TestCharacter.h"
 
 UMyAnimInstance::UMyAnimInstance()
 {

@@ -62,6 +62,24 @@ class ACapstone_TestCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
 		class USoundWave* PlayerBashSound;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* BashEndSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* LifeUpSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* JumpEndSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* DamagedSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* MapSound;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class UAudioComponent* WalkSound;
+
 	class UMyGameInstance* myGameInstance;
 
 	UPROPERTY()

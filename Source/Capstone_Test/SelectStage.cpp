@@ -2,6 +2,8 @@
 
 
 #include "SelectStage.h"
+#include "MyGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ASelectStage::ASelectStage()
@@ -19,6 +21,9 @@ void ASelectStage::BeginPlay()
 	Super::BeginPlay();
 	
 	nStageNumber = FCString::Atoi(*strStageNumber);
+
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	OnSound = MyGI->GetSound("MapChoose");
 }
 
 // Called every frame
@@ -31,6 +36,11 @@ void ASelectStage::Tick(float DeltaTime)
 void ASelectStage::OnStage()
 {
 	// 캐릭터가 해당 액터 위에 올라갔을 때 활성화
+
+	if (OnSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, OnSound, GetActorLocation());
+	}
 }
 
 void ASelectStage::OffStage()
