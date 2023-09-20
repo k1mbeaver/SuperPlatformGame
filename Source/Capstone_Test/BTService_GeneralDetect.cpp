@@ -32,7 +32,7 @@ void UBTService_GeneralDetect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 
     TArray<FOverlapResult> OverlapResults;
     FCollisionQueryParams CollisionQueryParam(NAME_None, false, ControllingPawn);
-    bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel7, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
+    bool bResult = World->OverlapMultiByChannel(OverlapResults, Center, FQuat::Identity, ECollisionChannel::ECC_GameTraceChannel3, FCollisionShape::MakeSphere(DetectRadius), CollisionQueryParam);
 
     AMyAICharacter* myMonster = Cast<AMyAICharacter>(ControllingPawn);
 
