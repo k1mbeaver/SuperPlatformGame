@@ -56,6 +56,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int CharacterStage;
 
+	// 클리어한 스테이지
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int ClearStage;
+
 	// 점프 사운드
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundWave* PlayerJumpSound;

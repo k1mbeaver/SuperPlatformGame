@@ -178,6 +178,19 @@ int UMyGameInstance::GetCurrentStage()
 	return myStage;
 }
 
+int UMyGameInstance::GetClearStage()
+{
+	FCharacterDataTable* StageData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	int myStage = StageData->ClearStage;
+	return myStage;
+}
+
+void UMyGameInstance::SetClearStage(int nStage)
+{
+	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));
+	PlayerData->ClearStage = nStage;
+}
+
 void UMyGameInstance::SetCurrentStage(int nStage)
 {
 	FCharacterDataTable* PlayerData = FCharacterTable->FindRow<FCharacterDataTable>("Player", TEXT(""));

@@ -35,12 +35,14 @@ public:
 	int GetPlayerCoin();
 	int GetPlayerGem();
 	int GetCurrentStage();
+	int GetClearStage();
 	//UParticleSystem* GetPlayerBashParticle();
 	void SetPlayerLife(int nLife);
 	void SetPlayerStar(int nStar);
 	void SetPlayerCoin(int nCoin);
 	void SetPlayerGem(int nGem);
 	void SetCurrentStage(int nStage);
+	void SetClearStage(int nStage);
 	USoundWave* GetPlayerJumpSound();
 	USoundWave* GetPlayerBashSound();
 	USoundWave* GetPlayerWalkSound();

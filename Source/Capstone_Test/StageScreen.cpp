@@ -47,12 +47,21 @@ void AStageScreen::SetImage(int nMap)
 {
 	// 여기다가 평면에 그림을 그리도록 설정하기
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	CurrentSelectStage = nMap;
 
 	ImageSquare->SetMaterial(0, MyGI->GetMapMaterial(nMap));
 }
 
 void AStageScreen::ImageOnOff(bool bOnOff)
 {
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	if (CurrentSelectStage > MyGI->GetClearStage())
+	{
+		return;
+	}
+
+	//if(CurrentStage != 7 && CurrentStage)
 	if (bOnOff)
 	{
 		ImageSquare->SetVisibility(true);

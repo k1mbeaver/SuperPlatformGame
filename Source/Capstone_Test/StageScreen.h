@@ -24,6 +24,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
 		class UStaticMeshComponent* ImageSquare;
+
+	int CurrentPlayerStage;
+	int CurrentSelectStage;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

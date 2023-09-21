@@ -218,7 +218,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	DamagedSound = MyGI->GetSound("PlayerDamaged");
 	MapSound = MyGI->GetSound("MapClear");
 	PlayerRunSound = MyGI->GetSound("Walking");
-	PlayerRunSound->Pitch = 2.0f;
+	PlayerRunSound->Pitch = 3.0f;
 
 	WalkSound->SetSound(PlayerWalkSound);
 	/*
@@ -450,9 +450,14 @@ void ACapstone_TestCharacter::StageLeftRight(float Value)
 
 void ACapstone_TestCharacter::StageSelect()
 {
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	if (CurrentSelectStage > MyGI->GetClearStage())
+	{
+		return;
+	}
+
 	if (bCurrentStageOn)
 	{
-		UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 		FString MapStage = MyGI->GetMapName(CurrentSelectStage);
 		FName fnNextStage = FName(*MapStage);
 
@@ -463,10 +468,17 @@ void ACapstone_TestCharacter::StageSelect()
 
 void ACapstone_TestCharacter::PlayerOnStage(int nStage)
 {
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	CurrentSelectStage = nStage;
+	if (CurrentSelectStage > MyGI->GetClearStage())
+	{
+		return;
+	}
+
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 	myHUD->SetStageMode(true);
 	myHUD->SetStage(nStage);
-	CurrentSelectStage = nStage;
 	bCurrentStageOn = true;
 }
 

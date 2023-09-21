@@ -61,6 +61,7 @@ void AMyPortal::NextMap()
 {
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	int CurrentStage = MyGI->GetCurrentStage();
+	MyGI->SetClearStage(CurrentStage);
 	MyGI->SetCurrentStage(CurrentStage + 1);
 	MyGI->SetPlayerGem(0);
 	MyGI->SetPlayerStar(0);
