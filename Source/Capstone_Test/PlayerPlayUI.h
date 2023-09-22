@@ -37,5 +37,4 @@ public:
 	void SetCoinCount(int nCount);
 	void SetGemCount(int nCount);
 	void SetStarCount(int nCount);
-	
 };

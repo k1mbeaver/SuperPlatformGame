@@ -26,6 +26,7 @@
 #include "Sound/SoundWave.h"
 #include "Sound/SoundCue.h"
 #include "Components/AudioComponent.h"
+#include "MyPlayerController.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ACapstone_TestCharacter
@@ -191,8 +192,37 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
-
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+
+	if (MyGI->GetCurrentStage() == 8)
+	{
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			TArray<AActor*> CameraFoundActors;
+
+			FString CameraTag = "Start";
+
+			UGameplayStatics::GetAllActorsWithTag(World, FName(*CameraTag), CameraFoundActors);
+
+			if (CameraFoundActors.Num() > 0)
+			{
+				AActor* CameraActor = CameraFoundActors[0];
+
+				AMyPlayerController* PlayerController = Cast<AMyPlayerController>(GetWorld()->GetFirstPlayerController());
+				PlayerController->SetViewTargetWithBlend(CameraActor, 0.1f);
+				myHUD->SetPlayMode(false);
+				myHUD->SetStageMode(false);
+				myHUD->VisibleLoading(true);
+				myHUD->SetLoadingImage(MyGI->GetCurrentStage());
+				myHUD->SetLoadingText(MyGI->GetCurrentStage());
+
+				return;
+			}
+		}
+	}
+
 	myHUD->VisibleLoading(true);
 	myHUD->SetLoadingImage(MyGI->GetCurrentStage());
 	myHUD->SetLoadingText(MyGI->GetCurrentStage());
@@ -221,6 +251,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	PlayerRunSound->Pitch = 3.0f;
 
 	WalkSound->SetSound(PlayerWalkSound);
+
 	/*
 	if (MyGI->GetCurrentStage() == 7)
 	{
@@ -280,11 +311,6 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	check(PlayerInputComponent);
 
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
-
-	if (MyGI->GetCurrentStage() == 7)
-	{
-		bStageMode = true;
-	}
 
 	if (MyGI->GetMapIsSide(MyGI->GetCurrentStage()) == 0)
 	{
