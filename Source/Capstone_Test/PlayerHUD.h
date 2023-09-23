@@ -35,6 +35,9 @@ public:
 	void SetLoadingImage(int nMap);
 	void SetLoadingText(int nMap);
 	void InitProgressBar();
+
+	//StartUI
+	void VisibleStart(bool bVisible);
 private:
 	TSubclassOf<class UPlayerMainUI> MainUIClass;
 	class UPlayerMainUI* MainUIObject;

@@ -118,3 +118,8 @@ void APlayerHUD::InitProgressBar()
 {
 	MainUIObject->InitProgressBar();
 }
+
+void APlayerHUD::VisibleStart(bool bVisible)
+{
+	MainUIObject->VisibleStart(bVisible);
+}

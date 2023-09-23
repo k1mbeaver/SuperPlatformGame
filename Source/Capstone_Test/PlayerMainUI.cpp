@@ -6,6 +6,7 @@
 #include "PlayerStageUI.h"
 #include "PlayerPauseUI.h"
 #include "PlayerLoadingUI.h"
+#include "PlayerStartUI.h"
 
 void UPlayerMainUI::SetCharacterCount(int nCount)
 {
@@ -129,4 +130,17 @@ void UPlayerMainUI::EngagePercent()
 		VisibleLoading(UW_PlayerLoading->EngageProgressBar(CurrentLoading));
 	}
 	
+}
+
+void UPlayerMainUI::VisibleStart(bool bVisible)
+{
+	if (bVisible)
+	{
+		UW_PlayerStart->SetVisibility(ESlateVisibility::Visible);
+	}
+
+	else
+	{
+		UW_PlayerStart->SetVisibility(ESlateVisibility::Hidden);
+	}
 }

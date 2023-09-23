@@ -217,6 +217,7 @@ void ACapstone_TestCharacter::BeginPlay()
 				myHUD->VisibleLoading(true);
 				myHUD->SetLoadingImage(MyGI->GetCurrentStage());
 				myHUD->SetLoadingText(MyGI->GetCurrentStage());
+				myHUD->VisibleStart(true);
 
 				return;
 			}
