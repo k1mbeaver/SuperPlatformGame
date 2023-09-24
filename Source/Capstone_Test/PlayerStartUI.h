@@ -18,9 +18,26 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 		class UButton* BtExit;
 
-
 	UPROPERTY(Meta = (BindWidget))
 		class UButton* BtStart;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UButton* BtSetting;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UButton* BtSettingExit;
+
+	UPROPERTY(Meta = (BindWidget))
+		class USlider* BGSlider;
+
+	UPROPERTY(Meta = (BindWidget))
+		class USlider* EffectSlider;
+
+	UPROPERTY(Meta = (BindWidget))
+		class USlider* CharacterSlider;
+
+	UPROPERTY(Meta = (BindWidget))
+		class UCanvasPanel* SettingCanvas;
 
 protected:
 	virtual void NativeOnInitialized() override;
@@ -31,4 +48,19 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void GameStart();
+
+	UFUNCTION(BlueprintCallable)
+		void GameSetting();
+
+	UFUNCTION(BlueprintCallable)
+		void VisibleSetting(bool bVisible);
+
+	UFUNCTION(BlueprintCallable)
+		void SetBGVolume(float myVolume);
+
+	UFUNCTION(BlueprintCallable)
+		void SetCharacterVolume(float myVolume);
+
+	UFUNCTION(BlueprintCallable)
+		void SetEffectVolume(float myVolume);
 };

@@ -77,6 +77,8 @@ public:
 
 	// Sound 데이터 값 얻어오기
 	USoundWave* GetSound(FString SoundName);
+	float GetSoundVolume(FString SoundName);
+	void SetSoundVolume(FString SoundName, float myVolume);
 
 private:
 	UPROPERTY()

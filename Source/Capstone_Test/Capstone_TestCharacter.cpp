@@ -214,7 +214,7 @@ void ACapstone_TestCharacter::BeginPlay()
 				PlayerController->SetViewTargetWithBlend(CameraActor, 0.1f);
 				myHUD->SetPlayMode(false);
 				myHUD->SetStageMode(false);
-				myHUD->VisibleLoading(true);
+				myHUD->VisibleLoading(false);
 				myHUD->SetLoadingImage(MyGI->GetCurrentStage());
 				myHUD->SetLoadingText(MyGI->GetCurrentStage());
 				myHUD->VisibleStart(true);

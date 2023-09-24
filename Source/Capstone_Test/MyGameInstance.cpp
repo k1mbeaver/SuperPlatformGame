@@ -362,3 +362,16 @@ USoundWave* UMyGameInstance::GetSound(FString SoundName)
 	USoundWave* mySound = SoundData->mySound;
 	return mySound;
 }
+
+float UMyGameInstance::GetSoundVolume(FString SoundName)
+{
+	FSoundDataTable* SoundData = FSoundTable->FindRow<FSoundDataTable>(*SoundName, TEXT(""));
+	float mySound = SoundData->mySoundVolume;
+	return mySound;
+}
+
+void UMyGameInstance::SetSoundVolume(FString SoundName, float mySound)
+{
+	FSoundDataTable* PlayerData = FSoundTable->FindRow<FSoundDataTable>(*SoundName, TEXT(""));
+	PlayerData->mySoundVolume = mySound;
+}

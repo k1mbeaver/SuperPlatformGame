@@ -16,6 +16,9 @@ public:
 	// »ç¿îµå
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundWave* mySound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float mySoundVolume;
 };
 
 UCLASS()
