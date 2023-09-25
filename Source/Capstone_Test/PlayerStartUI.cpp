@@ -27,6 +27,7 @@ void UPlayerStartUI::GameStart()
 	FString MapStage = MyGI->GetMapName(7);
 	FName fnNextStage = FName(*MapStage);
 
+	MyGI->SetCurrentStage(7);
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
 }
 
@@ -45,6 +46,11 @@ void UPlayerStartUI::VisibleSetting(bool bVisible)
 	if (bVisible)
 	{
 		SettingCanvas->SetVisibility(ESlateVisibility::Visible);
+		UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+		EffectSlider->SetValue(MyGI->GetSoundVolume("EffectSound"));
+		CharacterSlider->SetValue(MyGI->GetSoundVolume("CharacterSound"));
+		BGSlider->SetValue(MyGI->GetSoundVolume("BGSound"));
 	}
 
 	else

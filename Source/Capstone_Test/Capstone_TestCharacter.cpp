@@ -240,6 +240,7 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+	CharacterSoundVolume = MyGI->GetSoundVolume("CharacterSound");
 	PlayerBashSound = MyGI->GetSound("BashStart");
 	PlayerJumpSound = MyGI->GetPlayerJumpSound();
 	PlayerWalkSound = MyGI->GetSound("Walking");
@@ -252,7 +253,8 @@ void ACapstone_TestCharacter::BeginPlay()
 	PlayerRunSound->Pitch = 3.0f;
 
 	WalkSound->SetSound(PlayerWalkSound);
-
+	WalkSound->SetVolumeMultiplier(CharacterSoundVolume);
+	
 	/*
 	if (MyGI->GetCurrentStage() == 7)
 	{
@@ -269,6 +271,7 @@ void ACapstone_TestCharacter::BeginPlay()
 		bSideMode = true;
 	}
 	*/
+
 	if (bSideMode == true)
 	{
 		FollowCamera->Deactivate();
@@ -321,6 +324,17 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	else
 	{
 		bSideMode = true;
+	}
+
+
+	if (MyGI->GetCurrentStage() == 7)
+	{
+		bStageMode = true;
+	}
+
+	else
+	{
+		bStageMode = false;
 	}
 
 	if (bSideMode)
@@ -589,7 +603,7 @@ void ACapstone_TestCharacter::Jump()
 
 	if (PlayerJumpSound != nullptr)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, PlayerJumpSound, GetActorLocation(), 0.1f);
+		UGameplayStatics::PlaySoundAtLocation(this, PlayerJumpSound, GetActorLocation(), CharacterSoundVolume);
 	}
 }
 
@@ -762,7 +776,7 @@ void ACapstone_TestCharacter::Bash()
 
 		if (PlayerBashSound != nullptr)
 		{
-			UGameplayStatics::PlaySoundAtLocation(this, PlayerBashSound, GetActorLocation(), 0.5f);
+			UGameplayStatics::PlaySoundAtLocation(this, PlayerBashSound, GetActorLocation(), CharacterSoundVolume);
 		}
 
 		GetWorldSettings()->SetTimeDilation(0.0f);
@@ -830,7 +844,7 @@ void ACapstone_TestCharacter::LaunchBash()
 
 	if (BashEndSound != nullptr)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, BashEndSound, GetActorLocation(), 0.5f);
+		UGameplayStatics::PlaySoundAtLocation(this, BashEndSound, GetActorLocation(), CharacterSoundVolume);
 	}
 
 	LaunchCharacter(PlayerBashDirection, 1, 1);
@@ -893,7 +907,7 @@ void ACapstone_TestCharacter::CoinGet()
 
 		if (LifeUpSound != nullptr)
 		{
-			UGameplayStatics::PlaySoundAtLocation(this, LifeUpSound, GetActorLocation(), 0.7f);
+			UGameplayStatics::PlaySoundAtLocation(this, LifeUpSound, GetActorLocation(), CharacterSoundVolume);
 		}
 
 		CurrentCoin = 0;
@@ -953,7 +967,7 @@ void ACapstone_TestCharacter::StarGet()
 
 			if (MapSound != nullptr)
 			{
-				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), 0.7f);
+				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), CharacterSoundVolume);
 			}
 		}
 	}
@@ -1007,7 +1021,7 @@ void ACapstone_TestCharacter::GemGet()
 
 			if (MapSound != nullptr)
 			{
-				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), 0.7f);
+				UGameplayStatics::PlaySoundAtLocation(this, MapSound, GetActorLocation(), CharacterSoundVolume);
 			}
 		}
 	}

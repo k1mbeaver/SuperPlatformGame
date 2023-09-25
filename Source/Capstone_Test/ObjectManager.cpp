@@ -23,6 +23,7 @@ void AObjectManager::BeginPlay()
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	FString GetType = strObjectType;
 	ObjectSound = MyGI->GetSound(strObjectType);
+	SoundVolume = MyGI->GetSoundVolume("EffectSound");
 }
 
 // Called every frame
@@ -43,6 +44,6 @@ void AObjectManager::PlaySound()
 {
 	if (ObjectSound != nullptr)
 	{
-		UGameplayStatics::PlaySoundAtLocation(this, ObjectSound, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(this, ObjectSound, GetActorLocation(), SoundVolume);
 	}
 }

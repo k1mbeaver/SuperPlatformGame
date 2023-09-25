@@ -35,4 +35,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void PlaySound();
 
+private:
+	float SoundVolume;
 };
