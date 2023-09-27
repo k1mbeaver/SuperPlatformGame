@@ -19,6 +19,13 @@ enum class ECharacterState : uint8
 	//이후에 추가하자
 };
 
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuRightDelegate);
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuLeftDelegate);
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuUpDelegate);
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuDownDelegate);
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuClickDelegate);
+DECLARE_MULTICAST_DELEGATE(FOnPlayerMenuOutDelegate);
+
 UCLASS(config=Game)
 class ACapstone_TestCharacter : public ACharacter
 {
@@ -103,6 +110,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash)
 		FVector PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
 
+	FOnPlayerMenuRightDelegate OnPlayerMenuRightDelegate;
+	FOnPlayerMenuLeftDelegate OnPlayerMenuLeftDelegate;
+	FOnPlayerMenuUpDelegate OnPlayerMenuUpDelegate;
+	FOnPlayerMenuDownDelegate OnPlayerMenuDownDelegate;
+	FOnPlayerMenuClickDelegate OnPlayerMenuClickDelegate;
+	FOnPlayerMenuOutDelegate OnPlayerMenuOutDelegate;
 protected:
 
 	/** 
@@ -145,6 +158,7 @@ private:
 	bool bStageMode = false;
 	bool bCurrentStageOn = false;
 	bool bPause = false;
+	bool bUIControl = false;
 	bool bBash = false;
 	bool bCanBash = false;
 

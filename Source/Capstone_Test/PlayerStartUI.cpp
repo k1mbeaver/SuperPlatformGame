@@ -8,6 +8,7 @@
 #include "Components/CanvasPanel.h"
 #include "MyGameInstance.h"
 #include "Kismet/GamePlayStatics.h"
+#include "Capstone_TestCharacter.h"
 
 void UPlayerStartUI::NativeOnInitialized()
 {
@@ -19,6 +20,21 @@ void UPlayerStartUI::NativeOnInitialized()
 	EffectSlider = Cast<USlider>(GetWidgetFromName(TEXT("EffectSlider")));
 	CharacterSlider = Cast<USlider>(GetWidgetFromName(TEXT("CharacterSlider")));
 	SettingCanvas = Cast<UCanvasPanel>(GetWidgetFromName(TEXT("SettingCanvas")));
+}
+
+void UPlayerStartUI::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	UMyGameInstance* MyGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	myCharacter = Cast<ACapstone_TestCharacter>(UGameplayStatics::GetPlayerController(this, 0)->GetPawn());
+
+	myCharacter->OnPlayerMenuRightDelegate.AddUObject(this, &UPlayerStartUI::MenuRight);
+	myCharacter->OnPlayerMenuLeftDelegate.AddUObject(this, &UPlayerStartUI::MenuLeft);
+	myCharacter->OnPlayerMenuUpDelegate.AddUObject(this, &UPlayerStartUI::MenuUp);
+	myCharacter->OnPlayerMenuDownDelegate.AddUObject(this, &UPlayerStartUI::MenuDown);
+	myCharacter->OnPlayerMenuClickDelegate.AddUObject(this, &UPlayerStartUI::MenuClick);
+	myCharacter->OnPlayerMenuOutDelegate.AddUObject(this, &UPlayerStartUI::MenuOut);
 }
 
 void UPlayerStartUI::GameStart()
@@ -75,4 +91,34 @@ void UPlayerStartUI::SetCharacterVolume(float myVolume)
 {
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	MyGI->SetSoundVolume("CharacterSound", myVolume);
+}
+
+void UPlayerStartUI::MenuUp()
+{
+
+}
+
+void UPlayerStartUI::MenuDown()
+{
+
+}
+
+void UPlayerStartUI::MenuRight()
+{
+
+}
+
+void UPlayerStartUI::MenuLeft()
+{
+
+}
+
+void UPlayerStartUI::MenuClick()
+{
+
+}
+
+void UPlayerStartUI::MenuOut()
+{
+
 }

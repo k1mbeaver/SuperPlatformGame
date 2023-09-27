@@ -20,10 +20,6 @@ public:
 	
 	AMapBGM();
 protected:
-
-	virtual void Tick(float DeltaTime) override;
-	// End of APawn interface
-
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

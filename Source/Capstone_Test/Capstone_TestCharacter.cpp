@@ -219,6 +219,11 @@ void ACapstone_TestCharacter::BeginPlay()
 				myHUD->SetLoadingText(MyGI->GetCurrentStage());
 				myHUD->VisibleStart(true);
 
+				FInputModeUIOnly InputMode;
+				UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+
+				bUIControl = true;
+
 				return;
 			}
 		}
@@ -254,7 +259,11 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	WalkSound->SetSound(PlayerWalkSound);
 	WalkSound->SetVolumeMultiplier(CharacterSoundVolume);
+
+	bUIControl = false;
 	
+	FInputModeGameOnly GameMode;
+	UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
 	/*
 	if (MyGI->GetCurrentStage() == 7)
 	{
@@ -420,6 +429,21 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 		Value = Value * -1;
 	}
 
+	if (bUIControl)
+	{
+		if (Value > 0)
+		{
+			OnPlayerMenuUpDelegate.Broadcast();
+		}
+
+		else
+		{
+			OnPlayerMenuDownDelegate.Broadcast();
+		}
+
+		return;
+	}
+
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -443,6 +467,21 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 
 void ACapstone_TestCharacter::StageUpDown(float Value)
 {
+	if (bUIControl)
+	{
+		if (Value > 0)
+		{
+			OnPlayerMenuUpDelegate.Broadcast();
+		}
+
+		else
+		{
+			OnPlayerMenuDownDelegate.Broadcast();
+		}
+
+		return;
+	}
+
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -467,6 +506,21 @@ void ACapstone_TestCharacter::StageUpDown(float Value)
 
 void ACapstone_TestCharacter::StageLeftRight(float Value)
 {
+	if (bUIControl)
+	{
+		if (Value > 0)
+		{
+			OnPlayerMenuRightDelegate.Broadcast();
+		}
+
+		else
+		{
+			OnPlayerMenuLeftDelegate.Broadcast();
+		}
+
+		return;
+	}
+
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -574,6 +628,21 @@ void ACapstone_TestCharacter::MoveRight(float Value)
 	if (bCameraForward)
 	{
 		Value = Value * -1;
+	}
+
+	if (bUIControl)
+	{
+		if (Value > 0)
+		{
+			OnPlayerMenuRightDelegate.Broadcast();
+		}
+
+		else
+		{
+			OnPlayerMenuLeftDelegate.Broadcast();
+		}
+
+		return;
 	}
 
 	if ( (Controller != nullptr) && (Value != 0.0f) )
@@ -1057,11 +1126,11 @@ void ACapstone_TestCharacter::VisiblePause()
 
 		myHUD->SettingPauseVisible(true);
 		bPause = true;
-
+		bUIControl = true;
 		//GameStatic->SetGamePaused(GetWorld(), true);
 
-		//FInputModeUIOnly InputMode;
-		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+		FInputModeUIOnly InputMode;
+		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
 		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
 	}
 
@@ -1071,11 +1140,11 @@ void ACapstone_TestCharacter::VisiblePause()
 
 		myHUD->SettingPauseVisible(false);
 		bPause = false;
-
+		bUIControl = false;
 		//GameStatic->SetGamePaused(GetWorld(), false);
 
-		//FInputModeGameOnly GameMode;
-		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
+		FInputModeGameOnly GameMode;
+		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
 		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
 	}
 }

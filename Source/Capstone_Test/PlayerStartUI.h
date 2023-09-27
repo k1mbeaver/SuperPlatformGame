@@ -39,9 +39,11 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 		class UCanvasPanel* SettingCanvas;
 
+	ACapstone_TestCharacter* myCharacter;
+
 protected:
 	virtual void NativeOnInitialized() override;
-
+	virtual void NativeConstruct() override;
 public:
 	UFUNCTION(BlueprintCallable)
 		void GameExit();
@@ -63,4 +65,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetEffectVolume(float myVolume);
+
+	UFUNCTION(BlueprintCallable)
+		void MenuUp();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuDown();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuRight();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuLeft();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuClick();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuOut();
 };

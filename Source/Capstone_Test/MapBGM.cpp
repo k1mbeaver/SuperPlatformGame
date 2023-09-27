@@ -10,11 +10,6 @@ AMapBGM::AMapBGM()
 
 }
 
-void AMapBGM::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
 void AMapBGM::BeginPlay()
 {
 	Super::BeginPlay();
@@ -22,5 +17,6 @@ void AMapBGM::BeginPlay()
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 
 	GetAudioComponent()->SetSound(MyGI->GetSound(strMap));
+	GetAudioComponent()->SetVolumeMultiplier(MyGI->GetSoundVolume("BGSound"));
 	GetAudioComponent()->Play();
 }

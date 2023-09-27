@@ -24,9 +24,10 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 		class UButton* BtStage;
 
+	ACapstone_TestCharacter* myCharacter;
 protected:
 	virtual void NativeOnInitialized() override;
-
+	virtual void NativeConstruct() override;
 public:
 	// 사용할 함수들을 정리
 	UFUNCTION(BlueprintCallable)
@@ -37,4 +38,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void GameStage();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuUp();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuDown();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuRight();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuLeft();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuClick();
+
+	UFUNCTION(BlueprintCallable)
+		void MenuOut();
 };
