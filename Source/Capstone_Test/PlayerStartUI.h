@@ -41,6 +41,9 @@ private:
 
 	ACapstone_TestCharacter* myCharacter;
 
+	TArray<UButton*> BtArray;
+	int BtSequence = 0;
+
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;

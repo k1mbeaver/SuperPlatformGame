@@ -35,6 +35,12 @@ void UPlayerStartUI::NativeConstruct()
 	myCharacter->OnPlayerMenuDownDelegate.AddUObject(this, &UPlayerStartUI::MenuDown);
 	myCharacter->OnPlayerMenuClickDelegate.AddUObject(this, &UPlayerStartUI::MenuClick);
 	myCharacter->OnPlayerMenuOutDelegate.AddUObject(this, &UPlayerStartUI::MenuOut);
+
+	BtArray.Insert(BtStart, 0);
+	BtArray.Insert(BtSetting, 1);
+	BtArray.Insert(BtExit, 2);
+
+	BtSequence = 0;
 }
 
 void UPlayerStartUI::GameStart()
@@ -49,12 +55,12 @@ void UPlayerStartUI::GameStart()
 
 void UPlayerStartUI::GameExit()
 {
-
+	UKismetSystemLibrary::QuitGame(this, 0, EQuitPreference::Quit, false);
 }
 
 void UPlayerStartUI::GameSetting()
 {
-	
+	VisibleSetting(true);
 }
 
 void UPlayerStartUI::VisibleSetting(bool bVisible)
@@ -95,12 +101,34 @@ void UPlayerStartUI::SetCharacterVolume(float myVolume)
 
 void UPlayerStartUI::MenuUp()
 {
+	if (BtSequence == 0)
+	{
+		BtArray[BtSequence]->SetFocus();
+		return;
+	}
 
+	else
+	{
+		BtSequence--;
+	}
+
+	BtArray[BtSequence]->SetFocus();
 }
 
 void UPlayerStartUI::MenuDown()
 {
+	if (BtSequence == 2)
+	{
+		BtArray[BtSequence]->SetFocus();
+		return;
+	}
 
+	else
+	{
+		BtSequence++;
+	}
+
+	BtArray[BtSequence]->SetFocus();
 }
 
 void UPlayerStartUI::MenuRight()
@@ -115,7 +143,20 @@ void UPlayerStartUI::MenuLeft()
 
 void UPlayerStartUI::MenuClick()
 {
+	if (BtSequence == 1)
+	{
+		GameStart();
+	}
 
+	else if (BtSequence == 2)
+	{
+		GameSetting();
+	}
+
+	else if(BtSequence == 3)
+	{
+		GameExit();
+	}
 }
 
 void UPlayerStartUI::MenuOut()

@@ -392,6 +392,13 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	PlayerInputComponent->BindAction("Bash", IE_Released, this, &ACapstone_TestCharacter::StopBash);
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &ACapstone_TestCharacter::VisiblePause);
+
+	PlayerInputComponent->BindAction("MenuUp", IE_Pressed, this, &ACapstone_TestCharacter::MenuUp);
+	PlayerInputComponent->BindAction("MenuDown", IE_Pressed, this, &ACapstone_TestCharacter::MenuDown);
+	PlayerInputComponent->BindAction("MenuRight", IE_Pressed, this, &ACapstone_TestCharacter::MenuRight);
+	PlayerInputComponent->BindAction("MenuLeft", IE_Pressed, this, &ACapstone_TestCharacter::MenuLeft);
+	PlayerInputComponent->BindAction("MenuClick", IE_Pressed, this, &ACapstone_TestCharacter::MenuClick);
+	PlayerInputComponent->BindAction("MenuOut", IE_Pressed, this, &ACapstone_TestCharacter::MenuOut);
 }
 
 void ACapstone_TestCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
@@ -429,21 +436,6 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 		Value = Value * -1;
 	}
 
-	if (bUIControl)
-	{
-		if (Value > 0)
-		{
-			OnPlayerMenuUpDelegate.Broadcast();
-		}
-
-		else
-		{
-			OnPlayerMenuDownDelegate.Broadcast();
-		}
-
-		return;
-	}
-
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -467,21 +459,6 @@ void ACapstone_TestCharacter::MoveForward(float Value)
 
 void ACapstone_TestCharacter::StageUpDown(float Value)
 {
-	if (bUIControl)
-	{
-		if (Value > 0)
-		{
-			OnPlayerMenuUpDelegate.Broadcast();
-		}
-
-		else
-		{
-			OnPlayerMenuDownDelegate.Broadcast();
-		}
-
-		return;
-	}
-
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -506,21 +483,6 @@ void ACapstone_TestCharacter::StageUpDown(float Value)
 
 void ACapstone_TestCharacter::StageLeftRight(float Value)
 {
-	if (bUIControl)
-	{
-		if (Value > 0)
-		{
-			OnPlayerMenuRightDelegate.Broadcast();
-		}
-
-		else
-		{
-			OnPlayerMenuLeftDelegate.Broadcast();
-		}
-
-		return;
-	}
-
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		FVector Direction = FRotationMatrix(GetControlRotation()).GetUnitAxis(EAxis::X);
@@ -586,6 +548,7 @@ void ACapstone_TestCharacter::PlayerOffStage()
 
 void ACapstone_TestCharacter::SideMoveForward(float Value)
 {
+
 	if (bCanMove == false)
 	{
 		return;
@@ -628,21 +591,6 @@ void ACapstone_TestCharacter::MoveRight(float Value)
 	if (bCameraForward)
 	{
 		Value = Value * -1;
-	}
-
-	if (bUIControl)
-	{
-		if (Value > 0)
-		{
-			OnPlayerMenuRightDelegate.Broadcast();
-		}
-
-		else
-		{
-			OnPlayerMenuLeftDelegate.Broadcast();
-		}
-
-		return;
 	}
 
 	if ( (Controller != nullptr) && (Value != 0.0f) )
@@ -1252,5 +1200,53 @@ void ACapstone_TestCharacter::BashDirectionRight(float Value)
 
 		FRotator CurrentRotator = PlayerRotator;
 		PlayerDirection->SetWorldRotation(CurrentRotator);
+	}
+}
+
+void ACapstone_TestCharacter::MenuUp()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuUpDelegate.Broadcast();
+	}
+}
+
+void ACapstone_TestCharacter::MenuDown()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuDownDelegate.Broadcast();
+	}
+}
+
+void ACapstone_TestCharacter::MenuRight()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuRightDelegate.Broadcast();
+	}
+}
+
+void ACapstone_TestCharacter::MenuLeft()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuLeftDelegate.Broadcast();
+	}
+}
+
+void ACapstone_TestCharacter::MenuClick()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuClickDelegate.Broadcast();
+	}
+}
+
+void ACapstone_TestCharacter::MenuOut()
+{
+	if (bUIControl)
+	{
+		OnPlayerMenuOutDelegate.Broadcast();
 	}
 }

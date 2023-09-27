@@ -245,6 +245,14 @@ public:
 
 	void BashDirectionRight(float Value);
 
+	void MenuUp();
+	void MenuDown();
+	void MenuRight();
+	void MenuLeft();
+	void MenuClick();
+	void MenuOut();
+
+
 	UFUNCTION(BlueprintCallable)
 		void CoinGet();
 
