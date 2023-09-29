@@ -25,6 +25,9 @@ private:
 		class UButton* BtStage;
 
 	ACapstone_TestCharacter* myCharacter;
+
+	TArray<UButton*> BtArray;
+	int BtSequence;
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
@@ -44,16 +47,4 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void MenuDown();
-
-	UFUNCTION(BlueprintCallable)
-		void MenuRight();
-
-	UFUNCTION(BlueprintCallable)
-		void MenuLeft();
-
-	UFUNCTION(BlueprintCallable)
-		void MenuClick();
-
-	UFUNCTION(BlueprintCallable)
-		void MenuOut();
 };

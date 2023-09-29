@@ -219,8 +219,8 @@ void ACapstone_TestCharacter::BeginPlay()
 				myHUD->SetLoadingText(MyGI->GetCurrentStage());
 				myHUD->VisibleStart(true);
 
-				FInputModeUIOnly InputMode;
-				UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+				//FInputModeUIOnly InputMode;
+				//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
 
 				bUIControl = true;
 
@@ -346,6 +346,16 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 		bStageMode = false;
 	}
 
+	if (MyGI->GetCurrentStage() == 8)
+	{
+		bUIControl = true;
+	}
+
+	else
+	{
+		bUIControl = false;
+	}
+
 	if (bSideMode)
 	{
 		PlayerInputComponent->BindAxis("Side MoveForward / Backward", this, &ACapstone_TestCharacter::SideMoveForward);
@@ -373,14 +383,22 @@ void ACapstone_TestCharacter::SetupPlayerInputComponent(class UInputComponent* P
 		PlayerInputComponent->BindAction("BulletTime", IE_Released, this, &ACapstone_TestCharacter::StopBulletTime);
 	}
 
+	if (bUIControl)
+	{
+		PlayerInputComponent->BindAction("MenuOut", IE_Pressed, this, &ACapstone_TestCharacter::MenuOut);
+	}
+
+	else
+	{
+		PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ACapstone_TestCharacter::Run);
+		PlayerInputComponent->BindAction("Run", IE_Released, this, &ACapstone_TestCharacter::StopRun);
+	}
+
 	PlayerInputComponent->BindAxis("BashDirectionForward", this, &ACapstone_TestCharacter::BashDirectionForward);
 	PlayerInputComponent->BindAxis("BashDirectionRight", this, &ACapstone_TestCharacter::BashDirectionRight);
 
 	PlayerInputComponent->BindAction("TransCamera", IE_Pressed, this, &ACapstone_TestCharacter::TransCamera);
 	PlayerInputComponent->BindAction("TransCamera", IE_Released, this, &ACapstone_TestCharacter::StopTransCamera);
-
-	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ACapstone_TestCharacter::Run);
-	PlayerInputComponent->BindAction("Run", IE_Released, this, &ACapstone_TestCharacter::StopRun);
 
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &ACapstone_TestCharacter::Crouching);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &ACapstone_TestCharacter::StopCrouch);
@@ -1077,9 +1095,9 @@ void ACapstone_TestCharacter::VisiblePause()
 		bUIControl = true;
 		//GameStatic->SetGamePaused(GetWorld(), true);
 
-		FInputModeUIOnly InputMode;
-		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
-		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
+		//FInputModeUIOnly InputMode;
+		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+		//UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
 	}
 
 	else
@@ -1091,9 +1109,9 @@ void ACapstone_TestCharacter::VisiblePause()
 		bUIControl = false;
 		//GameStatic->SetGamePaused(GetWorld(), false);
 
-		FInputModeGameOnly GameMode;
-		UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
-		UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
+		//FInputModeGameOnly GameMode;
+		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
+		//UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
 	}
 }
 

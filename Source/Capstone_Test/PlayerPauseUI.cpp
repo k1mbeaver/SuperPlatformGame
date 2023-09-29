@@ -22,12 +22,14 @@ void UPlayerPauseUI::NativeConstruct()
 	UMyGameInstance* MyGameInstance = Cast<UMyGameInstance>(GetGameInstance());
 	myCharacter = Cast<ACapstone_TestCharacter>(UGameplayStatics::GetPlayerController(this, 0)->GetPawn());
 
-	myCharacter->OnPlayerMenuRightDelegate.AddUObject(this, &UPlayerPauseUI::MenuRight);
-	myCharacter->OnPlayerMenuLeftDelegate.AddUObject(this, &UPlayerPauseUI::MenuLeft);
 	myCharacter->OnPlayerMenuUpDelegate.AddUObject(this, &UPlayerPauseUI::MenuUp);
 	myCharacter->OnPlayerMenuDownDelegate.AddUObject(this, &UPlayerPauseUI::MenuDown);
-	myCharacter->OnPlayerMenuClickDelegate.AddUObject(this, &UPlayerPauseUI::MenuClick);
-	myCharacter->OnPlayerMenuOutDelegate.AddUObject(this, &UPlayerPauseUI::MenuOut);
+
+	BtArray.Insert(BtRestart, 0);
+	BtArray.Insert(BtStage, 1);
+	BtArray.Insert(BtExit, 2);
+
+	BtSequence = 0;
 }
 
 void UPlayerPauseUI::GameRestart()
@@ -56,30 +58,30 @@ void UPlayerPauseUI::GameStage()
 
 void UPlayerPauseUI::MenuUp()
 {
+	if (BtSequence == 0)
+	{
+		BtArray[BtSequence]->SetFocus();
+		return;
+	}
 
+	else
+	{
+		BtSequence = BtSequence - 1;
+		BtArray[BtSequence]->SetFocus();
+	}
 }
 
 void UPlayerPauseUI::MenuDown()
 {
+	if (BtSequence == 2)
+	{
+		BtArray[BtSequence]->SetFocus();
+		return;
+	}
 
-}
-
-void UPlayerPauseUI::MenuRight()
-{
-
-}
-
-void UPlayerPauseUI::MenuLeft()
-{
-
-}
-
-void UPlayerPauseUI::MenuClick()
-{
-
-}
-
-void UPlayerPauseUI::MenuOut()
-{
-
+	else
+	{
+		BtSequence = BtSequence + 1;
+		BtArray[BtSequence]->SetFocus();
+	}
 }

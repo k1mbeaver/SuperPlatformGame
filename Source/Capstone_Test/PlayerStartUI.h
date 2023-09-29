@@ -42,8 +42,12 @@ private:
 	ACapstone_TestCharacter* myCharacter;
 
 	TArray<UButton*> BtArray;
-	int BtSequence = 0;
+	TArray<USlider*> SliderArray;
 
+	int BtSequence = 0;
+	int SliderSequence = 0;
+
+	bool bStartMode;
 protected:
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;

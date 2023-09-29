@@ -6,6 +6,7 @@
 #include "Components/Button.h"
 #include "Components/Slider.h"
 #include "Components/CanvasPanel.h"
+#include "Components/Image.h"
 #include "MyGameInstance.h"
 #include "Kismet/GamePlayStatics.h"
 #include "Capstone_TestCharacter.h"
@@ -40,7 +41,15 @@ void UPlayerStartUI::NativeConstruct()
 	BtArray.Insert(BtSetting, 1);
 	BtArray.Insert(BtExit, 2);
 
+	SliderArray.Insert(BGSlider, 0);
+	SliderArray.Insert(EffectSlider, 1);
+	SliderArray.Insert(CharacterSlider, 2);
+
 	BtSequence = 0;
+	SliderSequence = 0;
+	bStartMode = true;
+
+	BtArray[BtSequence]->SetFocus();
 }
 
 void UPlayerStartUI::GameStart()
@@ -67,16 +76,21 @@ void UPlayerStartUI::VisibleSetting(bool bVisible)
 {
 	if (bVisible)
 	{
+		bStartMode = false;
+		SettingCanvas->SetFocus();
 		SettingCanvas->SetVisibility(ESlateVisibility::Visible);
 		UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 
 		EffectSlider->SetValue(MyGI->GetSoundVolume("EffectSound"));
 		CharacterSlider->SetValue(MyGI->GetSoundVolume("CharacterSound"));
 		BGSlider->SetValue(MyGI->GetSoundVolume("BGSound"));
+
+		SliderArray[SliderSequence]->SetFocus();
 	}
 
 	else
 	{
+		bStartMode = true;
 		SettingCanvas->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
@@ -101,65 +115,112 @@ void UPlayerStartUI::SetCharacterVolume(float myVolume)
 
 void UPlayerStartUI::MenuUp()
 {
-	if (BtSequence == 0)
+	if (bStartMode)
 	{
-		BtArray[BtSequence]->SetFocus();
-		return;
+		if (BtSequence == 0)
+		{
+			BtArray[BtSequence]->SetFocus();
+			return;
+		}
+
+		else
+		{
+			BtSequence = BtSequence - 1;
+			BtArray[BtSequence]->SetFocus();
+		}
 	}
 
 	else
 	{
-		BtSequence--;
-	}
+		if (SliderSequence == 0)
+		{
+			SliderArray[SliderSequence]->SetFocus();
+			return;
+		}
 
-	BtArray[BtSequence]->SetFocus();
+		else
+		{
+			SliderSequence = SliderSequence - 1;
+			SliderArray[SliderSequence]->SetFocus();
+		}
+	}
 }
 
 void UPlayerStartUI::MenuDown()
 {
-	if (BtSequence == 2)
+	if (bStartMode)
 	{
-		BtArray[BtSequence]->SetFocus();
-		return;
+		if (BtSequence == 2)
+		{
+			BtArray[BtSequence]->SetFocus();
+			return;
+		}
+
+		else
+		{
+			BtSequence = BtSequence + 1;
+			BtArray[BtSequence]->SetFocus();
+		}
 	}
 
 	else
 	{
-		BtSequence++;
-	}
+		if (SliderSequence == 2)
+		{
+			SliderArray[SliderSequence]->SetFocus();
+			return;
+		}
 
-	BtArray[BtSequence]->SetFocus();
+		else
+		{
+			SliderSequence = SliderSequence + 1;
+			SliderArray[SliderSequence]->SetFocus();
+		}
+	}
 }
 
 void UPlayerStartUI::MenuRight()
 {
-
+	if (!bStartMode)
+	{
+		float SliderValue = 0.0f;
+		SliderValue += 0.05f;
+		SliderArray[SliderSequence]->SetValue(SliderValue);
+	}
 }
 
 void UPlayerStartUI::MenuLeft()
 {
-
+	if (!bStartMode)
+	{
+		float SliderValue = 0.0f;
+		SliderValue -= 0.05f;
+		SliderArray[SliderSequence]->SetValue(SliderValue);
+	}
 }
 
 void UPlayerStartUI::MenuClick()
 {
-	if (BtSequence == 1)
+	if (bStartMode)
 	{
-		GameStart();
-	}
+		if (BtSequence == 1)
+		{
+			GameStart();
+		}
 
-	else if (BtSequence == 2)
-	{
-		GameSetting();
-	}
+		else if (BtSequence == 2)
+		{
+			GameSetting();
+		}
 
-	else if(BtSequence == 3)
-	{
-		GameExit();
+		else if (BtSequence == 3)
+		{
+			GameExit();
+		}
 	}
 }
 
 void UPlayerStartUI::MenuOut()
 {
-
+	VisibleSetting(false);
 }
