@@ -13,6 +13,7 @@ void UPlayerPauseUI::NativeOnInitialized()
 	BtRestart = Cast<UButton>(GetWidgetFromName(TEXT("BtRestart")));
 	BtStage = Cast<UButton>(GetWidgetFromName(TEXT("BtStage")));
 	BtExit = Cast<UButton>(GetWidgetFromName(TEXT("BtExit")));
+	TextDead = Cast<UTextBlock>(GetWidgetFromName(TEXT("TextDead")));
 }
 
 void UPlayerPauseUI::NativeConstruct()
@@ -38,6 +39,9 @@ void UPlayerPauseUI::GameRestart()
 	FString MapStage = MyGI->GetMapName(MyGI->GetCurrentStage());
 	FName fnNextStage = FName(*MapStage);
 
+	MyGI->SetPlayerStar(0);
+	MyGI->SetPlayerGem(0);
+
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
 }
 
@@ -51,6 +55,9 @@ void UPlayerPauseUI::GameStage()
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	FString MapStage = MyGI->GetMapName(7);
 	FName fnNextStage = FName(*MapStage);
+
+	MyGI->SetPlayerStar(0);
+	MyGI->SetPlayerGem(0);
 
 	MyGI->SetCurrentStage(7);
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
@@ -83,5 +90,18 @@ void UPlayerPauseUI::MenuDown()
 	{
 		BtSequence = BtSequence + 1;
 		BtArray[BtSequence]->SetFocus();
+	}
+}
+
+void UPlayerPauseUI::GameDead(bool bVisible)
+{
+	if (bVisible)
+	{
+		TextDead->SetVisibility(ESlateVisibility::Visible);
+	}
+
+	else
+	{
+		TextDead->SetVisibility(ESlateVisibility::Hidden);
 	}
 }

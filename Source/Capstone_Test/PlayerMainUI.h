@@ -49,6 +49,9 @@ public:
 	void GameStage();
 	void SettingPauseVisible(bool Istrue);
 
+	// PauseUI, DeadUI
+	void GameDead(bool bVisible);
+
 	// LoadingUI
 	void VisibleLoading(bool bVisible);
 	void SetLoadingImage(int nMap);

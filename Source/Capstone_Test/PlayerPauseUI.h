@@ -24,6 +24,9 @@ private:
 	UPROPERTY(Meta = (BindWidget))
 		class UButton* BtStage;
 
+	UPROPERTY(Meta = (BindWidget))
+		class UTextBlock* TextDead;
+
 	ACapstone_TestCharacter* myCharacter;
 
 	TArray<UButton*> BtArray;
@@ -47,4 +50,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void MenuDown();
+
+	UFUNCTION(BlueprintCallable)
+		void GameDead(bool bVisible);
 };

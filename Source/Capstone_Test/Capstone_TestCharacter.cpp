@@ -245,6 +245,11 @@ void ACapstone_TestCharacter::BeginPlay()
 	CurrentGem = MyGI->GetPlayerGem();
 	CurrentLife = MyGI->GetPlayerLife();
 
+	myHUD->SetCharacterCount(CurrentLife);
+	myHUD->SetStarCount(CurrentStar);
+	myHUD->SetGemCount(CurrentGem);
+	myHUD->SetCoinCount(CurrentCoin);
+
 	CharacterSoundVolume = MyGI->GetSoundVolume("CharacterSound");
 	PlayerBashSound = MyGI->GetSound("BashStart");
 	PlayerJumpSound = MyGI->GetPlayerJumpSound();
@@ -1073,6 +1078,23 @@ void ACapstone_TestCharacter::PlayerDead()
 
 	TArray<ACapstone_TestCharacter*> ActorsToPause;
 	// 나중에 여기 수정하기 죽었을 때 플레이어를 제외한 모든 사물이 멈추도록
+	// 
+	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+
+	CurrentLife--;
+	CurrentGem = 0;
+	CurrentStar = 0;
+
+	MyGI->SetPlayerLife(CurrentLife);
+	MyGI->SetPlayerStar(CurrentStar);
+	MyGI->SetPlayerGem(CurrentGem);
+	myHUD->SetCharacterCount(CurrentLife);
+
+	bPause = true;
+	bUIControl = true;
+	myHUD->SettingPauseVisible(true);
+	myHUD->GameDead(true);
 	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapstone_TestCharacter::StaticClass(), ActorsToPause);
 
 	for (ACapstone_TestCharacter* Actor : ActorsToPause)

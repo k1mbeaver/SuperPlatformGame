@@ -88,6 +88,11 @@ void UPlayerMainUI::SettingPauseVisible(bool Istrue)
 	}
 }
 
+void UPlayerMainUI::GameDead(bool bVisible)
+{
+	UW_PlayerPause->GameDead(bVisible);
+}
+
 void UPlayerMainUI::VisibleLoading(bool bVisible)
 {
 	if (bVisible)

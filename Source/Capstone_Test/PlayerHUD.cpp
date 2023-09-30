@@ -123,3 +123,8 @@ void APlayerHUD::VisibleStart(bool bVisible)
 {
 	MainUIObject->VisibleStart(bVisible);
 }
+
+void APlayerHUD::GameDead(bool bVisible)
+{
+	MainUIObject->GameDead(bVisible);
+}
