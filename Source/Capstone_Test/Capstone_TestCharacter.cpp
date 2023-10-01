@@ -1210,19 +1210,17 @@ void ACapstone_TestCharacter::BashDirectionForward(float Value)
 		return;
 	}
 
-	if ((Controller != nullptr) && (Value != 0.0f))
+	if (!bSideMode)
 	{
-		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+		if ((Controller != nullptr) && (Value != 0.0f))
+		{
+			FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+			
+			PlayerRotator.Pitch = PlayerRotator.Pitch + Value;
 
-			//if (PlayerRotator.Pitch > 0)
-			//{
-
-			//}
-
-		PlayerRotator.Pitch = PlayerRotator.Pitch + Value;
-
-		FRotator CurrentRotator = PlayerRotator;
-		PlayerDirection->SetWorldRotation(CurrentRotator);
+			FRotator CurrentRotator = PlayerRotator;
+			PlayerDirection->SetWorldRotation(CurrentRotator);
+		}
 	}
 }
 
@@ -1233,13 +1231,34 @@ void ACapstone_TestCharacter::BashDirectionRight(float Value)
 		return;
 	}
 
-	if ((Controller != nullptr) && (Value != 0.0f))
+	if (bSideMode)
 	{
-		FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
-		PlayerRotator.Yaw = PlayerRotator.Yaw + Value;
+		if ((Controller != nullptr) && (Value != 0.0f))
+		{
+			FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+			//if (PlayerRotator.Pitch > 0)
+			//{
 
-		FRotator CurrentRotator = PlayerRotator;
-		PlayerDirection->SetWorldRotation(CurrentRotator);
+			//}
+
+			PlayerRotator.Yaw = -90.0f;
+			PlayerRotator.Pitch = PlayerRotator.Pitch - Value;
+
+			FRotator CurrentRotator = PlayerRotator;
+			PlayerDirection->SetWorldRotation(CurrentRotator);
+		}
+	}
+
+	else
+	{
+		if ((Controller != nullptr) && (Value != 0.0f))
+		{
+			FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
+			PlayerRotator.Yaw = PlayerRotator.Yaw + Value;
+
+			FRotator CurrentRotator = PlayerRotator;
+			PlayerDirection->SetWorldRotation(CurrentRotator);
+		}
 	}
 }
 
