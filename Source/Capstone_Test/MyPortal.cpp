@@ -66,6 +66,15 @@ void AMyPortal::NextMap()
 	MyGI->SetPlayerGem(0);
 	MyGI->SetPlayerStar(0);
 
+	if (MyGI->GetCurrentStage() == 4)
+	{
+		MyGI->SetCurrentStage(8);
+		FString NextStage = MyGI->GetMapName(CurrentStage);
+		FName fnNextStage = FName(*NextStage);
+		UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);
+		return;
+	}
+
 	FString NextStage = MyGI->GetMapStrNext(CurrentStage);
 	FName fnNextStage = FName(*NextStage);
 	UGameplayStatics::OpenLevel(GetWorld(), fnNextStage);

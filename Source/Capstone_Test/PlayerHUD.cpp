@@ -128,3 +128,8 @@ void APlayerHUD::GameDead(bool bVisible)
 {
 	MainUIObject->GameDead(bVisible);
 }
+
+void APlayerHUD::SetLoading(bool bVisible)
+{
+	MainUIObject->SetLoading(bVisible);
+}

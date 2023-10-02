@@ -212,23 +212,25 @@ void ACapstone_TestCharacter::BeginPlay()
 
 				AMyPlayerController* PlayerController = Cast<AMyPlayerController>(GetWorld()->GetFirstPlayerController());
 				PlayerController->SetViewTargetWithBlend(CameraActor, 0.1f);
-				myHUD->SetPlayMode(false);
-				myHUD->SetStageMode(false);
-				myHUD->VisibleLoading(false);
-				myHUD->SetLoadingImage(MyGI->GetCurrentStage());
-				myHUD->SetLoadingText(MyGI->GetCurrentStage());
-				myHUD->VisibleStart(true);
 
 				//FInputModeUIOnly InputMode;
 				//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
 
 				bUIControl = true;
-
-				return;
 			}
 		}
+
+		myHUD->SetPlayMode(false);
+		myHUD->SetStageMode(false);
+		myHUD->VisibleLoading(false);
+		myHUD->SetLoading(false);
+		//myHUD->SetLoadingText(MyGI->GetCurrentStage());
+		myHUD->VisibleStart(true);
+
+		return;
 	}
 
+	myHUD->SetLoading(true);
 	myHUD->VisibleLoading(true);
 	myHUD->SetLoadingImage(MyGI->GetCurrentStage());
 	myHUD->SetLoadingText(MyGI->GetCurrentStage());

@@ -31,6 +31,10 @@ class CAPSTONE_TEST_API UPlayerMainUI : public UUserWidget
 		class UPlayerStartUI* UW_PlayerStart;
 
 	float CurrentLoading = 0.0f;
+
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Loading)
+		bool bLoading = false;
 public:
 	// PlayUI
 	void SetCharacterCount(int nCount);
@@ -59,6 +63,7 @@ public:
 	void InitProgressBar();
 	UFUNCTION(BlueprintCallable)
 		void EngagePercent();
+	void SetLoading(bool bVisible);
 
 	// StartUI
 	void VisibleStart(bool bVisible);

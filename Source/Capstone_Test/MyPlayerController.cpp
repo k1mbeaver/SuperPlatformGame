@@ -16,7 +16,7 @@ void AMyPlayerController::OnPossess(APawn* aPawn)
 	Super::OnPossess(aPawn);
 
 	myCharacter = Cast<ACapstone_TestCharacter>(aPawn);
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PossessPlayer"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PossessPlayer"));
 }
 
 void AMyPlayerController::PostInitializeComponents()

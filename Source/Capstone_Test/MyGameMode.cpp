@@ -24,7 +24,7 @@ AMyGameMode::AMyGameMode()
 
 void AMyGameMode::PostLogin(APlayerController* NewPlayer)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PostLogin Begin"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PostLogin Begin"));
 	Super::PostLogin(NewPlayer);
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PostLogin End"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, TEXT("PostLogin End"));
 }

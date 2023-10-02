@@ -149,3 +149,16 @@ void UPlayerMainUI::VisibleStart(bool bVisible)
 		UW_PlayerStart->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
+
+void UPlayerMainUI::SetLoading(bool bVisible)
+{
+	if (bVisible)
+	{
+		bLoading = true;
+	}
+
+	else
+	{
+		bLoading = false;
+	}
+}

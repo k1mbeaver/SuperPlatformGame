@@ -36,6 +36,8 @@ public:
 	void SetLoadingText(int nMap);
 	void InitProgressBar();
 
+	// LoadingUI
+	void SetLoading(bool bVisible);
 	// DeadUI
 
 	void GameDead(bool bVisible);
