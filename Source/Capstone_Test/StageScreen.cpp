@@ -36,7 +36,7 @@ void AStageScreen::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FVector NewLocation = GetPlayer->GetActorLocation();
-	FVector ActorNewLocation = FVector(NewLocation.X - 1000.0f, NewLocation.Y, NewLocation.Z + 550.0f);
+	FVector ActorNewLocation = FVector(NewLocation.X - 1000.0f, NewLocation.Y, NewLocation.Z + 500.0f);
 
 	SetActorLocation(ActorNewLocation);
 	//SetRelativeLocation(CameraNewLocation);

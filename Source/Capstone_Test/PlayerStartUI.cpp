@@ -120,13 +120,16 @@ void UPlayerStartUI::MenuUp()
 		if (BtSequence == 0)
 		{
 			BtArray[BtSequence]->SetFocus();
+			//BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.1f, 0.1f, 1.0f));
 			return;
 		}
 
 		else
 		{
+		//	BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.5f, 0.3f, 1.0f));
 			BtSequence = BtSequence - 1;
 			BtArray[BtSequence]->SetFocus();
+			//BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		}
 	}
 
@@ -153,13 +156,16 @@ void UPlayerStartUI::MenuDown()
 		if (BtSequence == 2)
 		{
 			BtArray[BtSequence]->SetFocus();
+			//BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.1f, 0.1f, 1.0f));
 			return;
 		}
 
 		else
 		{
+			//BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.5f, 0.3f, 1.0f));
 			BtSequence = BtSequence + 1;
 			BtArray[BtSequence]->SetFocus();
+			//BtArray[BtSequence]->SetBackgroundColor(FLinearColor(0.1f, 0.1f, 0.1f, 1.0f));
 		}
 	}
 

@@ -1179,7 +1179,7 @@ void ACapstone_TestCharacter::AttackCheck()
 	if (bResult)
 	{
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
+			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
 			//FDamageEvent DamageEvent;
 			//AttackParticleStart(HitResult.ImpactPoint); // 몬스터 공격 파티클 출력하기
 
