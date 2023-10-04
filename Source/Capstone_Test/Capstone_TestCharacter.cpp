@@ -65,7 +65,6 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom);
-	//FollowCamera->SetupAttachment(GetCapsuleComponent());
 	FollowCamera->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
@@ -75,10 +74,7 @@ ACapstone_TestCharacter::ACapstone_TestCharacter()
 	PlayerDirection->SetVisibility(false);
 	PlayerDirection->Deactivate();
 
-	// Create a follow camera
 	SideCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("SideCamera"));
-	//SideCamera->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f));
-	//SideCamera->SetupAttachment(RootComponent);
 	SideCamera->Deactivate();
 
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
@@ -190,7 +186,6 @@ void ACapstone_TestCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//GetMesh()->SetSkeletalMesh(GetGameInstance()->);
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 
@@ -213,9 +208,6 @@ void ACapstone_TestCharacter::BeginPlay()
 				AMyPlayerController* PlayerController = Cast<AMyPlayerController>(GetWorld()->GetFirstPlayerController());
 				PlayerController->SetViewTargetWithBlend(CameraActor, 0.1f);
 
-				//FInputModeUIOnly InputMode;
-				//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
-
 				bUIControl = true;
 			}
 		}
@@ -224,7 +216,6 @@ void ACapstone_TestCharacter::BeginPlay()
 		myHUD->SetStageMode(false);
 		myHUD->VisibleLoading(false);
 		myHUD->SetLoading(false);
-		//myHUD->SetLoadingText(MyGI->GetCurrentStage());
 		myHUD->VisibleStart(true);
 
 		return;
@@ -271,22 +262,6 @@ void ACapstone_TestCharacter::BeginPlay()
 	
 	FInputModeGameOnly GameMode;
 	UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
-	/*
-	if (MyGI->GetCurrentStage() == 7)
-	{
-		bStageMode = true;
-	}
-
-	if (MyGI->GetMapIsSide(MyGI->GetCurrentStage()) == 0)
-	{
-		bSideMode = false;
-	}
-
-	else
-	{
-		bSideMode = true;
-	}
-	*/
 
 	if (bSideMode == true)
 	{
@@ -296,30 +271,15 @@ void ACapstone_TestCharacter::BeginPlay()
 
 	if (bStageMode)
 	{
-		//APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 		myHUD->SetPlayMode(false);
 		myHUD->SetStageMode(false);
 	}
 
 	else
 	{
-		//APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 		myHUD->SetPlayMode(true);
 		myHUD->SetStageMode(false);
 	}
-
-	// 여기는 나중에 보스 몬스터 실험 끝나면 주석 되돌려놓기
-	/* 
-	APlayerHUD* myHUD = Cast<APlayerHUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
-	myHUD->SetGemCount(CurrentGem);
-	myHUD->SetStarCount(CurrentStar);
-	myHUD->SetCoinCount(CurrentCoin);
-	myHUD->SetCharacterCount(CurrentLife);
-	*/
-
-	//BashParticle = MyGI->GetPlayerBashParticle();
-	//CharacterDefaultHP = MyGI->GetPlayerHP();
-	//CharacterHP = CharacterDefaultHP;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -436,19 +396,6 @@ void ACapstone_TestCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVecto
 	StopJumping();
 }
 
-/*
-void ACapstone_TestCharacter::TurnAtRate(float Rate)
-{
-	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
-}
-
-void ACapstone_TestCharacter::LookUpAtRate(float Rate)
-{
-	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
-}
-*/
 void ACapstone_TestCharacter::MoveForward(float Value)
 {
 	if (bCanMove == false)
@@ -502,7 +449,6 @@ void ACapstone_TestCharacter::StageUpDown(float Value)
 		{
 			WalkSound->Play();
 		}
-		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
 
@@ -526,7 +472,6 @@ void ACapstone_TestCharacter::StageLeftRight(float Value)
 		{
 			WalkSound->Play();
 		}
-		// 맵을 구현하고 이동하는 스테이지의 값에 따라서 CurrentSelectStage 값을 변경하기
 	}
 }
 
@@ -653,31 +598,22 @@ void ACapstone_TestCharacter::StopJumping()
 {
 	Super::StopJumping();
 
-	// 착지는 일단 나중에
-	// 
-	//if (JumpEndSound != nullptr)
-	//{
-		//UGameplayStatics::PlaySoundAtLocation(this, JumpEndSound, GetActorLocation());
-	//}
 }
 
 
 void ACapstone_TestCharacter::BulletTime()
 {
 	GetWorldSettings()->SetTimeDilation(0.5f);
-	//CameraBoom->TargetArmLength = 1000.0f;
 }
 
 void ACapstone_TestCharacter::StopBulletTime()
 {
 	GetWorldSettings()->SetTimeDilation(1.0f);
-	//CameraBoom->TargetArmLength = 500.0f;
 }
 
 void ACapstone_TestCharacter::TransCamera()
 {
 	bCameraMove = true;
-	//TransCameraPos(0.05, 0.5);
 }
 
 void ACapstone_TestCharacter::StopTransCamera()
@@ -705,8 +641,7 @@ void ACapstone_TestCharacter::CameraChange()
 }
 
 void ACapstone_TestCharacter::TransCameraPos(float t, float targetRatio) {
-	//float EndArmValue = LerpFun(CameraBoom->TargetArmLength, 0, targetRatio);
-	//float EndSocketValue = LerpFun(CameraBoom->SocketOffset.Z, 0, targetRatio);
+
 	float EndArmValue = LerpFun(500.0f, 0, targetRatio);
 	float EndSocketValue = LerpFun(200.0f, 0, targetRatio);
 	CameraBoom->TargetArmLength = LerpFun(CameraBoom->TargetArmLength, EndArmValue, t);
@@ -725,8 +660,7 @@ void ACapstone_TestCharacter::TransCameraPos(float t, float targetRatio) {
 }
 
 void ACapstone_TestCharacter::ReturnTransCameraPos(float t, float targetRatio) {
-	//float EndArmValue = LerpFun(CameraBoom->TargetArmLength, 0, targetRatio);
-	//float EndSocketValue = LerpFun(CameraBoom->SocketOffset.Z, 0, targetRatio);
+
 	float EndArmValue = LerpFun(CameraBoom->TargetArmLength, 500.0f, targetRatio);
 	float EndSocketValue = LerpFun(CameraBoom->SocketOffset.Z, 200.0f, targetRatio);
 	CameraBoom->TargetArmLength = LerpFun(CameraBoom->TargetArmLength, EndArmValue, t);
@@ -824,14 +758,12 @@ void ACapstone_TestCharacter::Bash()
 		GetWorldSettings()->SetTimeDilation(0.0f);
 		bCameraMove = true;
 		bBash = true;
-		//bCanMove = false;
 		myAnimInstance->IsBash = true;
 		myAnimInstance->PlayDiveMontage(myDiveMontage);
 
 		PlayerDirection->Activate();
 		PlayerDirection->SetVisibility(true);
 
-		//GameStatic->SpawnEmitterAttached(BashParticle, BashMuzzleLocation, FName("MuzzleLocation"));
 		NiagaraComponent->Activate();
 
 		float Duration = 0.1f; // Duration in seconds
@@ -864,17 +796,9 @@ void ACapstone_TestCharacter::StopBash()
 		bCameraMove = false;
 		myAnimInstance->IsBash = false;
 
-		//PlayerBashDirection = FVector(0.0f, 0.0f, 0.0f);
-		//PlayerBashDirection = PlayerDirection->GetForwardVector();
-		//PlayerBashDirection.Normalize();
-
-		//PlayerBashDirection = PlayerBashDirection * BashPower;
 
 		PlayerDirection->Deactivate();
 		PlayerDirection->SetVisibility(false);
-
-		// 여기다가 매개변수로 넣어
-		//LaunchCharacter(PlayerBashDirection, 1, 1);
 	}
 }
 
@@ -894,33 +818,12 @@ void ACapstone_TestCharacter::LaunchBash()
 
 void ACapstone_TestCharacter::StartBashAnimation()
 {
-	//bCanMove = false;
-	// 여기서 온갖 계산다하고 구한 값을 PlayerBashDirect에 넣기
-	/*
-	// PlayerBashDirection = 구한값
-	FRotator LaunchRotator;
-	FVector LaunchDirection;
-	FVector StartArrow = PlayerDirection->GetComponentLocation();
-	FVector DirectionArrow = PlayerDirection->GetForwardVector();
-
-	LaunchRotator = PlayerDirection->GetComponentRotation();
-	//LaunchDirection.X = FMath::Cos(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Yaw);
-	//LaunchDirection.Y = FMath::Sin(LaunchRotator.Yaw) * FMath::Cos(LaunchRotator.Pitch);
-	//LaunchDirection.Z = FMath::Sin(LaunchRotator.Pitch);
-	LaunchDirection = DirectionArrow;
-	LaunchDirection.Normalize();
-	*/
-
-	//PlayerBashDirection = PlayerBashDirection * BashPower;
-
-	// 여기다가 매개변수로 넣어
-	//LaunchCharacter(PlayerBashDirection, 1, 1);
-	//LaunchCharacter(FVector(0.0f, 0.0f, 1000.f), 0, 1);
+	
 }
 
 void ACapstone_TestCharacter::CurrentBash()
 {
-	//
+	
 }
 
 void ACapstone_TestCharacter::StopBashAnimation()
@@ -1097,7 +1000,6 @@ void ACapstone_TestCharacter::PlayerDead()
 	bUIControl = true;
 	myHUD->SettingPauseVisible(true);
 	myHUD->GameDead(true);
-	//UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACapstone_TestCharacter::StaticClass(), ActorsToPause);
 
 	for (ACapstone_TestCharacter* Actor : ActorsToPause)
 	{
@@ -1117,11 +1019,6 @@ void ACapstone_TestCharacter::VisiblePause()
 		myHUD->SettingPauseVisible(true);
 		bPause = true;
 		bUIControl = true;
-		//GameStatic->SetGamePaused(GetWorld(), true);
-
-		//FInputModeUIOnly InputMode;
-		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
-		//UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(true);
 	}
 
 	else
@@ -1131,11 +1028,6 @@ void ACapstone_TestCharacter::VisiblePause()
 		myHUD->SettingPauseVisible(false);
 		bPause = false;
 		bUIControl = false;
-		//GameStatic->SetGamePaused(GetWorld(), false);
-
-		//FInputModeGameOnly GameMode;
-		//UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(GameMode);
-		//UGameplayStatics::GetPlayerController(this, 0)->SetShowMouseCursor(false);
 	}
 }
 
@@ -1151,38 +1043,10 @@ void ACapstone_TestCharacter::AttackCheck()
 		ECollisionChannel::ECC_GameTraceChannel3, // Attack 채널 player의 경우에만 충돌 한다
 		FCollisionShape::MakeSphere(AttackRadius),
 		Params);
-	
-	/*
-	#if ENABLE_DRAW_DEBUG
-			FVector TraceVec = (GetActorUpVector() * -1) * AttackRange;
-			FVector Center = GetActorLocation() + TraceVec * 0.5f;
-			float HalfHeight = AttackRange * 0.5f + AttackRadius;
-			FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
-			FColor DrawColor = bResult ? FColor::Green : FColor::Red;
-			float DebugLifeTime = 5.0f;
-
-			// 이거는 에디터에서만 사용하는거
-			DrawDebugCapsule(GetWorld(),
-				Center,
-				HalfHeight,
-				AttackRadius,
-				CapsuleRot,
-				DrawColor,
-				false,
-				DebugLifeTime);
-
-			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("PlayerPunch!")); // 플레이어가 펀치하는지 확인용
-
-	#endif
-	*/
 
 	if (bResult)
 	{
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Hit!"));
-			//FDamageEvent DamageEvent;
-			//AttackParticleStart(HitResult.ImpactPoint); // 몬스터 공격 파티클 출력하기
-
 			AMyBossMonster* HitCharacter = Cast<AMyBossMonster>(HitResult.GetActor());
 
 			if (!HitCharacter)
@@ -1238,10 +1102,6 @@ void ACapstone_TestCharacter::BashDirectionRight(float Value)
 		if ((Controller != nullptr) && (Value != 0.0f))
 		{
 			FRotator PlayerRotator = PlayerDirection->GetComponentRotation();
-			//if (PlayerRotator.Pitch > 0)
-			//{
-
-			//}
 
 			PlayerRotator.Yaw = -90.0f;
 			PlayerRotator.Pitch = PlayerRotator.Pitch - Value;
