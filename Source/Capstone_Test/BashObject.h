@@ -18,6 +18,21 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		bool bLight = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class USphereComponent* BashCollision;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class UStaticMeshComponent* BashSphere;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Material, Meta = (AllowPrivateAccess = true))
+		class UMaterialInterface* ActivatedMaterial;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Material, Meta = (AllowPrivateAccess = true))
+		class UMaterialInterface* DeActivatedMaterial;
+
+private:
+	int nCount = 0;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -26,4 +41,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+		void OnActivated();
+
+	UFUNCTION(BlueprintCallable)
+		void OnDeActivated();
 };
