@@ -37,7 +37,7 @@ void ABashObject::Tick(float DeltaTime)
 
 	nCount++;
 
-	if (nCount == 1000)
+	if (nCount == nCustomCount)
 	{
 		if (bLight)
 		{
@@ -58,9 +58,11 @@ void ABashObject::Tick(float DeltaTime)
 void ABashObject::OnActivated()
 {	
 	BashSphere->SetMaterial(0, ActivatedMaterial);
+	BashCollision->SetGenerateOverlapEvents(true);
 }
 
 void ABashObject::OnDeActivated()
 {
 	BashSphere->SetMaterial(0, DeActivatedMaterial);
+	BashCollision->SetGenerateOverlapEvents(false);
 }

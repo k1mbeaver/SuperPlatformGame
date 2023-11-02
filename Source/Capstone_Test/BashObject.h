@@ -18,6 +18,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		bool bLight = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+		int nCustomCount = 0;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
 		class USphereComponent* BashCollision;
 
