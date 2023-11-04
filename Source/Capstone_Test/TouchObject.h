@@ -15,6 +15,18 @@ public:
 	// Sets default values for this actor's properties
 	ATouchObject();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
+		bool bTouch = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+		int nTouchNumber = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class USphereComponent* TouchCollision;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
+		class UStaticMeshComponent* TouchStaticMesh;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
