@@ -26,6 +26,11 @@ void ABashObject::BeginPlay()
 	Super::BeginPlay();
 	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
 
+	if (nMissionCount == 1)
+	{
+		bMission = true;
+	}
+
 	DeActivatedMaterial = MyGI->GetMaterial("BashDeActivated");
 	ActivatedMaterial = MyGI->GetMaterial("BashActivated");
 }
@@ -66,3 +71,12 @@ void ABashObject::OnDeActivated()
 	BashSphere->SetMaterial(0, DeActivatedMaterial);
 	BashCollision->SetGenerateOverlapEvents(false);
 }
+
+void ABashObject::PlayMission(int myMissionCount)
+{
+	if (nMissionCount == myMissionCount)
+	{
+		bMission = true;
+	}
+}
+

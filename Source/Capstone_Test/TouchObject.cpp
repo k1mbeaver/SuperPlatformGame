@@ -33,3 +33,8 @@ void ATouchObject::Tick(float DeltaTime)
 
 }
 
+// Called every frame
+int ATouchObject::GetTouchNumber()
+{
+	return nTouchNumber;
+}

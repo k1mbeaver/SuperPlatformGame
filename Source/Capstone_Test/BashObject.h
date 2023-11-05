@@ -18,8 +18,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
 		bool bLight = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = State)
+		bool bMission = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 		int nCustomCount = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+		int nMissionCount = 1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
 		class USphereComponent* BashCollision;
@@ -49,4 +55,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void OnDeActivated();
+
+	UFUNCTION(BlueprintCallable)
+		void PlayMission(int myMissionCount);
 };
