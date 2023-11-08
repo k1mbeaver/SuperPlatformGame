@@ -19,7 +19,7 @@ public:
 		bool bTouch = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
-		int nTouchNumber = 0;
+		int nTouchNumber = 1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
 		class USphereComponent* TouchCollision;
@@ -27,9 +27,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Bash, meta = (AllowPrivateAccess = "true"))
 		class UStaticMeshComponent* TouchStaticMesh;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Sound, Meta = (AllowPrivateAccess = true))
+		class USoundWave* ActiveSound;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	float SoundVolume = 0;
 
 public:	
 	// Called every frame
@@ -37,5 +42,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		int GetTouchNumber();
+
+	UFUNCTION(BlueprintCallable)
+		void PlayActivatedSound();
 
 };

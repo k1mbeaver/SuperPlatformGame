@@ -8,6 +8,7 @@
 #include "MapDataTableClass.h"
 #include "SoundDataTableClass.h"
 #include "ImageDataTableClass.h"
+#include "MaterialDataTableClass.h"
 
 UMyGameInstance::UMyGameInstance()
 {
@@ -63,6 +64,15 @@ UMyGameInstance::UMyGameInstance()
 	if (DT_SOUNDFILE.Succeeded())
 	{
 		FSoundTable = DT_SOUNDFILE.Object;
+	}
+
+	FString MaterialDataTable = TEXT("DataTable'/Game/DataTable/MaterialDatatTable.MaterialDatatTable'");
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_MATERIALFILE(*MaterialDataTable);
+
+	if (DT_MATERIALFILE.Succeeded())
+	{
+		FMaterialTable = DT_MATERIALFILE.Object;
 	}
 }
 
@@ -374,4 +384,11 @@ void UMyGameInstance::SetSoundVolume(FString SoundName, float mySound)
 {
 	FSoundDataTable* PlayerData = FSoundTable->FindRow<FSoundDataTable>(*SoundName, TEXT(""));
 	PlayerData->mySoundVolume = mySound;
+}
+
+UMaterialInterface* UMyGameInstance::GetMaterial(FString MaterialName)
+{
+	FMaterialDataTable* MaterialData = FMaterialTable->FindRow<FMaterialDataTable>(*MaterialName, TEXT(""));
+	UMaterialInterface* myMaterial = MaterialData->ObjectMaterial;
+	return myMaterial;
 }

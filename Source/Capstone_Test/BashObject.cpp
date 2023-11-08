@@ -40,22 +40,25 @@ void ABashObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	nCount++;
-
-	if (nCount == nCustomCount)
+	if (bMission)
 	{
-		if (bLight)
-		{
-			OnDeActivated();
-			bLight = false;
-			nCount = 0;
-		}
+		nCount++;
 
-		else
+		if (nCount == nCustomCount)
 		{
-			OnActivated();
-			bLight = true;
-			nCount = 0;
+			if (bLight)
+			{
+				OnDeActivated();
+				bLight = false;
+				nCount = 0;
+			}
+
+			else
+			{
+				OnActivated();
+				bLight = true;
+				nCount = 0;
+			}
 		}
 	}
 }

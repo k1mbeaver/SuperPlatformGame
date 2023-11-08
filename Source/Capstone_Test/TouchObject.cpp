@@ -5,6 +5,9 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "MyGameInstance.h"
+#include "Sound/SoundWave.h"
+#include "Kismet/GameplayStatics.h"
+#include "CustomCamera.h"
 
 // Sets default values
 ATouchObject::ATouchObject()
@@ -24,6 +27,9 @@ void ATouchObject::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	UMyGameInstance* MyGI = Cast<UMyGameInstance>(GetGameInstance());
+	ActiveSound = MyGI->GetSound("StatueActivated");
+	SoundVolume = MyGI->GetSoundVolume("EffectSound");
 }
 
 // Called every frame
@@ -37,4 +43,35 @@ void ATouchObject::Tick(float DeltaTime)
 int ATouchObject::GetTouchNumber()
 {
 	return nTouchNumber;
+}
+
+void ATouchObject::PlayActivatedSound()
+{
+	bTouch = true;
+
+	UWorld* World = GetWorld();
+
+	if (World)
+	{
+		TArray<AActor*> CameraFoundActors;
+
+		FString CameraTag = "CustomCamera";
+
+		UGameplayStatics::GetAllActorsWithTag(World, FName(*CameraTag), CameraFoundActors);
+
+		if (CameraFoundActors.Num() > 0)
+		{
+			AActor* CameraActor = CameraFoundActors[nTouchNumber - 2];
+
+			if (ACustomCamera* CastedCamera = Cast<ACustomCamera>(CameraActor))
+			{
+				CastedCamera->UseCamera();
+			}
+		}
+	}
+
+	if (ActiveSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ActiveSound, GetActorLocation(), SoundVolume);
+	}
 }

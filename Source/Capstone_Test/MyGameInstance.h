@@ -80,6 +80,9 @@ public:
 	float GetSoundVolume(FString SoundName);
 	void SetSoundVolume(FString SoundName, float myVolume);
 
+	// Material 데이터 값 얻어오기
+	UMaterialInterface* GetMaterial(FString MaterialName);
+
 private:
 	UPROPERTY()
 		UDataTable* FAITable;
@@ -98,4 +101,7 @@ private:
 
 	UPROPERTY()
 		UDataTable* FSoundTable;
+
+	UPROPERTY()
+		UDataTable* FMaterialTable;
 };
